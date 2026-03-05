@@ -373,7 +373,15 @@ export default function KGMasterClass() {
 
   // ── Home Screen ──────────────────────────────────────────────────────────────
   const renderHome = () => (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 pb-64">
+    <div
+      className="min-h-screen pb-52"
+      style={{
+        backgroundImage: 'url("/Images/OTHER IMAGES/JANITOR CART.jpg")',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed',
+      }}
+    >
       {/* Header */}
       <div className="bg-white px-6 py-6 text-center border-b-4 border-blue-900 shadow-lg relative">
         <div className="absolute top-4 right-4">
@@ -384,38 +392,26 @@ export default function KGMasterClass() {
       </div>
 
       {/* Categories */}
-      <div className="px-4 py-8">
-        <div className="space-y-4">
+      <div className="px-4 py-6">
+        <div className="space-y-3">
           {t.categories.map(({ id, title, description }) => {
             const Icon = categoryIcons[id];
             return (
               <button
                 key={id}
                 onClick={() => setCurrentScreen(id)}
-                className="w-full rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all hover:scale-105 text-left transform"
+                className="w-full rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all hover:scale-105 text-left transform"
+                style={{ backgroundColor: 'rgba(255, 255, 255, 0.88)' }}
               >
-                <div
-                  className="relative overflow-hidden h-24"
-                  style={{
-                    backgroundImage: 'url("/Images/OTHER IMAGES/JANITOR CART.jpg")',
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                  }}
-                >
-                  <div
-                    className="absolute inset-0"
-                    style={{ backgroundColor: 'rgba(30, 58, 138, 0.65)' }}
-                  />
-                  <div className="relative flex items-center gap-4 h-full px-5 py-4">
-                    <div className="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center shadow-md">
-                      <Icon size={26} className="text-white" />
-                    </div>
-                    <div className="flex-grow">
-                      <h3 className="text-white font-bold text-lg">{title}</h3>
-                      <p className="text-gray-200 text-xs">{description}</p>
-                    </div>
-                    <ChevronRight className="text-yellow-400 flex-shrink-0" size={24} />
+                <div className="flex items-center gap-4 px-4 py-3">
+                  <div className="flex-shrink-0 w-12 h-12 bg-blue-900 rounded-full flex items-center justify-center shadow-md">
+                    <Icon size={22} className="text-white" />
                   </div>
+                  <div className="flex-grow">
+                    <h3 className="text-gray-900 font-bold text-base leading-tight">{title}</h3>
+                    <p className="text-gray-600 text-xs mt-0.5">{description}</p>
+                  </div>
+                  <ChevronRight className="text-blue-900 flex-shrink-0" size={20} />
                 </div>
               </button>
             );
@@ -424,22 +420,22 @@ export default function KGMasterClass() {
       </div>
 
       {/* Footer */}
-      <div className="fixed bottom-0 left-0 right-0 bg-blue-900 px-6 py-4 text-center shadow-2xl">
+      <div className="fixed bottom-0 left-0 right-0 bg-blue-900 px-4 py-2 text-center shadow-2xl">
         <button
           onClick={() => { setFormSubmitted(false); setFormErrors({}); setCurrentScreen('registration'); }}
-          className="bg-yellow-400 hover:bg-yellow-300 active:bg-yellow-500 text-blue-900 font-bold py-3 px-8 rounded-xl transition-all w-full shadow-lg text-base mb-3"
+          className="bg-yellow-400 hover:bg-yellow-300 active:bg-yellow-500 text-blue-900 font-bold py-2 px-8 rounded-lg transition-all w-full shadow-lg text-sm mb-1.5"
         >
           🎯 {t.takeQuiz}
         </button>
-        <p className="text-white text-xs mb-2 font-semibold">{t.needMoreInfo}</p>
+        <p className="text-white text-xs mb-1 font-semibold">{t.needMoreInfo}</p>
         <button
           onClick={() => setCurrentScreen('contact')}
-          className="bg-cyan-500 hover:bg-cyan-600 text-blue-900 font-bold py-2 px-8 rounded-lg transition-colors w-full shadow-lg text-sm"
+          className="bg-cyan-500 hover:bg-cyan-600 text-blue-900 font-bold py-1.5 px-8 rounded-lg transition-colors w-full shadow text-xs"
         >
           {t.contactUs}
         </button>
-        <div className="mt-3">
-          <p className="text-gray-400 text-xs">{t.footer.copy}</p>
+        <div className="mt-1.5">
+          <p className="text-gray-400 text-xs leading-tight">{t.footer.copy}</p>
           <a
             href="https://www.tesographics.com"
             target="_blank"
