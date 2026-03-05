@@ -507,14 +507,10 @@ export default function KGMasterClass() {
                     style={{ height: '70%' }}
                   />
                   <div
-                    className="absolute bottom-0 left-0 right-0 flex flex-col items-center justify-center gap-0.5"
+                    className="absolute bottom-0 left-0 right-0 flex items-center justify-center"
                     style={{ height: '30%', backgroundColor: 'rgba(30, 58, 138, 0.92)' }}
                   >
-                    <p className="text-white font-bold text-xs text-center leading-tight px-2">{product.name}</p>
-                    <div className="flex items-center gap-1">
-                      <span className="text-xs">👁️</span>
-                      <span className="text-white/80 text-xs">Ver más</span>
-                    </div>
+                    <p className="text-white font-bold text-sm text-center leading-tight px-2">{product.name}</p>
                   </div>
                 </button>
               ))}
@@ -555,6 +551,7 @@ export default function KGMasterClass() {
           >
             <div
               className="bg-white rounded-2xl overflow-hidden shadow-2xl w-full max-w-sm relative"
+              style={{ maxHeight: '90vh', overflowY: 'auto' }}
               onClick={(e) => e.stopPropagation()}
             >
               <button
@@ -566,8 +563,8 @@ export default function KGMasterClass() {
               <img
                 src={selectedChemical.image}
                 alt={selectedChemical.name}
-                className="w-full object-cover"
-                style={{ height: '240px' }}
+                className="w-full object-contain bg-white"
+                style={{ maxHeight: '380px' }}
               />
               <div className="p-5">
                 <h3 className="text-blue-900 font-bold text-xl mb-3">{selectedChemical.name}</h3>
