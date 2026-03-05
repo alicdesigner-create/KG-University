@@ -350,7 +350,7 @@ export default function KGMasterClass() {
               <h2 className="text-2xl font-bold text-blue-900">{k.title}</h2>
             </div>
             <div className="flex justify-center mb-6">
-              <img src="/kg-logo-mean.png" alt="KG Logo" className="h-32 object-contain" />
+              <img src="/kg-logo-mean.png" alt="KG Logo" className="h-48 object-contain" />
             </div>
             <p className="text-gray-700 mb-6">{k.description}</p>
 
