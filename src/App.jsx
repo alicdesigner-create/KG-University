@@ -42,7 +42,7 @@ export default function KGMasterClass() {
         mission:      'Providing superior commercial cleaning services that go beyond the surface. We are committed to exceeding client standards while ensuring the highest levels of safety and professional care.',
         valuesLabel:  'Our Values',
         values: [
-          'Excellence in service quality',
+          'Excellence in Service Quality & Customer Experience',
           'Employee safety and wellbeing',
           'Environmental responsibility',
           'Customer-focused solutions',
@@ -157,7 +157,7 @@ export default function KGMasterClass() {
         mission:      'Brindar servicios superiores de limpieza comercial que van más allá de la superficie. Estamos comprometidos a superar los estándares del cliente garantizando los más altos niveles de seguridad y atención profesional.',
         valuesLabel:  'Nuestros Valores',
         values: [
-          'Excelencia en la calidad del servicio',
+          'Excelencia en Calidad del Servicio & Experiencia del Cliente',
           'Seguridad y bienestar del empleado',
           'Responsabilidad ambiental',
           'Soluciones centradas en el cliente',
