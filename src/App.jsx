@@ -93,10 +93,10 @@ export default function KGMasterClass() {
         section1: {
           title: 'How to Use & Where to Use',
           topics: [
-            { title: 'Oxyvir',          description: 'How to use and where to apply Oxyvir' },
-            { title: 'Glance / Klearview', description: 'Proper application and usage' },
             { title: 'NABC',            description: 'Usage guidelines and safety' },
+            { title: 'Glance / Klearview', description: 'Proper application and usage' },
             { title: 'Top Clean',       description: 'Application and proper use' },
+            { title: 'Oxyvir',          description: 'How to use and where to apply Oxyvir' },
             { title: 'Nutra Rinse',     description: 'How to use and where to apply Nutra Rinse' },
             { title: 'Stainless Steel', description: 'How to use on stainless steel surfaces' },
             { title: 'Ajax',            description: 'Proper use and application' },
@@ -210,10 +210,10 @@ export default function KGMasterClass() {
         section1: {
           title: 'Cómo Usar y Dónde Usar',
           topics: [
-            { title: 'Oxyvir',          description: 'Cómo usar y dónde aplicar Oxyvir' },
-            { title: 'Glance / Klearview', description: 'Aplicación y uso adecuado' },
             { title: 'NABC',            description: 'Guías de uso y seguridad' },
+            { title: 'Glance / Klearview', description: 'Aplicación y uso adecuado' },
             { title: 'Top Clean',       description: 'Aplicación y uso adecuado' },
+            { title: 'Oxyvir',          description: 'Cómo usar y dónde aplicar Oxyvir' },
             { title: 'Nutra Rinse',     description: 'Cómo usar y dónde aplicar Nutra Rinse' },
             { title: 'Stainless Steel', description: 'Cómo usar en superficies de acero inoxidable' },
             { title: 'Ajax',            description: 'Uso y aplicación adecuados' },
