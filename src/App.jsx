@@ -376,7 +376,7 @@ export default function KGMasterClass() {
     <div
       className="min-h-screen pb-52"
       style={{
-        backgroundImage: 'url("/Images/OTHER IMAGES/JANITOR CART.jpg")',
+        backgroundImage: 'url("/janitor-cart.jpg")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundAttachment: 'fixed',
