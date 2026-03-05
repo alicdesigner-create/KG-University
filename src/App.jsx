@@ -5,6 +5,9 @@ export default function KGMasterClass() {
   const [currentScreen, setCurrentScreen] = useState('home');
   const [lang, setLang] = useState('en');
   const [selectedChemical, setSelectedChemical] = useState(null);
+  const [userInfo, setUserInfo] = useState({ name: '', phone: '', role: '' });
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formErrors, setFormErrors] = useState({});
 
   const categoryIcons = {
     kgfs:      Building2,
@@ -18,6 +21,7 @@ export default function KGMasterClass() {
   const translations = {
     en: {
       subtitle:     'Professional Training Platform',
+      takeQuiz:     'Take a Quiz',
       needMoreInfo: 'Need more info?',
       contactUs:    'Contact us',
       designedBy:   'Designed by tesocraphics.com',
@@ -142,8 +146,60 @@ export default function KGMasterClass() {
       },
     },
 
+    registration: {
+      en: {
+        navTitle:     'Take a Quiz',
+        heading:      'Before we start…',
+        subheading:   'Please fill in your information to begin the quiz.',
+        namePlaceholder:  'Full name',
+        phonePlaceholder: 'Phone number',
+        roleLabel:    'Your role',
+        roleDefault:  'Select your role',
+        roles: [
+          { value: 'cleaner',       label: 'Cleaner' },
+          { value: 'supervisor',    label: 'Supervisor' },
+          { value: 'manager',       label: 'Manager' },
+          { value: 'new_employee',  label: 'New Employee' },
+        ],
+        startBtn:     'Start Quiz',
+        errors: {
+          name:  'Please enter your full name.',
+          phone: 'Please enter a valid phone number.',
+          role:  'Please select your role.',
+        },
+        successHeading:  'You\'re all set!',
+        successMessage:  'Your information has been saved. Good luck on the quiz!',
+        backHome:        'Back to Home',
+      },
+      es: {
+        navTitle:     'Tomar Quiz',
+        heading:      'Antes de comenzar…',
+        subheading:   'Por favor completa tu información para iniciar el quiz.',
+        namePlaceholder:  'Nombre completo',
+        phonePlaceholder: 'Número de teléfono',
+        roleLabel:    'Tu rol',
+        roleDefault:  'Selecciona tu rol',
+        roles: [
+          { value: 'cleaner',       label: 'Limpiador(a)' },
+          { value: 'supervisor',    label: 'Supervisor(a)' },
+          { value: 'manager',       label: 'Gerente' },
+          { value: 'new_employee',  label: 'Empleado Nuevo' },
+        ],
+        startBtn:     'Iniciar Quiz',
+        errors: {
+          name:  'Por favor ingresa tu nombre completo.',
+          phone: 'Por favor ingresa un número de teléfono válido.',
+          role:  'Por favor selecciona tu rol.',
+        },
+        successHeading:  '¡Todo listo!',
+        successMessage:  'Tu información fue guardada. ¡Mucho éxito en el quiz!',
+        backHome:        'Volver al Inicio',
+      },
+    },
+
     es: {
       subtitle:     'Plataforma de Entrenamiento Profesional',
+      takeQuiz:     'Tomar Quiz',
       needMoreInfo: '¿Necesitas más información?',
       contactUs:    'Contáctanos',
       designedBy:   'Diseñado por tesocraphics.com',
@@ -340,15 +396,21 @@ export default function KGMasterClass() {
       </div>
 
       {/* Footer */}
-      <div className="fixed bottom-0 left-0 right-0 bg-blue-900 px-6 py-6 text-center shadow-2xl">
-        <p className="text-white text-sm mb-4 font-semibold">{t.needMoreInfo}</p>
+      <div className="fixed bottom-0 left-0 right-0 bg-blue-900 px-6 py-4 text-center shadow-2xl">
+        <button
+          onClick={() => { setFormSubmitted(false); setFormErrors({}); setCurrentScreen('registration'); }}
+          className="bg-yellow-400 hover:bg-yellow-300 active:bg-yellow-500 text-blue-900 font-bold py-3 px-8 rounded-xl transition-all w-full shadow-lg text-base mb-3"
+        >
+          🎯 {t.takeQuiz}
+        </button>
+        <p className="text-white text-xs mb-2 font-semibold">{t.needMoreInfo}</p>
         <button
           onClick={() => setCurrentScreen('contact')}
-          className="bg-cyan-500 hover:bg-cyan-600 text-blue-900 font-bold py-2 px-8 rounded-lg transition-colors w-full shadow-lg"
+          className="bg-cyan-500 hover:bg-cyan-600 text-blue-900 font-bold py-2 px-8 rounded-lg transition-colors w-full shadow-lg text-sm"
         >
           {t.contactUs}
         </button>
-        <p className="text-gray-300 text-xs mt-4">{t.designedBy}</p>
+        <p className="text-gray-300 text-xs mt-3">{t.designedBy}</p>
       </div>
     </div>
   );
@@ -707,15 +769,183 @@ export default function KGMasterClass() {
     );
   };
 
+  // ── Registration Screen ───────────────────────────────────────────────────────
+  const renderRegistration = () => {
+    const r = translations.registration[lang];
+
+    const validate = () => {
+      const errors = {};
+      if (!userInfo.name.trim()) errors.name = r.errors.name;
+      if (!userInfo.phone.trim() || !/^\+?[\d\s\-()]{7,}$/.test(userInfo.phone.trim())) errors.phone = r.errors.phone;
+      if (!userInfo.role) errors.role = r.errors.role;
+      return errors;
+    };
+
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      const errors = validate();
+      if (Object.keys(errors).length > 0) {
+        setFormErrors(errors);
+        return;
+      }
+      setFormErrors({});
+      setFormSubmitted(true);
+    };
+
+    const inputBase = 'w-full bg-white border-2 rounded-xl px-4 py-3 text-gray-800 text-sm focus:outline-none transition-colors';
+    const inputOk   = 'border-gray-200 focus:border-blue-700';
+    const inputErr  = 'border-red-400 focus:border-red-500 bg-red-50';
+
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800">
+        {/* Navbar */}
+        <div className="bg-blue-900 text-white py-4 px-6 sticky top-0 z-10 shadow-lg flex items-center gap-3">
+          <button
+            onClick={() => setCurrentScreen('home')}
+            className="hover:bg-blue-800 p-2 rounded transition"
+          >
+            <ArrowLeft size={24} />
+          </button>
+          <h2 className="font-bold text-lg">{r.navTitle}</h2>
+          <div className="ml-auto"><LangToggle /></div>
+        </div>
+
+        <div className="px-4 pt-8 pb-12 max-w-md mx-auto">
+          {!formSubmitted ? (
+            <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
+              {/* Header card */}
+              <div className="bg-blue-900 px-6 py-8 text-center">
+                <div className="w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                  <span className="text-3xl">🎯</span>
+                </div>
+                <h1 className="text-white font-bold text-2xl">{r.heading}</h1>
+                <p className="text-blue-200 text-sm mt-2">{r.subheading}</p>
+              </div>
+
+              {/* Form */}
+              <form onSubmit={handleSubmit} noValidate className="px-6 py-7 space-y-5">
+
+                {/* Full Name */}
+                <div>
+                  <label className="block text-blue-900 font-semibold text-sm mb-1.5">
+                    👤 {r.namePlaceholder}
+                  </label>
+                  <input
+                    type="text"
+                    value={userInfo.name}
+                    onChange={(e) => {
+                      setUserInfo({ ...userInfo, name: e.target.value });
+                      if (formErrors.name) setFormErrors({ ...formErrors, name: undefined });
+                    }}
+                    placeholder={r.namePlaceholder}
+                    className={`${inputBase} ${formErrors.name ? inputErr : inputOk}`}
+                  />
+                  {formErrors.name && (
+                    <p className="text-red-500 text-xs mt-1.5 flex items-center gap-1">
+                      <span>⚠</span> {formErrors.name}
+                    </p>
+                  )}
+                </div>
+
+                {/* Phone */}
+                <div>
+                  <label className="block text-blue-900 font-semibold text-sm mb-1.5">
+                    📞 {r.phonePlaceholder}
+                  </label>
+                  <input
+                    type="tel"
+                    value={userInfo.phone}
+                    onChange={(e) => {
+                      setUserInfo({ ...userInfo, phone: e.target.value });
+                      if (formErrors.phone) setFormErrors({ ...formErrors, phone: undefined });
+                    }}
+                    placeholder={r.phonePlaceholder}
+                    className={`${inputBase} ${formErrors.phone ? inputErr : inputOk}`}
+                  />
+                  {formErrors.phone && (
+                    <p className="text-red-500 text-xs mt-1.5 flex items-center gap-1">
+                      <span>⚠</span> {formErrors.phone}
+                    </p>
+                  )}
+                </div>
+
+                {/* Role */}
+                <div>
+                  <label className="block text-blue-900 font-semibold text-sm mb-1.5">
+                    🪪 {r.roleLabel}
+                  </label>
+                  <select
+                    value={userInfo.role}
+                    onChange={(e) => {
+                      setUserInfo({ ...userInfo, role: e.target.value });
+                      if (formErrors.role) setFormErrors({ ...formErrors, role: undefined });
+                    }}
+                    className={`${inputBase} ${formErrors.role ? inputErr : inputOk} appearance-none cursor-pointer`}
+                  >
+                    <option value="">{r.roleDefault}</option>
+                    {r.roles.map((opt) => (
+                      <option key={opt.value} value={opt.value}>{opt.label}</option>
+                    ))}
+                  </select>
+                  {formErrors.role && (
+                    <p className="text-red-500 text-xs mt-1.5 flex items-center gap-1">
+                      <span>⚠</span> {formErrors.role}
+                    </p>
+                  )}
+                </div>
+
+                {/* Submit */}
+                <button
+                  type="submit"
+                  className="w-full bg-yellow-400 hover:bg-yellow-300 active:bg-yellow-500 text-blue-900 font-bold py-3.5 rounded-xl transition-all shadow-lg text-base mt-2"
+                >
+                  {r.startBtn} →
+                </button>
+              </form>
+            </div>
+          ) : (
+            /* Success state */
+            <div className="bg-white rounded-2xl shadow-2xl overflow-hidden text-center">
+              <div className="bg-blue-900 px-6 py-10">
+                <div className="w-20 h-20 bg-green-400 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                  <span className="text-4xl">✅</span>
+                </div>
+                <h2 className="text-white font-bold text-2xl">{r.successHeading}</h2>
+                <p className="text-blue-200 text-sm mt-2">{r.successMessage}</p>
+              </div>
+              <div className="px-6 py-6 bg-slate-50 space-y-3">
+                <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-4 text-left space-y-2">
+                  <p className="text-xs text-gray-400 uppercase font-semibold tracking-wide">Info guardada</p>
+                  <p className="text-blue-900 font-semibold text-sm">👤 {userInfo.name}</p>
+                  <p className="text-blue-900 font-semibold text-sm">📞 {userInfo.phone}</p>
+                  <p className="text-blue-900 font-semibold text-sm">
+                    🪪 {translations.registration[lang].roles.find(r => r.value === userInfo.role)?.label}
+                  </p>
+                </div>
+                <button
+                  onClick={() => setCurrentScreen('home')}
+                  className="w-full bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 rounded-xl transition-colors shadow"
+                >
+                  {r.backHome}
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  };
+
   // ── Router ───────────────────────────────────────────────────────────────────
   switch (currentScreen) {
-    case 'kgfs':      return renderKGFS();
-    case 'cleaning':  return renderCleaning();
-    case 'safety':    return renderTopics(t.safety.navTitle,    '⚠️', t.safety.topics);
-    case 'equipment': return renderTopics(t.equipment.navTitle, '🔧', t.equipment.topics);
-    case 'chemicals': return renderChemicals();
-    case 'standards': return renderStandards();
-    case 'contact':   return renderContact();
-    default:          return renderHome();
+    case 'registration': return renderRegistration();
+    case 'kgfs':         return renderKGFS();
+    case 'cleaning':     return renderCleaning();
+    case 'safety':       return renderTopics(t.safety.navTitle,    '⚠️', t.safety.topics);
+    case 'equipment':    return renderTopics(t.equipment.navTitle, '🔧', t.equipment.topics);
+    case 'chemicals':    return renderChemicals();
+    case 'standards':    return renderStandards();
+    case 'contact':      return renderContact();
+    default:             return renderHome();
   }
 }
