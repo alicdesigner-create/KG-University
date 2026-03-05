@@ -24,7 +24,10 @@ export default function KGMasterClass() {
       takeQuiz:     'Take a Quiz',
       needMoreInfo: 'Need more info?',
       contactUs:    'Contact us',
-      designedBy:   'Designed by tesocraphics.com',
+      footer: {
+        copy:       '© 2024 KG Facility Solutions. All Rights Reserved.',
+        designedBy: 'Designed by tesographics.com',
+      },
       contact: {
         navTitle:     'Contact KG Office',
         officeTitle:  'KG Office',
@@ -156,10 +159,10 @@ export default function KGMasterClass() {
         roleLabel:    'Your role',
         roleDefault:  'Select your role',
         roles: [
-          { value: 'cleaner',       label: 'Cleaner' },
-          { value: 'supervisor',    label: 'Supervisor' },
-          { value: 'manager',       label: 'Manager' },
-          { value: 'new_employee',  label: 'New Employee' },
+          { value: 'day_porter',        label: 'Day Porter' },
+          { value: 'contractor',        label: 'Contractor' },
+          { value: 'night_crew',        label: 'Night Cleaning Crew Member' },
+          { value: 'corporate_office',  label: 'Corporate Office Member' },
         ],
         startBtn:     'Start Quiz',
         errors: {
@@ -180,10 +183,10 @@ export default function KGMasterClass() {
         roleLabel:    'Tu rol',
         roleDefault:  'Selecciona tu rol',
         roles: [
-          { value: 'cleaner',       label: 'Limpiador(a)' },
-          { value: 'supervisor',    label: 'Supervisor(a)' },
-          { value: 'manager',       label: 'Gerente' },
-          { value: 'new_employee',  label: 'Empleado Nuevo' },
+          { value: 'day_porter',        label: 'Portero Diurno' },
+          { value: 'contractor',        label: 'Contratista' },
+          { value: 'night_crew',        label: 'Miembro del Equipo de Limpieza Nocturna' },
+          { value: 'corporate_office',  label: 'Miembro de Oficina Corporativa' },
         ],
         startBtn:     'Iniciar Quiz',
         errors: {
@@ -202,7 +205,10 @@ export default function KGMasterClass() {
       takeQuiz:     'Tomar Quiz',
       needMoreInfo: '¿Necesitas más información?',
       contactUs:    'Contáctanos',
-      designedBy:   'Diseñado por tesocraphics.com',
+      footer: {
+        copy:       '© 2024 KG Facility Solutions. Todos los Derechos Reservados.',
+        designedBy: 'Diseñado por tesographics.com',
+      },
       contact: {
         navTitle:      'Contactar Oficina KG',
         officeTitle:   'Oficina KG',
@@ -327,6 +333,21 @@ export default function KGMasterClass() {
 
   const t = translations[lang];
 
+  // ── Page Footer (shared across all screens) ───────────────────────────────────
+  const PageFooter = () => (
+    <div className="bg-blue-950 px-4 py-3 text-center">
+      <p className="text-gray-400 text-xs">{t.footer.copy}</p>
+      <a
+        href="https://www.tesographics.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-cyan-400 text-xs hover:text-cyan-300 transition-colors"
+      >
+        {t.footer.designedBy}
+      </a>
+    </div>
+  );
+
   // ── Language Toggle (dark navbar variant) ─────────────────────────────────────
   const LangToggle = ({ dark = false }) => (
     <div className={`flex items-center rounded-full px-1 py-0.5 ${dark ? 'bg-blue-900/10' : 'bg-white/20'}`}>
@@ -410,7 +431,17 @@ export default function KGMasterClass() {
         >
           {t.contactUs}
         </button>
-        <p className="text-gray-300 text-xs mt-3">{t.designedBy}</p>
+        <div className="mt-3">
+          <p className="text-gray-400 text-xs">{t.footer.copy}</p>
+          <a
+            href="https://www.tesographics.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-cyan-400 text-xs hover:text-cyan-300 transition-colors"
+          >
+            {t.footer.designedBy}
+          </a>
+        </div>
       </div>
     </div>
   );
@@ -428,7 +459,7 @@ export default function KGMasterClass() {
           <div className="ml-auto"><LangToggle /></div>
         </div>
 
-        <div className="p-6 max-w-2xl mx-auto">
+        <div className="p-6 max-w-2xl mx-auto pb-4">
           <div className="bg-white rounded-lg shadow-lg p-6 mb-6 text-center">
             <div className="flex items-center justify-center gap-3 mb-4">
               <span className="text-4xl">🏢</span>
@@ -468,6 +499,7 @@ export default function KGMasterClass() {
             </div>
           </div>
         </div>
+      <PageFooter />
       </div>
     );
   };
@@ -501,6 +533,7 @@ export default function KGMasterClass() {
             ))}
           </div>
         </div>
+        <PageFooter />
       </div>
     );
   };
@@ -534,6 +567,7 @@ export default function KGMasterClass() {
           </button>
         ))}
       </div>
+      <PageFooter />
     </div>
   );
 
@@ -621,6 +655,7 @@ export default function KGMasterClass() {
           </div>
         </div>
 
+        <PageFooter />
         {/* Modal */}
         {selectedChemical && (
           <div
@@ -692,6 +727,7 @@ export default function KGMasterClass() {
             ))}
           </div>
         </div>
+        <PageFooter />
       </div>
     );
   };
@@ -765,6 +801,7 @@ export default function KGMasterClass() {
           </div>
 
         </div>
+      <PageFooter />
       </div>
     );
   };
@@ -932,6 +969,7 @@ export default function KGMasterClass() {
             </div>
           )}
         </div>
+        <PageFooter />
       </div>
     );
   };
