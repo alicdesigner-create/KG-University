@@ -37,7 +37,6 @@ export default function KGMasterClass() {
         details: [
           { label: 'Years in Market', value: '30+ years' },
           { label: 'Locations',       value: 'Serving multiple facilities across Colorado' },
-          { label: 'Employees',       value: '200+' },
         ],
         missionLabel: 'Our Mission',
         mission:      'Providing superior commercial cleaning services that go beyond the surface. We are committed to exceeding client standards while ensuring the highest levels of safety and professional care.',
@@ -153,7 +152,6 @@ export default function KGMasterClass() {
         details: [
           { label: 'Años en el mercado', value: '30+ años' },
           { label: 'Ubicaciones',        value: 'Sirviendo múltiples instalaciones en Colorado' },
-          { label: 'Empleados',          value: '200+' },
         ],
         missionLabel: 'Nuestra Misión',
         mission:      'Brindar servicios superiores de limpieza comercial que van más allá de la superficie. Estamos comprometidos a superar los estándares del cliente garantizando los más altos niveles de seguridad y atención profesional.',
@@ -350,6 +348,9 @@ export default function KGMasterClass() {
             <div className="flex items-center gap-3 mb-4">
               <span className="text-4xl">🏢</span>
               <h2 className="text-2xl font-bold text-blue-900">{k.title}</h2>
+            </div>
+            <div className="flex justify-center mb-6">
+              <img src="/kg-logo-mean.png" alt="KG Logo" className="h-32 object-contain" />
             </div>
             <p className="text-gray-700 mb-6">{k.description}</p>
 
