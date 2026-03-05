@@ -21,6 +21,14 @@ export default function KGMasterClass() {
       needMoreInfo: 'Need more info?',
       contactUs:    'Contact us',
       designedBy:   'Designed by tesocraphics.com',
+      contact: {
+        navTitle:     'Contact KG Office',
+        officeTitle:  'KG Office',
+        officeSubtitle: 'Get in touch with our office',
+        callOffice:   'Call Office',
+        managersTitle: 'Contact Your Manager',
+        callBtn:      'Call',
+      },
 
       categories: [
         { id: 'kgfs',      title: 'Learn about KGFS',   description: 'Company history and mission' },
@@ -139,6 +147,14 @@ export default function KGMasterClass() {
       needMoreInfo: '¿Necesitas más información?',
       contactUs:    'Contáctanos',
       designedBy:   'Diseñado por tesocraphics.com',
+      contact: {
+        navTitle:      'Contactar Oficina KG',
+        officeTitle:   'Oficina KG',
+        officeSubtitle: 'Comunícate con nuestra oficina',
+        callOffice:    'Llamar a la Oficina',
+        managersTitle: 'Contacta a tu Supervisor',
+        callBtn:       'Llamar',
+      },
 
       categories: [
         { id: 'kgfs',      title: 'Conoce KGFS',                description: 'Historia y misión de la empresa' },
@@ -327,7 +343,7 @@ export default function KGMasterClass() {
       <div className="fixed bottom-0 left-0 right-0 bg-blue-900 px-6 py-6 text-center shadow-2xl">
         <p className="text-white text-sm mb-4 font-semibold">{t.needMoreInfo}</p>
         <button
-          onClick={() => window.location.href = 'tel:3036659757'}
+          onClick={() => setCurrentScreen('contact')}
           className="bg-cyan-500 hover:bg-cyan-600 text-blue-900 font-bold py-2 px-8 rounded-lg transition-colors w-full shadow-lg"
         >
           {t.contactUs}
@@ -618,6 +634,79 @@ export default function KGMasterClass() {
     );
   };
 
+  // ── Contact Screen ───────────────────────────────────────────────────────────
+  const renderContact = () => {
+    const c = t.contact;
+    const managers = [
+      { name: 'Miguel Torres',     photo: '/managers/miguel.jpg',  tel: 'tel:7207881118',  display: '720-788-1118' },
+      { name: 'Alirio Castaneda',  photo: '/managers/alirio.jpg',  tel: 'tel:7209264665',  display: '720-926-4665' },
+      { name: 'Rolando Hernández', photo: '/managers/rolando.jpg', tel: 'tel:7209552814',  display: '720-955-2814' },
+    ];
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 pb-8">
+        {/* Navbar */}
+        <div className="bg-blue-900 text-white py-4 px-6 sticky top-0 z-10 shadow-lg flex items-center gap-3">
+          <button onClick={() => setCurrentScreen('home')} className="hover:bg-blue-800 p-2 rounded transition">
+            <ArrowLeft size={24} />
+          </button>
+          <h2 className="font-bold text-lg">{c.navTitle}</h2>
+          <div className="ml-auto"><LangToggle /></div>
+        </div>
+
+        <div className="px-4 pt-8 pb-6 max-w-lg mx-auto space-y-8">
+
+          {/* ── Office card ── */}
+          <div className="bg-gradient-to-br from-blue-900 to-blue-800 rounded-2xl shadow-2xl overflow-hidden">
+            <div className="flex flex-col items-center pt-8 pb-6 px-6 gap-4">
+              <div className="w-28 h-28 rounded-full overflow-hidden ring-4 ring-cyan-400 shadow-xl">
+                <img src="/managers/kg-circular.png" alt="KG Logo" className="w-full h-full object-cover" />
+              </div>
+              <div className="text-center">
+                <h2 className="text-white font-bold text-2xl">{c.officeTitle}</h2>
+                <p className="text-blue-200 text-sm mt-1">{c.officeSubtitle}</p>
+                <p className="text-cyan-300 font-semibold text-lg mt-1">303-665-9757</p>
+              </div>
+              <a
+                href="tel:3036659757"
+                className="mt-2 w-full bg-cyan-500 hover:bg-cyan-400 active:bg-cyan-600 text-blue-900 font-bold py-3 px-8 rounded-xl transition-all shadow-lg text-center text-base"
+              >
+                📞 {c.callOffice}
+              </a>
+            </div>
+          </div>
+
+          {/* ── Managers ── */}
+          <div>
+            <h3 className="text-white font-bold text-lg mb-4 flex items-center gap-2">
+              <span>👥</span> {c.managersTitle}
+            </h3>
+            <div className="grid grid-cols-1 gap-4">
+              {managers.map((m) => (
+                <a
+                  key={m.name}
+                  href={m.tel}
+                  className="flex items-center gap-4 bg-slate-700 hover:bg-slate-600 active:bg-slate-800 rounded-2xl p-4 shadow-lg transition-all hover:scale-105 hover:shadow-xl"
+                >
+                  <div className="flex-shrink-0 w-16 h-16 rounded-full overflow-hidden ring-2 ring-cyan-400 shadow-md">
+                    <img src={m.photo} alt={m.name} className="w-full h-full object-cover" />
+                  </div>
+                  <div className="flex-grow">
+                    <p className="text-white font-bold text-base">{m.name}</p>
+                    <p className="text-cyan-300 text-sm mt-0.5">{m.display}</p>
+                  </div>
+                  <div className="flex-shrink-0 w-10 h-10 bg-cyan-500 hover:bg-cyan-400 rounded-full flex items-center justify-center shadow">
+                    <span className="text-lg">📞</span>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+
+        </div>
+      </div>
+    );
+  };
+
   // ── Router ───────────────────────────────────────────────────────────────────
   switch (currentScreen) {
     case 'kgfs':      return renderKGFS();
@@ -626,6 +715,7 @@ export default function KGMasterClass() {
     case 'equipment': return renderTopics(t.equipment.navTitle, '🔧', t.equipment.topics);
     case 'chemicals': return renderChemicals();
     case 'standards': return renderStandards();
+    case 'contact':   return renderContact();
     default:          return renderHome();
   }
 }
