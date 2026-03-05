@@ -373,7 +373,7 @@ export default function KGMasterClass() {
 
   // ── Home Screen ──────────────────────────────────────────────────────────────
   const renderHome = () => (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 pb-24">
+    <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 pb-64">
       {/* Header */}
       <div className="bg-white px-6 py-6 text-center border-b-4 border-blue-900 shadow-lg relative">
         <div className="absolute top-4 right-4">
@@ -392,12 +392,19 @@ export default function KGMasterClass() {
               <button
                 key={id}
                 onClick={() => setCurrentScreen(id)}
-                className="w-full bg-gradient-to-r from-slate-700 to-slate-600 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all hover:scale-105 text-left transform"
+                className="w-full rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all hover:scale-105 text-left transform"
               >
-                <div className="relative overflow-hidden h-24">
+                <div
+                  className="relative overflow-hidden h-24"
+                  style={{
+                    backgroundImage: 'url("/Images/OTHER IMAGES/JANITOR CART.jpg")',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                  }}
+                >
                   <div
-                    className="absolute inset-0 opacity-20"
-                    style={{ backgroundImage: 'linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%)' }}
+                    className="absolute inset-0"
+                    style={{ backgroundColor: 'rgba(30, 58, 138, 0.65)' }}
                   />
                   <div className="relative flex items-center gap-4 h-full px-5 py-4">
                     <div className="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center shadow-md">
