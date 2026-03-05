@@ -567,9 +567,11 @@ export default function KGMasterClass() {
                 className="w-full object-contain bg-white"
                 style={{ maxHeight: '380px' }}
               />
-              <div className="p-5">
-                <h3 className="text-blue-900 font-bold text-xl mb-3">{selectedChemical.name}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{selectedChemical.description}</p>
+              <div className="bg-blue-900 px-5 py-3 text-center">
+                <h3 className="text-white font-bold text-lg">{selectedChemical.name}</h3>
+              </div>
+              <div className="bg-blue-700 px-5 py-4">
+                <p className="text-blue-50 text-sm leading-relaxed">{selectedChemical.description}</p>
               </div>
             </div>
           </div>
