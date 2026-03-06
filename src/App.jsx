@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronRight, ArrowLeft, Building2, Sparkles, Shield, Wrench, Droplets, Star } from 'lucide-react';
+import { ChevronRight, ArrowLeft, Building2, Sparkles, Shield, Wrench, Droplets, Star, FolderOpen } from 'lucide-react';
 
 export default function KGMasterClass() {
   const [currentScreen, setCurrentScreen] = useState('home');
@@ -16,6 +16,7 @@ export default function KGMasterClass() {
     equipment: Wrench,
     chemicals: Droplets,
     standards: Star,
+    resources: FolderOpen,
   };
 
   const translations = {
@@ -44,6 +45,7 @@ export default function KGMasterClass() {
         { id: 'equipment', title: 'Equipment',          description: 'Tools and equipment guide' },
         { id: 'chemicals', title: 'Chemicals',          description: 'Chemical handling and safety' },
         { id: 'standards', title: 'Employee Standard',  description: 'Company standards and expectations' },
+        { id: 'resources', title: 'Other Resources',    description: 'Apps, handbooks and Trinet guides' },
       ],
 
       kgfs: {
@@ -147,6 +149,16 @@ export default function KGMasterClass() {
           { title: 'Language Skills',       description: 'Use clear and professional language in all communications.',       icon: '🗣️' },
         ],
       },
+
+      resources: {
+        navTitle: 'Other Resources',
+        items: [
+          { icon: '📱', title: 'My Applications',                          description: 'Access your work apps and platforms' },
+          { icon: '📖', title: 'How to get the Employee Handbook on Trinet?', description: 'Step-by-step guide to download your handbook' },
+          { icon: '📄', title: 'How to download my W2 on Tri-Net?',       description: 'Access and download your tax documents' },
+          { icon: '☎️', title: 'Contact Trinet',                           description: 'Get support directly from Trinet' },
+        ],
+      },
     },
 
     registration: {
@@ -225,6 +237,7 @@ export default function KGMasterClass() {
         { id: 'equipment', title: 'Equipos',                    description: 'Guía de herramientas y equipos' },
         { id: 'chemicals', title: 'Químicos',                   description: 'Manejo y seguridad de químicos' },
         { id: 'standards', title: 'Estándar del empleado',      description: 'Estándares y expectativas de la empresa' },
+        { id: 'resources', title: 'Otros Recursos',             description: 'Apps, handbooks y guías de Trinet' },
       ],
 
       kgfs: {
@@ -326,6 +339,16 @@ export default function KGMasterClass() {
           { title: 'Responsabilidad',         description: 'Hazte responsable de tus tareas e informa los problemas de inmediato.',             icon: '📋' },
           { title: 'Clearance y Credenciales', description: 'Sigue los procesos de clearance y requisitos de credencial en todo momento.',     icon: '🪪' },
           { title: 'Habilidades Lingüísticas', description: 'Usa un lenguaje claro y profesional en todas las comunicaciones.',                icon: '🗣️' },
+        ],
+      },
+
+      resources: {
+        navTitle: 'Otros Recursos',
+        items: [
+          { icon: '📱', title: 'Mis Aplicaciones',                                    description: 'Accede a tus apps y plataformas de trabajo' },
+          { icon: '📖', title: '¿Cómo obtener el Handbook de empleado en Trinet?',    description: 'Guía paso a paso para descargar tu handbook' },
+          { icon: '📄', title: '¿Cómo descargar mi W2 en Tri-Net?',                  description: 'Accede y descarga tus documentos de impuestos' },
+          { icon: '☎️', title: 'Contactar a Trinet',                                  description: 'Obtén soporte directamente de Trinet' },
         ],
       },
     },
@@ -940,6 +963,34 @@ export default function KGMasterClass() {
     );
   };
 
+  // ── Resources Screen ─────────────────────────────────────────────────────────
+  const renderResources = () => {
+    const res = t.resources;
+    return (
+      <div className="min-h-screen bg-slate-50 pb-20">
+        <SubPageNav title={res.navTitle} />
+        <div className="p-6 max-w-2xl mx-auto space-y-3">
+          {res.items.map((item, idx) => (
+            <button
+              key={idx}
+              className="w-full bg-white rounded-xl shadow-md p-5 flex items-center gap-4 hover:shadow-lg hover:scale-105 transition-all border border-gray-100 text-left"
+            >
+              <div className="w-12 h-12 bg-blue-900 rounded-full flex items-center justify-center flex-shrink-0 shadow-md">
+                <span className="text-2xl">{item.icon}</span>
+              </div>
+              <div className="flex-grow">
+                <p className="text-blue-900 font-semibold text-sm leading-snug">{item.title}</p>
+                <p className="text-gray-500 text-xs mt-0.5">{item.description}</p>
+              </div>
+              <ChevronRight className="text-blue-300 flex-shrink-0" size={18} />
+            </button>
+          ))}
+        </div>
+        <PageFooter />
+      </div>
+    );
+  };
+
   // ── Router ───────────────────────────────────────────────────────────────────
   switch (currentScreen) {
     case 'registration': return renderRegistration();
@@ -949,6 +1000,7 @@ export default function KGMasterClass() {
     case 'equipment':    return renderTopics(t.equipment.navTitle, '🔧', t.equipment.topics);
     case 'chemicals':    return renderChemicals();
     case 'standards':    return renderStandards();
+    case 'resources':    return renderResources();
     case 'contact':      return renderContact();
     default:             return renderHome();
   }
