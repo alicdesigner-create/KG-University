@@ -50,6 +50,8 @@ export default function KGMasterClass() {
 
       kgfs: {
         navTitle:      'Learn about KGFS',
+        founders:      'Wade Keller & Debbie Garay',
+        foundersLabel: 'Founders',
         purposeLabel:  'Our Purpose',
         description:   'Family-owned and operated since 1995, KG Facility Solutions has proudly served the Front Range with premier commercial cleaning. We are dedicated to leading and creating healthy, safe, and sustainable environments by delivering top-tier facility management and innovative solutions with a personal touch for all our communities.',
         boldYear:      '1995',
@@ -242,6 +244,8 @@ export default function KGMasterClass() {
 
       kgfs: {
         navTitle:      'Conoce KGFS',
+        founders:      'Wade Keller & Debbie Garay',
+        foundersLabel: 'Fundadores',
         purposeLabel:  'Nuestro Propósito',
         description:   'Empresa familiar fundada en 1995, KG Facility Solutions ha servido con orgullo al Front Range con limpieza comercial de primer nivel. Nos dedicamos a liderar y crear entornos saludables, seguros y sostenibles, brindando gestión de instalaciones de primer nivel y soluciones innovadoras con un toque personal para todas nuestras comunidades.',
         boldYear:      '1995',
@@ -492,58 +496,59 @@ export default function KGMasterClass() {
   // ── KGFS Screen ──────────────────────────────────────────────────────────────
   const renderKGFS = () => {
     const k = t.kgfs;
-
-    // Render description with bold year and company name
     const parts = k.description.split(/(1995|KG Facility Solutions)/g);
 
     return (
-      <div className="min-h-screen bg-slate-50 pb-20">
+      <div className="min-h-screen bg-white pb-20">
         <SubPageNav title={k.navTitle} />
 
-        <div className="p-5 max-w-2xl mx-auto space-y-5">
+        <div className="max-w-2xl mx-auto px-5 pt-6 pb-4 space-y-6">
 
-          {/* Logo */}
-          <div className="flex justify-center pt-2">
-            <img src="/kg-logo-mean.png" alt="KG Logo" className="h-36 object-contain" />
+          {/* ── Logo + Founders ── */}
+          <div className="flex flex-col items-center gap-1">
+            <img src="/kg-logo-mean.png" alt="KG Logo" className="h-28 object-contain" />
+            <p className="text-blue-900 font-semibold text-sm">{k.founders}</p>
+            <p className="text-gray-400 text-xs">{k.foundersLabel}</p>
           </div>
 
-          {/* Our Purpose card */}
-          <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-            <div className="bg-blue-900 px-5 py-3">
-              <h2 className="text-white font-bold text-lg tracking-wide">{k.purposeLabel}</h2>
-            </div>
-            <div className="px-5 py-5">
-              <p className="text-gray-700 text-sm leading-relaxed">
-                {parts.map((part, i) =>
-                  part === k.boldYear || part === k.boldCompany
-                    ? <strong key={i} className="text-blue-900 font-bold">{part}</strong>
-                    : part
-                )}
-              </p>
-            </div>
-          </div>
-
-          {/* Stats */}
-          <div className="grid grid-cols-2 gap-3">
+          {/* ── Stats row ── */}
+          <div className="flex items-stretch divide-x divide-blue-100 border border-blue-100 rounded-xl overflow-hidden">
             {k.details.map((item, idx) => (
-              <div key={idx} className="bg-blue-900 rounded-xl p-4 text-center shadow-md">
-                <p className="text-yellow-400 font-bold text-sm leading-snug">{item.value}</p>
+              <div key={idx} className="flex-1 py-3 px-3 text-center bg-blue-50">
+                <p className="text-blue-900 font-bold text-xs leading-snug">{item.value}</p>
               </div>
             ))}
           </div>
 
-          {/* Core Values */}
-          <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-            <div className="bg-blue-900 px-5 py-3">
-              <h2 className="text-white font-bold text-lg tracking-wide">{k.valuesLabel}</h2>
+          {/* ── Our Purpose ── */}
+          <div>
+            <div className="flex items-center gap-2 mb-2">
+              <div className="h-0.5 w-5 bg-blue-900 rounded" />
+              <h2 className="text-blue-900 font-bold text-base uppercase tracking-widest">{k.purposeLabel}</h2>
             </div>
-            <div className="grid grid-cols-1 divide-y divide-gray-100">
+            <p className="text-gray-600 text-sm leading-relaxed">
+              {parts.map((part, i) =>
+                part === k.boldYear || part === k.boldCompany
+                  ? <strong key={i} className="text-blue-900 font-semibold">{part}</strong>
+                  : part
+              )}
+            </p>
+          </div>
+
+          {/* ── Divider ── */}
+          <hr className="border-gray-100" />
+
+          {/* ── Core Values ── */}
+          <div>
+            <div className="flex items-center gap-2 mb-3">
+              <div className="h-0.5 w-5 bg-blue-900 rounded" />
+              <h2 className="text-blue-900 font-bold text-base uppercase tracking-widest">{k.valuesLabel}</h2>
+            </div>
+            <div className="grid grid-cols-2 gap-2">
               {k.values.map(({ label, Icon }, idx) => (
-                <div key={idx} className="flex items-center gap-4 px-5 py-4">
-                  <div className="w-10 h-10 bg-blue-50 rounded-full flex items-center justify-center flex-shrink-0">
-                    <Icon size={20} className="text-blue-900" />
-                  </div>
-                  <p className="text-blue-900 font-semibold text-sm">{label}</p>
+                <div key={idx} className="flex items-center gap-3 p-3 rounded-xl border border-gray-100 bg-slate-50 hover:bg-blue-50 transition-colors">
+                  <Icon size={18} className="text-blue-900 flex-shrink-0" />
+                  <p className="text-gray-700 font-medium text-sm">{label}</p>
                 </div>
               ))}
             </div>
