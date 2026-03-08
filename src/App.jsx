@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { ChevronRight, ArrowLeft, Building2, Sparkles, Shield, Wrench, Droplets, Star, FolderOpen, ShieldCheck, Lightbulb, Users2, ClipboardCheck, Handshake, Briefcase } from 'lucide-react';
+import { ChevronRight, ArrowLeft, Building2, Sparkles, Shield, Wrench, Droplets, Star, FolderOpen, ShieldCheck, Lightbulb, Users2, ClipboardCheck, Handshake, Briefcase, SprayCan } from 'lucide-react';
 
 export default function KGMasterClass() {
   const [showSplash, setShowSplash] = useState(true);
@@ -60,7 +60,7 @@ export default function KGMasterClass() {
     cleaning:  Sparkles,
     safety:    Shield,
     equipment: Wrench,
-    chemicals: Droplets,
+    chemicals: SprayCan,
     standards: Star,
     resources: FolderOpen,
   };
