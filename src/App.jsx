@@ -1,6 +1,34 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { ChevronRight, ArrowLeft, Building2, Sparkles, Shield, Wrench, Droplets, Star, FolderOpen, ShieldCheck, Lightbulb, Users2, ClipboardCheck, Handshake, Briefcase, SprayCan, ShowerHead, UtensilsCrossed, AppWindow, Grid3x3, Gauge, GraduationCap, Landmark } from 'lucide-react';
 
+function ImageSlider({ images }) {
+  const [current, setCurrent] = useState(0);
+  useEffect(() => {
+    const timer = setInterval(() => setCurrent(i => (i + 1) % images.length), 4000);
+    return () => clearInterval(timer);
+  }, [images.length]);
+  const prev = () => setCurrent(i => (i - 1 + images.length) % images.length);
+  const next = () => setCurrent(i => (i + 1) % images.length);
+  return (
+    <div className="relative rounded-2xl overflow-hidden shadow-md bg-black" style={{ aspectRatio: '16/9' }}>
+      {images.map((src, idx) => (
+        <img key={idx} src={src} alt={`Slide ${idx + 1}`}
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${idx === current ? 'opacity-100' : 'opacity-0'}`}
+        />
+      ))}
+      <button onClick={prev} className="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 bg-black/40 hover:bg-black/60 rounded-full flex items-center justify-center text-white text-xl leading-none transition-colors">‹</button>
+      <button onClick={next} className="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 bg-black/40 hover:bg-black/60 rounded-full flex items-center justify-center text-white text-xl leading-none transition-colors">›</button>
+      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
+        {images.map((_, idx) => (
+          <button key={idx} onClick={() => setCurrent(idx)}
+            className={`h-2 rounded-full transition-all duration-300 ${idx === current ? 'w-5 bg-white' : 'w-2 bg-white/50'}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function KGMasterClass() {
   const [showSplash, setShowSplash] = useState(true);
   const [splashHiding, setSplashHiding] = useState(false);
@@ -994,6 +1022,10 @@ export default function KGMasterClass() {
     pressure_washing: 'https://youtu.be/Px41NCJM2TA',
   };
 
+  const cleaningImages = {
+    schools: ['/school-cleaning-1.jpg', '/school-cleaning-2.jpg', '/school-cleaning-3.jpg'],
+  };
+
   const getYouTubeId = (url) => {
     const match = url.match(/youtu\.be\/([^?&]+)/);
     return match ? match[1] : null;
@@ -1013,8 +1045,10 @@ export default function KGMasterClass() {
 
         <div className="max-w-2xl mx-auto px-5 pt-6 space-y-6">
 
-          {/* ── Video ── */}
-          {cleaningVideos[subId] ? (() => {
+          {/* ── Media (slider or video) ── */}
+          {cleaningImages[subId] ? (
+            <ImageSlider images={cleaningImages[subId]} />
+          ) : cleaningVideos[subId] ? (() => {
             const videoId = getYouTubeId(cleaningVideos[subId]);
             return (
               <a
