@@ -767,49 +767,75 @@ export default function KGMasterClass() {
   );
 
   // ── Home Screen ──────────────────────────────────────────────────────────────
+  const categoryAccents = {
+    kgfs:      'bg-blue-900',
+    cleaning:  'bg-sky-500',
+    chemicals: 'bg-emerald-600',
+    equipment: 'bg-orange-500',
+    safety:    'bg-red-500',
+    standards: 'bg-violet-600',
+    resources: 'bg-slate-500',
+  };
+
   const renderHome = () => (
-    <div
-      className="min-h-screen pb-52"
-      style={{
-        backgroundImage: 'url("/janitor-cart.jpg")',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'fixed',
-      }}
-    >
-      {/* Header */}
-      <div className="bg-white px-6 py-6 text-center border-b-4 border-blue-900 shadow-lg relative">
-        <div className="absolute top-4 right-4">
-          <LangToggle dark />
+    <div className="min-h-screen bg-slate-50 pb-52">
+
+      {/* ── Hero ── */}
+      <div
+        className="relative pt-14 pb-20 text-center"
+        style={{
+          backgroundImage: 'url("/janitor-cart.jpg")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-blue-950/95 via-blue-900/88 to-blue-800/70" />
+
+        {/* Lang toggle */}
+        <div className="absolute top-5 right-5 z-10">
+          <LangToggle />
         </div>
-        <img src="/kg-logo.png" alt="KG Masterclass Logo" className="h-20 mx-auto object-contain" />
-        <p className="text-gray-600 text-sm mt-2">{t.subtitle}</p>
+
+        {/* Logo + subtitle */}
+        <div className="relative z-10 px-6">
+          <img src="/kg-logo.png" alt="KG Masterclass" className="h-24 mx-auto object-contain drop-shadow-2xl" />
+          <p className="text-white/70 text-xs mt-3 tracking-widest uppercase font-semibold">{t.subtitle}</p>
+        </div>
+
+        {/* Curved bottom */}
+        <div className="absolute bottom-0 left-0 right-0 h-10 bg-slate-50" style={{ borderRadius: '2rem 2rem 0 0' }} />
       </div>
 
-      {/* Categories */}
-      <div className="px-4 py-6">
+      {/* ── Categories ── */}
+      <div className="px-4 pt-2 pb-6">
+        <p className="text-gray-400 text-xs uppercase tracking-widest font-semibold mb-4 px-1">
+          {lang === 'en' ? 'Select a category' : 'Selecciona una categoría'}
+        </p>
         <div className="space-y-3">
           {t.categories.map(({ id, title, description }) => {
             const Icon = categoryIcons[id];
+            const accent = categoryAccents[id] || 'bg-blue-900';
             return (
               <button
                 key={id}
                 onClick={() => navigateTo(id)}
-                className="w-full rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all hover:scale-105 text-left transform"
-                style={{ backgroundColor: 'rgba(255, 255, 255, 0.88)' }}
+                className="w-full bg-white rounded-2xl shadow-sm hover:shadow-md active:scale-95 transition-all text-left border border-gray-100 overflow-hidden group"
               >
-                <div className="flex items-center gap-4 px-4 py-3">
-                  <div className="flex-shrink-0 w-12 h-12 bg-blue-900 rounded-full flex items-center justify-center shadow-md">
+                <div className="flex items-center gap-4 px-4 py-4">
+                  <div className={`flex-shrink-0 w-12 h-12 ${accent} rounded-2xl flex items-center justify-center shadow-md transition-opacity group-hover:opacity-90`}>
                     {id === 'chemicals'
                       ? <img src="/spray-bottle.svg" alt="Chemicals" className="w-7 h-7 object-contain" />
                       : <Icon size={22} className="text-white" />
                     }
                   </div>
-                  <div className="flex-grow">
-                    <h3 className="text-gray-900 font-bold text-base leading-tight">{title}</h3>
-                    <p className="text-gray-600 text-xs mt-0.5">{description}</p>
+                  <div className="flex-grow min-w-0">
+                    <h3 className="text-blue-900 font-bold text-base leading-tight">{title}</h3>
+                    <p className="text-gray-400 text-xs mt-0.5">{description}</p>
                   </div>
-                  <ChevronRight className="text-blue-900 flex-shrink-0" size={20} />
+                  <div className="flex-shrink-0 w-7 h-7 rounded-full bg-slate-100 group-hover:bg-blue-50 transition-colors flex items-center justify-center">
+                    <ChevronRight className="text-blue-900" size={14} />
+                  </div>
                 </div>
               </button>
             );
@@ -817,18 +843,18 @@ export default function KGMasterClass() {
         </div>
       </div>
 
-      {/* Footer */}
+      {/* ── Fixed Footer ── */}
       <div className="fixed bottom-0 left-0 right-0 bg-blue-900 px-4 py-2 text-center shadow-2xl">
         <button
           onClick={() => { setFormSubmitted(false); setFormErrors({}); navigateTo('registration'); }}
-          className="bg-yellow-400 hover:bg-yellow-300 active:bg-yellow-500 text-blue-900 font-bold py-2 px-8 rounded-lg transition-all w-full shadow-lg text-sm mb-1.5"
+          className="bg-yellow-400 hover:bg-yellow-300 active:bg-yellow-500 text-blue-900 font-bold py-2 px-8 rounded-xl transition-all w-full shadow-lg text-sm mb-1.5"
         >
           🎯 {t.takeQuiz}
         </button>
         <p className="text-white text-xs mb-1 font-semibold">{t.needMoreInfo}</p>
         <button
           onClick={() => navigateTo('contact')}
-          className="bg-cyan-500 hover:bg-cyan-600 text-blue-900 font-bold py-1.5 px-8 rounded-lg transition-colors w-full shadow text-xs"
+          className="bg-cyan-500 hover:bg-cyan-600 text-blue-900 font-bold py-1.5 px-8 rounded-xl transition-colors w-full shadow text-xs"
         >
           {t.contactUs}
         </button>
