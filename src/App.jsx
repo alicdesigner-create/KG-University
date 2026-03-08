@@ -893,6 +893,20 @@ export default function KGMasterClass() {
   };
 
   // ── Cleaning Detail Screen ───────────────────────────────────────────────────
+  const cleaningVideos = {
+    offices:          'https://youtu.be/7plGAX-Iz6I',
+    bathrooms:        'https://youtu.be/s5VSezTEs4Y',
+    kitchens:         'https://youtu.be/dzPdmqC8Inc',
+    windows:          'https://youtu.be/b3WzpEF5djI',
+    floors:           'https://youtu.be/qZuChjwZ_BI',
+    pressure_washing: 'https://youtu.be/Px41NCJM2TA',
+  };
+
+  const getYouTubeId = (url) => {
+    const match = url.match(/youtu\.be\/([^?&]+)/);
+    return match ? match[1] : null;
+  };
+
   const renderCleaningDetail = (subId) => {
     const detail = t.cleaningDetails[subId];
     if (!detail) return null;
@@ -905,13 +919,36 @@ export default function KGMasterClass() {
 
         <div className="max-w-2xl mx-auto px-5 pt-6 space-y-6">
 
-          {/* ── Video Placeholder ── */}
-          <div className="rounded-2xl overflow-hidden border-2 border-dashed border-blue-200 bg-blue-50 flex flex-col items-center justify-center gap-3 py-14">
-            <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
-              <span className="text-3xl">▶️</span>
+          {/* ── Video ── */}
+          {cleaningVideos[subId] ? (() => {
+            const videoId = getYouTubeId(cleaningVideos[subId]);
+            return (
+              <a
+                href={cleaningVideos[subId]}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block rounded-2xl overflow-hidden shadow-md relative group"
+              >
+                <img
+                  src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`}
+                  alt="Video thumbnail"
+                  className="w-full object-cover"
+                />
+                <div className="absolute inset-0 bg-black/30 flex items-center justify-center group-hover:bg-black/40 transition-colors">
+                  <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center shadow-lg">
+                    <span className="text-white text-2xl ml-1">▶</span>
+                  </div>
+                </div>
+              </a>
+            );
+          })() : (
+            <div className="rounded-2xl overflow-hidden border-2 border-dashed border-blue-200 bg-blue-50 flex flex-col items-center justify-center gap-3 py-14">
+              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
+                <span className="text-3xl">▶️</span>
+              </div>
+              <p className="text-blue-400 font-semibold text-sm">Video coming soon</p>
             </div>
-            <p className="text-blue-400 font-semibold text-sm">Video coming soon</p>
-          </div>
+          )}
 
           {/* ── Tips ── */}
           <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
