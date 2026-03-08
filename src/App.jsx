@@ -87,9 +87,9 @@ export default function KGMasterClass() {
       categories: [
         { id: 'kgfs',      title: 'Learn about KGFS',   description: 'Company history and mission' },
         { id: 'cleaning',  title: 'Cleaning training',  description: 'Professional cleaning techniques' },
-        { id: 'safety',    title: 'Safety at work',     description: 'Workplace safety protocols' },
-        { id: 'equipment', title: 'Equipment',          description: 'Tools and equipment guide' },
         { id: 'chemicals', title: 'Chemicals',          description: 'Chemical handling and safety' },
+        { id: 'equipment', title: 'Equipment',          description: 'Tools and equipment guide' },
+        { id: 'safety',    title: 'Safety at work',     description: 'Workplace safety protocols' },
         { id: 'standards', title: 'Employee Standard',  description: 'Company standards and expectations' },
         { id: 'resources', title: 'Other Resources',    description: 'Apps, handbooks and Trinet guides' },
       ],
@@ -427,9 +427,9 @@ export default function KGMasterClass() {
       categories: [
         { id: 'kgfs',      title: 'Conoce KGFS',                description: 'Historia y misión de la empresa' },
         { id: 'cleaning',  title: 'Entrenamiento de limpieza',  description: 'Técnicas profesionales de limpieza' },
-        { id: 'safety',    title: 'Seguridad en el trabajo',    description: 'Protocolos de seguridad laboral' },
-        { id: 'equipment', title: 'Equipos',                    description: 'Guía de herramientas y equipos' },
         { id: 'chemicals', title: 'Químicos',                   description: 'Manejo y seguridad de químicos' },
+        { id: 'equipment', title: 'Equipos',                    description: 'Guía de herramientas y equipos' },
+        { id: 'safety',    title: 'Seguridad en el trabajo',    description: 'Protocolos de seguridad laboral' },
         { id: 'standards', title: 'Estándar del empleado',      description: 'Estándares y expectativas de la empresa' },
         { id: 'resources', title: 'Otros Recursos',             description: 'Apps, handbooks y guías de Trinet' },
       ],
