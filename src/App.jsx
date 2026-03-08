@@ -227,13 +227,64 @@ export default function KGMasterClass() {
       safety: {
         navTitle: 'Safety at Work',
         topics: [
-          { title: 'Uniform Requirements',              description: 'Proper work attire and safety gear' },
-          { title: 'OSHA Requirements',                 description: 'Compliance and safety standards' },
-          { title: 'Biohazards',                        description: 'Identifying and handling biohazards' },
-          { title: 'Height Safety',                     description: 'Ladder and height safety protocols' },
-          { title: 'Tripping Hazards',                  description: 'Identifying and preventing accidents' },
-          { title: 'PPE (Personal Protective Equipment)', description: 'Proper use and care of safety equipment' },
+          { id: 'uniform',    title: 'Uniform Requirements',              description: 'Proper work attire and safety gear' },
+          { id: 'osha',       title: 'OSHA Requirements',                 description: 'Compliance and safety standards' },
+          { id: 'biohazards', title: 'Biohazards',                        description: 'Identifying and handling biohazards' },
+          { id: 'height',     title: 'Height Safety',                     description: 'Ladder and height safety protocols' },
+          { id: 'tripping',   title: 'Tripping Hazards',                  description: 'Identifying and preventing accidents' },
+          { id: 'ppe',        title: 'PPE (Personal Protective Equipment)', description: 'Proper use and care of safety equipment' },
         ],
+      },
+
+      safetyDetails: {
+        uniform: {
+          navTitle: 'Uniform Requirements',
+          points: [
+            { label: 'Standard',  text: 'Clean company-issued shirt and durable work pants.' },
+            { label: 'Footwear',  text: 'Mandatory closed-toe, waterproof, non-slip shoes.' },
+            { label: 'Safety',    text: 'No dangling jewelry or loose clothing to prevent snagging.' },
+          ],
+        },
+        osha: {
+          navTitle: 'OSHA Requirements',
+          points: [
+            { label: 'Compliance', text: 'Follow all federal safety standards and site-specific protocols.' },
+            { label: 'SDS',        text: 'Know the location of Safety Data Sheets for all chemicals on-site.' },
+            { label: 'Signage',    text: 'Always use "Caution Wet Floor" signs when mopping or if spills occur.' },
+          ],
+        },
+        biohazards: {
+          navTitle: 'Biohazards',
+          points: [
+            { label: 'Identification', text: 'Treat all body fluids as infectious (blood, vomit, etc.).' },
+            { label: 'Disposal',       text: 'Use labeled red biohazard bags for contaminated waste.' },
+            { label: 'Handling',       text: 'Never push trash down with hands or feet; use a tool or replace the bag.' },
+          ],
+        },
+        height: {
+          navTitle: 'Height Safety',
+          points: [
+            { label: 'Equipment',  text: 'Use only approved ladders; never use chairs, crates, or trash cans.' },
+            { label: 'Technique',  text: 'Maintain three points of contact. Ensure the ladder is on a flat, stable surface.' },
+            { label: 'Limits',     text: 'Do not overreach; move the ladder to stay centered.' },
+          ],
+        },
+        tripping: {
+          navTitle: 'Tripping Hazards',
+          points: [
+            { label: 'Organization', text: 'Keep vacuum cords close to the wall and out of main walkways.' },
+            { label: 'Storage',      text: 'Park cleaning carts to the side of hallways, never blocking exits.' },
+            { label: 'Response',     text: 'Clean up any liquid spills or debris immediately.' },
+          ],
+        },
+        ppe: {
+          navTitle: 'PPE (Personal Protective Equipment)',
+          points: [
+            { label: 'Hand Protection', text: 'Wear nitrile or latex gloves for all cleaning tasks.' },
+            { label: 'Eye Protection',  text: 'Use safety goggles when pouring or spraying chemicals.' },
+            { label: 'Respiratory',     text: 'Use masks in dusty areas or when using strong disinfectants.' },
+          ],
+        },
       },
 
       equipment: {
@@ -514,13 +565,64 @@ export default function KGMasterClass() {
       safety: {
         navTitle: 'Seguridad en el Trabajo',
         topics: [
-          { title: 'Requisitos de Uniforme',              description: 'Vestimenta adecuada y equipo de seguridad' },
-          { title: 'Requisitos OSHA',                     description: 'Cumplimiento y estándares de seguridad' },
-          { title: 'Biohazards',                          description: 'Identificar y manejar materiales peligrosos biológicos' },
-          { title: 'Seguridad en Alturas',                description: 'Protocolos de seguridad con escaleras y alturas' },
-          { title: 'Riesgos de Tropiezo',                 description: 'Identificar y prevenir accidentes' },
-          { title: 'EPP (Equipo de Protección Personal)', description: 'Uso y cuidado del equipo de seguridad' },
+          { id: 'uniform',    title: 'Requisitos de Uniforme',              description: 'Vestimenta adecuada y equipo de seguridad' },
+          { id: 'osha',       title: 'Requisitos OSHA',                     description: 'Cumplimiento y estándares de seguridad' },
+          { id: 'biohazards', title: 'Biohazards',                          description: 'Identificar y manejar materiales peligrosos biológicos' },
+          { id: 'height',     title: 'Seguridad en Alturas',                description: 'Protocolos de seguridad con escaleras y alturas' },
+          { id: 'tripping',   title: 'Riesgos de Tropiezo',                 description: 'Identificar y prevenir accidentes' },
+          { id: 'ppe',        title: 'EPP (Equipo de Protección Personal)', description: 'Uso y cuidado del equipo de seguridad' },
         ],
+      },
+
+      safetyDetails: {
+        uniform: {
+          navTitle: 'Requisitos de Uniforme',
+          points: [
+            { label: 'Estándar',   text: 'Camisa de la empresa limpia y pantalón de trabajo resistente.' },
+            { label: 'Calzado',    text: 'Zapatos cerrados, impermeables y antideslizantes obligatorios.' },
+            { label: 'Seguridad',  text: 'Sin joyería colgante ni ropa suelta para evitar enganches.' },
+          ],
+        },
+        osha: {
+          navTitle: 'Requisitos OSHA',
+          points: [
+            { label: 'Cumplimiento', text: 'Sigue todos los estándares federales de seguridad y protocolos del sitio.' },
+            { label: 'SDS',          text: 'Conoce la ubicación de las Hojas de Datos de Seguridad de todos los químicos.' },
+            { label: 'Señalización', text: 'Usa siempre señales de "Precaución Piso Mojado" al trapear o ante derrames.' },
+          ],
+        },
+        biohazards: {
+          navTitle: 'Biohazards',
+          points: [
+            { label: 'Identificación', text: 'Trata todos los fluidos corporales como infecciosos (sangre, vómito, etc.).' },
+            { label: 'Eliminación',    text: 'Usa bolsas rojas de biohazard etiquetadas para desechos contaminados.' },
+            { label: 'Manejo',         text: 'Nunca empujes la basura con manos o pies; usa una herramienta o cambia la bolsa.' },
+          ],
+        },
+        height: {
+          navTitle: 'Seguridad en Alturas',
+          points: [
+            { label: 'Equipo',     text: 'Usa solo escaleras aprobadas; nunca uses sillas, cajones o basureros.' },
+            { label: 'Técnica',    text: 'Mantén tres puntos de contacto. Asegura que la escalera esté en superficie plana y estable.' },
+            { label: 'Límites',    text: 'No te estires demasiado; mueve la escalera para mantenerte centrado.' },
+          ],
+        },
+        tripping: {
+          navTitle: 'Riesgos de Tropiezo',
+          points: [
+            { label: 'Organización', text: 'Mantén los cables de la aspiradora pegados a la pared y fuera de los pasillos.' },
+            { label: 'Almacenamiento', text: 'Estaciona los carritos de limpieza al lado del pasillo, nunca bloqueando salidas.' },
+            { label: 'Respuesta',    text: 'Limpia de inmediato cualquier derrame de líquidos o escombros.' },
+          ],
+        },
+        ppe: {
+          navTitle: 'EPP (Equipo de Protección Personal)',
+          points: [
+            { label: 'Protección de Manos', text: 'Usa guantes de nitrilo o látex en todas las tareas de limpieza.' },
+            { label: 'Protección Ocular',   text: 'Usa gafas de seguridad al verter o rociar químicos.' },
+            { label: 'Respiratorio',        text: 'Usa mascarillas en áreas con polvo o al usar desinfectantes fuertes.' },
+          ],
+        },
       },
 
       equipment: {
@@ -868,8 +970,57 @@ export default function KGMasterClass() {
     );
   };
 
+  // ── Safety Detail Screen ─────────────────────────────────────────────────────
+  const renderSafetyDetail = (topicId) => {
+    const detail = t.safetyDetails[topicId];
+    if (!detail) return null;
+    return (
+      <div className="min-h-screen bg-slate-50 pb-20">
+        <SubPageNav
+          title={detail.navTitle}
+          icon="🛡️"
+          onBack={() => navigateTo('safety')}
+        />
+
+        <div className="max-w-2xl mx-auto px-5 pt-6 space-y-6">
+
+          {/* ── Image Placeholder ── */}
+          <div className="rounded-2xl overflow-hidden border-2 border-dashed border-blue-200 bg-blue-50 flex flex-col items-center justify-center gap-3 py-14">
+            <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
+              <span className="text-3xl">🖼️</span>
+            </div>
+            <p className="text-blue-400 font-semibold text-sm">Image coming soon</p>
+          </div>
+
+          {/* ── Detail Points ── */}
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <div className="bg-gradient-to-r from-blue-900 to-blue-700 px-5 py-4">
+              <h2 className="text-white font-bold text-base uppercase tracking-widest">
+                {detail.navTitle}
+              </h2>
+            </div>
+            <ul className="divide-y divide-gray-50">
+              {detail.points.map((point, idx) => (
+                <li key={idx} className="flex items-start gap-4 px-5 py-4">
+                  <span className="mt-0.5 flex-shrink-0 w-6 h-6 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center shadow-sm">
+                    <span className="text-white text-xs font-bold">✓</span>
+                  </span>
+                  <p className="text-gray-700 text-sm leading-relaxed">
+                    <strong className="text-blue-900">{point.label}:</strong> {point.text}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+        </div>
+        <PageFooter />
+      </div>
+    );
+  };
+
   // ── Generic Topics Screen (Safety / Equipment) ────────────────────────────────
-  const renderTopics = (navTitle, icon, topics) => (
+  const renderTopics = (navTitle, icon, topics, onTopicClick) => (
     <div className="min-h-screen bg-slate-50 pb-20">
       <SubPageNav title={navTitle} icon={icon} />
 
@@ -877,6 +1028,7 @@ export default function KGMasterClass() {
         {topics.map((topic, idx) => (
           <button
             key={idx}
+            onClick={onTopicClick ? () => onTopicClick(topic.id) : undefined}
             className="w-full bg-white rounded-xl shadow-md p-5 flex items-center gap-4 hover:shadow-lg hover:scale-105 transition-all border border-gray-100 text-left"
           >
             <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center flex-shrink-0 shadow">
@@ -1317,7 +1469,13 @@ export default function KGMasterClass() {
     case 'cleaning-pressure_washing': return renderCleaningDetail('pressure_washing');
     case 'cleaning-schools':      return renderCleaningDetail('schools');
     case 'cleaning-banking':      return renderCleaningDetail('banking');
-    case 'safety':       return renderTopics(t.safety.navTitle,    '🛡️', t.safety.topics);
+    case 'safety':            return renderTopics(t.safety.navTitle, '🛡️', t.safety.topics, (id) => navigateTo(`safety-${id}`));
+    case 'safety-uniform':    return renderSafetyDetail('uniform');
+    case 'safety-osha':       return renderSafetyDetail('osha');
+    case 'safety-biohazards': return renderSafetyDetail('biohazards');
+    case 'safety-height':     return renderSafetyDetail('height');
+    case 'safety-tripping':   return renderSafetyDetail('tripping');
+    case 'safety-ppe':        return renderSafetyDetail('ppe');
     case 'equipment':    return renderTopics(t.equipment.navTitle, '🔧', t.equipment.topics);
     case 'chemicals':    return renderChemicals();
     case 'standards':    return renderStandards();
