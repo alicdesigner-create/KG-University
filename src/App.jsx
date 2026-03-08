@@ -1086,12 +1086,9 @@ export default function KGMasterClass() {
               const hasColon = tip.includes(':');
               return (
                 <div key={idx} className="bg-white rounded-2xl shadow-sm border border-gray-100 px-5 py-5 flex flex-col items-center text-center gap-3 hover:shadow-md hover:border-sky-200 transition-all">
-                  <div className="flex items-center gap-2">
-                    <span className="w-6 h-6 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center shadow-sm flex-shrink-0">
-                      <span className="text-white text-xs font-bold">✓</span>
-                    </span>
-                    <span className="text-sky-400 text-xs font-bold uppercase tracking-widest">{idx + 1} / {detail.tips.length}</span>
-                  </div>
+                  <span className="w-6 h-6 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center shadow-sm flex-shrink-0">
+                    <span className="text-white text-xs font-bold">✓</span>
+                  </span>
                   <p className="text-gray-700 text-sm leading-relaxed">
                     {hasColon
                       ? <><strong className="text-blue-900">{bold}:</strong>{rest.join(':')}</>
