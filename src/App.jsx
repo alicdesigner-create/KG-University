@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { ChevronRight, ArrowLeft, Building2, Sparkles, Shield, Wrench, Droplets, Star, FolderOpen, ShieldCheck, Lightbulb, Users2, ClipboardCheck, Handshake, Briefcase, SprayCan } from 'lucide-react';
+import { ChevronRight, ArrowLeft, Building2, Sparkles, Shield, Wrench, Droplets, Star, FolderOpen, ShieldCheck, Lightbulb, Users2, ClipboardCheck, Handshake, Briefcase, SprayCan, ShowerHead, UtensilsCrossed, AppWindow, Grid3x3, Gauge, GraduationCap, Landmark } from 'lucide-react';
 
 export default function KGMasterClass() {
   const [showSplash, setShowSplash] = useState(true);
@@ -63,6 +63,17 @@ export default function KGMasterClass() {
     chemicals: SprayCan,
     standards: Star,
     resources: FolderOpen,
+  };
+
+  const cleaningSubIcons = {
+    offices:          Building2,
+    bathrooms:        ShowerHead,
+    kitchens:         UtensilsCrossed,
+    windows:          AppWindow,
+    floors:           Grid3x3,
+    pressure_washing: Gauge,
+    schools:          GraduationCap,
+    banking:          Landmark,
   };
 
   const translations = {
@@ -987,18 +998,21 @@ export default function KGMasterClass() {
         <div className="p-6 max-w-2xl mx-auto">
           <p className="text-gray-600 text-sm mb-6">{c.intro}</p>
           <div className="grid grid-cols-2 gap-4">
-            {c.subCategories.map((sub) => (
-              <button
-                key={sub.id}
-                onClick={() => navigateTo(`cleaning-${sub.id}`)}
-                className="bg-white rounded-xl shadow-md p-5 flex flex-col items-center gap-3 hover:shadow-lg hover:scale-105 transition-all border border-gray-100"
-              >
-                <div className="w-14 h-14 bg-gradient-to-br from-blue-800 to-blue-900 rounded-full flex items-center justify-center shadow-md">
-                  <span className="text-2xl">{sub.icon}</span>
-                </div>
-                <p className="text-blue-900 font-semibold text-sm text-center">{sub.title}</p>
-              </button>
-            ))}
+            {c.subCategories.map((sub) => {
+              const SubIcon = cleaningSubIcons[sub.id];
+              return (
+                <button
+                  key={sub.id}
+                  onClick={() => navigateTo(`cleaning-${sub.id}`)}
+                  className="bg-white rounded-xl shadow-md p-5 flex flex-col items-center gap-3 hover:shadow-lg hover:scale-105 transition-all border border-gray-100"
+                >
+                  <div className="w-14 h-14 bg-gradient-to-br from-blue-800 to-blue-900 rounded-full flex items-center justify-center shadow-md">
+                    {SubIcon && <SubIcon size={24} className="text-white" />}
+                  </div>
+                  <p className="text-blue-900 font-semibold text-sm text-center">{sub.title}</p>
+                </button>
+              );
+            })}
           </div>
         </div>
         <PageFooter />
