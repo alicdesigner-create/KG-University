@@ -953,13 +953,26 @@ export default function KGMasterClass() {
           {/* ── Core Values ── */}
           <div className="text-center">
             <h2 className="text-blue-900 font-bold text-base uppercase tracking-widest mb-3">{k.valuesLabel}</h2>
-            <div className="grid grid-cols-2 gap-2">
-              {k.values.map(({ label, Icon }, idx) => (
-                <div key={idx} className="flex flex-col items-center gap-1.5 p-3 rounded-xl border border-gray-100 bg-slate-50 hover:bg-blue-50 transition-colors">
-                  <Icon size={20} className="text-blue-900" />
-                  <p className="text-gray-700 font-medium text-sm">{label}</p>
-                </div>
-              ))}
+            <div className="grid grid-cols-2 gap-3">
+              {k.values.map(({ label, Icon }, idx) => {
+                const valueColors = [
+                  { bg: 'bg-blue-900',    icon: 'text-white' },
+                  { bg: 'bg-sky-500',     icon: 'text-white' },
+                  { bg: 'bg-emerald-600', icon: 'text-white' },
+                  { bg: 'bg-violet-600',  icon: 'text-white' },
+                  { bg: 'bg-orange-500',  icon: 'text-white' },
+                  { bg: 'bg-red-500',     icon: 'text-white' },
+                ];
+                const color = valueColors[idx % valueColors.length];
+                return (
+                  <div key={idx} className="flex flex-col items-center gap-2.5 p-4 rounded-2xl bg-white shadow-sm border border-gray-100 hover:shadow-md transition-all">
+                    <div className={`w-10 h-10 ${color.bg} rounded-xl flex items-center justify-center shadow-md`}>
+                      <Icon size={20} className={color.icon} />
+                    </div>
+                    <p className="text-blue-900 font-semibold text-sm">{label}</p>
+                  </div>
+                );
+              })}
             </div>
           </div>
 
@@ -1029,25 +1042,26 @@ export default function KGMasterClass() {
           )}
 
           {/* ── Tips ── */}
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-            <ul className="divide-y divide-gray-50">
-              {detail.tips.map((tip, idx) => {
-                const [bold, ...rest] = tip.split(':');
-                const hasColon = tip.includes(':');
-                return (
-                  <li key={idx} className="flex flex-col items-center text-center gap-2 px-5 py-4">
-                    <span className="flex-shrink-0 w-6 h-6 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center shadow-sm">
+          <div className="space-y-3">
+            {detail.tips.map((tip, idx) => {
+              const [bold, ...rest] = tip.split(':');
+              const hasColon = tip.includes(':');
+              return (
+                <div key={idx} className="bg-white rounded-2xl shadow-sm border border-gray-100 px-5 py-5 flex flex-col items-center text-center gap-3 hover:shadow-md hover:border-sky-200 transition-all">
+                  <div className="flex items-center gap-2">
+                    <span className="w-6 h-6 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center shadow-sm flex-shrink-0">
                       <span className="text-white text-xs font-bold">✓</span>
                     </span>
-                    <p className="text-gray-700 text-sm leading-relaxed">
-                      {hasColon
-                        ? <><strong className="text-blue-900">{bold}:</strong>{rest.join(':')}</>
-                        : tip}
-                    </p>
-                  </li>
-                );
-              })}
-            </ul>
+                    <span className="text-sky-400 text-xs font-bold uppercase tracking-widest">{idx + 1} / {detail.tips.length}</span>
+                  </div>
+                  <p className="text-gray-700 text-sm leading-relaxed">
+                    {hasColon
+                      ? <><strong className="text-blue-900">{bold}:</strong>{rest.join(':')}</>
+                      : tip}
+                  </p>
+                </div>
+              );
+            })}
           </div>
 
         </div>
@@ -1116,18 +1130,20 @@ export default function KGMasterClass() {
 
           {/* ── Detail Points ── */}
           <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-            <ul className="divide-y divide-gray-50">
+          <div className="space-y-3">
               {detail.points.map((point, idx) => (
-                <li key={idx} className="flex flex-col items-center text-center gap-2 px-5 py-4">
-                  <span className="flex-shrink-0 w-6 h-6 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center shadow-sm">
-                    <span className="text-white text-xs font-bold">✓</span>
-                  </span>
+                <div key={idx} className="bg-white rounded-2xl shadow-sm border border-gray-100 px-5 py-5 flex flex-col items-center text-center gap-3 hover:shadow-md hover:border-red-200 transition-all">
+                  <div className="flex items-center gap-2">
+                    <span className="w-6 h-6 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center shadow-sm flex-shrink-0">
+                      <span className="text-white text-xs font-bold">✓</span>
+                    </span>
+                    <span className="text-red-400 text-xs font-bold uppercase tracking-widest">{idx + 1} / {detail.points.length}</span>
+                  </div>
                   <p className="text-gray-700 text-sm leading-relaxed">
                     <strong className="text-blue-900">{point.label}:</strong> {point.text}
                   </p>
-                </li>
+                </div>
               ))}
-            </ul>
           </div>
 
         </div>
