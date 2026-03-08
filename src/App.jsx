@@ -755,6 +755,22 @@ export default function KGMasterClass() {
     </div>
   );
 
+  // ── Page Hero Banner (shown below SubPageNav on inner screens) ───────────────
+  const PageHero = ({ gradient, Icon, svgSrc }) => (
+    <div className={`relative ${gradient} px-6 py-8 text-center overflow-hidden`}>
+      <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-white/10" />
+      <div className="absolute -bottom-8 -left-8 w-28 h-28 rounded-full bg-white/10" />
+      <div className="absolute top-6 left-8 w-10 h-10 rounded-full bg-white/5" />
+      <div className="relative z-10 w-20 h-20 bg-white/20 rounded-3xl flex items-center justify-center mx-auto shadow-inner">
+        {svgSrc
+          ? <img src={svgSrc} className="w-10 h-10 object-contain" alt="" />
+          : Icon && <Icon size={36} className="text-white" />
+        }
+      </div>
+      <div className="absolute bottom-0 left-0 right-0 h-7 bg-slate-50" style={{ borderRadius: '1.5rem 1.5rem 0 0' }} />
+    </div>
+  );
+
   // ── Sub-page Nav with logo (shared across all inner screens) ─────────────────
   const SubPageNav = ({ title, icon, onBack }) => (
     <div className="sticky top-0 z-10 shadow-lg">
@@ -899,8 +915,9 @@ export default function KGMasterClass() {
     const parts = k.description.split(/(1995|KG Facility Solutions)/g);
 
     return (
-      <div className="min-h-screen bg-white pb-20">
+      <div className="min-h-screen bg-slate-50 pb-20">
         <SubPageNav title={k.navTitle} />
+        <PageHero gradient="bg-gradient-to-br from-blue-900 to-blue-700" Icon={Building2} />
 
         <div className="max-w-2xl mx-auto px-5 pt-6 pb-4 space-y-6">
 
@@ -976,6 +993,7 @@ export default function KGMasterClass() {
           title={detail.navTitle}
           onBack={() => navigateTo('cleaning')}
         />
+        {(() => { const SubIcon = cleaningSubIcons[subId]; return <PageHero gradient="bg-gradient-to-br from-sky-600 to-sky-400" Icon={SubIcon} />; })()}
 
         <div className="max-w-2xl mx-auto px-5 pt-6 space-y-6">
 
@@ -1044,6 +1062,7 @@ export default function KGMasterClass() {
     return (
       <div className="min-h-screen bg-slate-50 pb-20">
         <SubPageNav title={c.navTitle} />
+        <PageHero gradient="bg-gradient-to-br from-sky-600 to-sky-400" Icon={Sparkles} />
         <div className="p-6 max-w-2xl mx-auto">
           <p className="text-gray-600 text-sm mb-6">{c.intro}</p>
           <div className="grid grid-cols-2 gap-4">
@@ -1083,6 +1102,7 @@ export default function KGMasterClass() {
           icon="🛡️"
           onBack={() => navigateTo('safety')}
         />
+        <PageHero gradient="bg-gradient-to-br from-red-600 to-red-400" Icon={Shield} />
 
         <div className="max-w-2xl mx-auto px-5 pt-6 space-y-6">
 
@@ -1117,9 +1137,10 @@ export default function KGMasterClass() {
   };
 
   // ── Generic Topics Screen (Safety / Equipment) ────────────────────────────────
-  const renderTopics = (navTitle, icon, topics, onTopicClick) => (
+  const renderTopics = (navTitle, icon, topics, onTopicClick, heroGradient, HeroIcon) => (
     <div className="min-h-screen bg-slate-50 pb-20">
       <SubPageNav title={navTitle} icon={icon} />
+      {heroGradient && HeroIcon && <PageHero gradient={heroGradient} Icon={HeroIcon} />}
 
       <div className="p-6 max-w-2xl mx-auto space-y-3">
         {topics.map((topic, idx) => (
@@ -1163,6 +1184,7 @@ export default function KGMasterClass() {
     return (
       <div className="min-h-screen bg-slate-50 pb-20">
         <SubPageNav title={c.navTitle} />
+        <PageHero gradient="bg-gradient-to-br from-emerald-700 to-emerald-500" svgSrc="/spray-bottle.svg" />
         <div className="p-4 max-w-2xl mx-auto space-y-6">
           {/* Section 1 — Product grid */}
           <div>
@@ -1263,6 +1285,7 @@ export default function KGMasterClass() {
     return (
       <div className="min-h-screen bg-slate-50 pb-20">
         <SubPageNav title={s.navTitle} />
+        <PageHero gradient="bg-gradient-to-br from-violet-700 to-violet-500" Icon={Star} />
         <div className="p-6 max-w-2xl mx-auto">
           <div className="bg-white rounded-xl shadow-lg p-6">
             <div className="flex items-center gap-3 mb-4">
@@ -1518,6 +1541,7 @@ export default function KGMasterClass() {
     return (
       <div className="min-h-screen bg-slate-50 pb-20">
         <SubPageNav title={res.navTitle} />
+        <PageHero gradient="bg-gradient-to-br from-slate-600 to-slate-400" Icon={FolderOpen} />
         <div className="p-6 max-w-2xl mx-auto space-y-3">
           {res.items.map((item, idx) => (
             <button
@@ -1566,14 +1590,14 @@ export default function KGMasterClass() {
     case 'cleaning-pressure_washing': return renderCleaningDetail('pressure_washing');
     case 'cleaning-schools':      return renderCleaningDetail('schools');
     case 'cleaning-banking':      return renderCleaningDetail('banking');
-    case 'safety':            return renderTopics(t.safety.navTitle, '🛡️', t.safety.topics, (id) => navigateTo(`safety-${id}`));
+    case 'safety':            return renderTopics(t.safety.navTitle, '🛡️', t.safety.topics, (id) => navigateTo(`safety-${id}`), 'bg-gradient-to-br from-red-600 to-red-400', Shield);
     case 'safety-uniform':    return renderSafetyDetail('uniform');
     case 'safety-osha':       return renderSafetyDetail('osha');
     case 'safety-biohazards': return renderSafetyDetail('biohazards');
     case 'safety-height':     return renderSafetyDetail('height');
     case 'safety-tripping':   return renderSafetyDetail('tripping');
     case 'safety-ppe':        return renderSafetyDetail('ppe');
-    case 'equipment':    return renderTopics(t.equipment.navTitle, '🔧', t.equipment.topics);
+    case 'equipment':    return renderTopics(t.equipment.navTitle, '🔧', t.equipment.topics, undefined, 'bg-gradient-to-br from-orange-600 to-orange-400', Wrench);
     case 'chemicals':    return renderChemicals();
     case 'standards':    return renderStandards();
     case 'resources':    return renderResources();
