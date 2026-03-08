@@ -249,9 +249,10 @@ export default function KGMasterClass() {
         osha: {
           navTitle: 'OSHA Requirements',
           points: [
-            { label: 'Compliance', text: 'Follow all federal safety standards and site-specific protocols.' },
-            { label: 'SDS',        text: 'Know the location of Safety Data Sheets for all chemicals on-site.' },
-            { label: 'Signage',    text: 'Always use "Caution Wet Floor" signs when mopping or if spills occur.' },
+            { label: 'Compliance',         text: 'Follow all federal safety standards and site-specific protocols.' },
+            { label: 'SDS',                text: 'Know the location of Safety Data Sheets for all chemicals on-site.' },
+            { label: 'Signage',            text: 'Always use "Caution Wet Floor" signs when mopping or if spills occur.' },
+            { label: 'Chemical Labeling',  text: 'Ensure all spray bottles have their respective labels and are properly identified. Never use unlabeled containers or hand-written markings that do not meet OSHA Hazard Communication standards.' },
           ],
         },
         biohazards: {
@@ -588,9 +589,10 @@ export default function KGMasterClass() {
         osha: {
           navTitle: 'Requisitos OSHA',
           points: [
-            { label: 'Cumplimiento', text: 'Sigue todos los estándares federales de seguridad y protocolos del sitio.' },
-            { label: 'SDS',          text: 'Conoce la ubicación de las Hojas de Datos de Seguridad de todos los químicos.' },
-            { label: 'Señalización', text: 'Usa siempre señales de "Precaución Piso Mojado" al trapear o ante derrames.' },
+            { label: 'Cumplimiento',         text: 'Sigue todos los estándares federales de seguridad y protocolos del sitio.' },
+            { label: 'SDS',                  text: 'Conoce la ubicación de las Hojas de Datos de Seguridad de todos los químicos.' },
+            { label: 'Señalización',         text: 'Usa siempre señales de "Precaución Piso Mojado" al trapear o ante derrames.' },
+            { label: 'Etiquetado Químico',   text: 'Asegúrate de que todos los atomizadores tengan su etiqueta correspondiente y estén correctamente identificados. Nunca uses envases sin etiqueta ni marcas escritas a mano que no cumplan con los estándares de Comunicación de Peligros de OSHA.' },
           ],
         },
         biohazards: {
