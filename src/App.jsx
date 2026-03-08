@@ -1007,7 +1007,10 @@ export default function KGMasterClass() {
                   className="bg-white rounded-xl shadow-md p-5 flex flex-col items-center gap-3 hover:shadow-lg hover:scale-105 transition-all border border-gray-100"
                 >
                   <div className="w-14 h-14 bg-gradient-to-br from-blue-800 to-blue-900 rounded-full flex items-center justify-center shadow-md">
-                    {SubIcon && <SubIcon size={24} className="text-white" />}
+                    {sub.id === 'pressure_washing'
+                      ? <img src="/pw-icon.svg" alt="Pressure Washing" className="w-7 h-7 object-contain" />
+                      : SubIcon && <SubIcon size={24} className="text-white" />
+                    }
                   </div>
                   <p className="text-blue-900 font-semibold text-sm text-center">{sub.title}</p>
                 </button>
