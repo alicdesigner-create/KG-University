@@ -918,8 +918,8 @@ export default function KGMasterClass() {
                 const [bold, ...rest] = tip.split(':');
                 const hasColon = tip.includes(':');
                 return (
-                  <li key={idx} className="flex items-start gap-4 px-5 py-4">
-                    <span className="mt-0.5 flex-shrink-0 w-6 h-6 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center shadow-sm">
+                  <li key={idx} className="flex flex-col items-center text-center gap-2 px-5 py-4">
+                    <span className="flex-shrink-0 w-6 h-6 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center shadow-sm">
                       <span className="text-white text-xs font-bold">✓</span>
                     </span>
                     <p className="text-gray-700 text-sm leading-relaxed">
@@ -993,8 +993,8 @@ export default function KGMasterClass() {
           <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
             <ul className="divide-y divide-gray-50">
               {detail.points.map((point, idx) => (
-                <li key={idx} className="flex items-start gap-4 px-5 py-4">
-                  <span className="mt-0.5 flex-shrink-0 w-6 h-6 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center shadow-sm">
+                <li key={idx} className="flex flex-col items-center text-center gap-2 px-5 py-4">
+                  <span className="flex-shrink-0 w-6 h-6 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center shadow-sm">
                     <span className="text-white text-xs font-bold">✓</span>
                   </span>
                   <p className="text-gray-700 text-sm leading-relaxed">
