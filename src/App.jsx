@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { ChevronRight, ArrowLeft, Building2, Sparkles, Shield, Wrench, Droplets, Star, FolderOpen, ShieldCheck, Lightbulb, Users2, ClipboardCheck, Handshake } from 'lucide-react';
+import { ChevronRight, ArrowLeft, Building2, Sparkles, Shield, Wrench, Droplets, Star, FolderOpen, ShieldCheck, Lightbulb, Users2, ClipboardCheck, Handshake, Briefcase } from 'lucide-react';
 
 export default function KGMasterClass() {
   const [showSplash, setShowSplash] = useState(true);
@@ -108,11 +108,12 @@ export default function KGMasterClass() {
         ],
         valuesLabel: 'Core Values',
         values: [
-          { label: 'Integrity',      Icon: ShieldCheck    },
-          { label: 'Innovation',     Icon: Lightbulb      },
-          { label: 'Inclusiveness',  Icon: Users2         },
-          { label: 'Accountability', Icon: ClipboardCheck },
-          { label: 'Relationships',  Icon: Handshake      },
+          { label: 'Integrity',       Icon: ShieldCheck    },
+          { label: 'Innovation',      Icon: Lightbulb      },
+          { label: 'Inclusiveness',   Icon: Users2         },
+          { label: 'Accountability',  Icon: ClipboardCheck },
+          { label: 'Relationships',   Icon: Handshake      },
+          { label: 'Professionalism', Icon: Briefcase      },
         ],
       },
 
@@ -302,11 +303,12 @@ export default function KGMasterClass() {
         ],
         valuesLabel: 'Valores Fundamentales',
         values: [
-          { label: 'Integridad',       Icon: ShieldCheck    },
-          { label: 'Innovación',       Icon: Lightbulb      },
-          { label: 'Inclusión',        Icon: Users2         },
-          { label: 'Responsabilidad',  Icon: ClipboardCheck },
-          { label: 'Relaciones',       Icon: Handshake      },
+          { label: 'Integridad',        Icon: ShieldCheck    },
+          { label: 'Innovación',        Icon: Lightbulb      },
+          { label: 'Inclusión',         Icon: Users2         },
+          { label: 'Responsabilidad',   Icon: ClipboardCheck },
+          { label: 'Relaciones',        Icon: Handshake      },
+          { label: 'Profesionalismo',   Icon: Briefcase      },
         ],
       },
 
