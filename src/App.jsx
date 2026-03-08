@@ -773,7 +773,7 @@ export default function KGMasterClass() {
 
   // ── Sub-page Nav with logo (shared across all inner screens) ─────────────────
   const SubPageNav = ({ title, icon, onBack }) => (
-    <div className="sticky top-0 z-10 shadow-lg">
+    <div className="sticky top-0 z-30 shadow-lg">
       <div className="bg-blue-900 text-white py-3 px-4 flex items-center relative">
         <button onClick={onBack ?? goHome} className="hover:bg-blue-800 p-2 rounded transition flex-shrink-0">
           <ArrowLeft size={22} />
@@ -1078,23 +1078,34 @@ export default function KGMasterClass() {
         <SubPageNav title={c.navTitle} />
         <PageHero gradient="bg-gradient-to-br from-sky-600 to-sky-400" Icon={Sparkles} />
         <div className="p-6 max-w-2xl mx-auto">
-          <p className="text-gray-600 text-sm mb-6">{c.intro}</p>
+          <p className="text-gray-600 text-sm mb-6 text-center">{c.intro}</p>
           <div className="grid grid-cols-2 gap-4">
             {c.subCategories.map((sub) => {
               const SubIcon = cleaningSubIcons[sub.id];
+              const cardColors = {
+                offices:          { icon: 'from-blue-800 to-blue-600',    card: 'bg-blue-50   border-blue-100',   text: 'text-blue-900'   },
+                bathrooms:        { icon: 'from-cyan-600 to-cyan-400',    card: 'bg-cyan-50   border-cyan-100',   text: 'text-cyan-900'   },
+                kitchens:         { icon: 'from-orange-500 to-orange-400',card: 'bg-orange-50 border-orange-100', text: 'text-orange-900' },
+                windows:          { icon: 'from-sky-600 to-sky-400',      card: 'bg-sky-50    border-sky-100',    text: 'text-sky-900'    },
+                floors:           { icon: 'from-emerald-700 to-emerald-500', card: 'bg-emerald-50 border-emerald-100', text: 'text-emerald-900' },
+                pressure_washing: { icon: 'from-indigo-700 to-indigo-500',card: 'bg-indigo-50 border-indigo-100', text: 'text-indigo-900' },
+                schools:          { icon: 'from-violet-700 to-violet-500',card: 'bg-violet-50 border-violet-100', text: 'text-violet-900' },
+                banking:          { icon: 'from-slate-700 to-slate-500',  card: 'bg-slate-100 border-slate-200',  text: 'text-slate-900'  },
+              };
+              const c2 = cardColors[sub.id] || { icon: 'from-blue-800 to-blue-600', card: 'bg-white border-gray-100', text: 'text-blue-900' };
               return (
                 <button
                   key={sub.id}
                   onClick={() => navigateTo(`cleaning-${sub.id}`)}
-                  className="bg-white rounded-xl shadow-md p-5 flex flex-col items-center gap-3 hover:shadow-lg hover:scale-105 transition-all border border-gray-100"
+                  className={`${c2.card} rounded-2xl shadow-sm p-5 flex flex-col items-center gap-3 hover:shadow-md hover:scale-105 transition-all border`}
                 >
-                  <div className="w-14 h-14 bg-gradient-to-br from-blue-800 to-blue-900 rounded-full flex items-center justify-center shadow-md">
+                  <div className={`w-14 h-14 bg-gradient-to-br ${c2.icon} rounded-2xl flex items-center justify-center shadow-md`}>
                     {sub.id === 'pressure_washing'
                       ? <img src="/pw-icon.svg" alt="Pressure Washing" className="w-9 h-9 object-contain" />
                       : SubIcon && <SubIcon size={24} className="text-white" />
                     }
                   </div>
-                  <p className="text-blue-900 font-semibold text-sm text-center">{sub.title}</p>
+                  <p className={`${c2.text} font-semibold text-sm text-center`}>{sub.title}</p>
                 </button>
               );
             })}
