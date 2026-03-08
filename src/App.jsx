@@ -818,8 +818,8 @@ export default function KGMasterClass() {
                 const hasColon = tip.includes(':');
                 return (
                   <li key={idx} className="flex items-start gap-4 px-5 py-4">
-                    <span className="mt-0.5 flex-shrink-0 w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
-                      <span className="text-green-600 text-xs font-bold">✓</span>
+                    <span className="mt-0.5 flex-shrink-0 w-6 h-6 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center shadow-sm">
+                      <span className="text-white text-xs font-bold">✓</span>
                     </span>
                     <p className="text-gray-700 text-sm leading-relaxed">
                       {hasColon
