@@ -289,7 +289,7 @@ export default function KGMasterClass() {
         uniform: {
           navTitle: 'Uniform Requirements',
           points: [
-            { label: 'Standard',              text: 'Clean company-issued shirt and durable work pants. Wear a reflective vest if your position requires you to.' },
+            { label: 'Standard',              text: 'Clean company-issued KG shirt, an apron, and durable work pants. Wear a reflective vest if your position requires you to. Always wear closed-toe, non-slip shoes for safety.' },
             { label: 'Footwear',              text: 'Mandatory closed-toe, waterproof, non-slip shoes.' },
             { label: 'Personal Presentation', text: 'Maintain a professional appearance by being well-groomed. Ensure your uniform is clean, wrinkle-free, and tucked in. Personal hygiene must be managed daily to reflect the high standards of our service and respect for the client\'s environment.' },
             { label: 'Safety',                text: 'No dangling jewelry or loose clothing to prevent snagging.' },
@@ -670,7 +670,7 @@ export default function KGMasterClass() {
         uniform: {
           navTitle: 'Requisitos de Uniforme',
           points: [
-            { label: 'Estándar',               text: 'Camisa de la empresa limpia y pantalón de trabajo resistente. Usa un chaleco reflectivo si tu posición lo requiere.' },
+            { label: 'Estándar',               text: 'Camisa KG de la empresa limpia, un delantal y pantalón de trabajo resistente. Usa un chaleco reflectivo si tu posición lo requiere. Usa siempre zapatos cerrados y antideslizantes por seguridad.' },
             { label: 'Calzado',                text: 'Zapatos cerrados, impermeables y antideslizantes obligatorios.' },
             { label: 'Presentación Personal',  text: 'Mantén una apariencia profesional cuidando tu imagen. Asegúrate de que tu uniforme esté limpio, sin arrugas y bien puesto. La higiene personal debe atenderse diariamente para reflejar los altos estándares de nuestro servicio y el respeto por el entorno del cliente.' },
             { label: 'Seguridad',              text: 'Sin joyería colgante ni ropa suelta para evitar enganches.' },
@@ -1239,6 +1239,10 @@ export default function KGMasterClass() {
   };
 
   // ── Safety Detail Screen ─────────────────────────────────────────────────────
+  const safetyImages = {
+    uniform: '/safety/uniform.jpg',
+  };
+
   const renderSafety = () => {
     const s = t.safety;
     const icons = { uniform: '👔', osha: '📋', biohazards: '☣️', height: '🪜', tripping: '⚠️', ppe: '🥽' };
@@ -1266,17 +1270,34 @@ export default function KGMasterClass() {
                     </span>
                   </button>
                   {isOpen && detail && (
-                    <div className="border-t border-red-100 px-4 pb-4 space-y-3 pt-3">
-                      {detail.points.map((point, pIdx) => (
-                        <div key={pIdx} className="flex gap-3 items-start">
-                          <span className="w-5 h-5 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
-                            <span className="text-white text-xs font-bold">✓</span>
-                          </span>
-                          <p className="text-gray-700 text-sm leading-relaxed">
-                            <strong className="text-red-900">{point.label}:</strong> {point.text}
-                          </p>
+                    <div className="border-t border-red-100 pb-4">
+                      {/* Image or placeholder */}
+                      {safetyImages[topic.id] ? (
+                        <img
+                          src={safetyImages[topic.id]}
+                          alt={topic.title}
+                          className="w-full object-cover"
+                          style={{ maxHeight: '200px', objectFit: 'cover' }}
+                        />
+                      ) : (
+                        <div className="mx-4 mt-3 rounded-xl border-2 border-dashed border-red-200 bg-red-50 flex items-center justify-center gap-2 py-6">
+                          <span className="text-2xl">🖼️</span>
+                          <p className="text-red-300 font-semibold text-sm">Image coming soon</p>
                         </div>
-                      ))}
+                      )}
+                      {/* Points */}
+                      <div className="px-4 pt-3 space-y-3">
+                        {detail.points.map((point, pIdx) => (
+                          <div key={pIdx} className="flex gap-3 items-start">
+                            <span className="w-5 h-5 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
+                              <span className="text-white text-xs font-bold">✓</span>
+                            </span>
+                            <p className="text-gray-700 text-sm leading-relaxed">
+                              <strong className="text-red-900">{point.label}:</strong> {point.text}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   )}
                 </div>
