@@ -1294,7 +1294,7 @@ export default function KGMasterClass() {
         <div className="p-4 max-w-2xl mx-auto space-y-6">
           {/* Section 1 — Product grid */}
           <div>
-            <h3 className="text-emerald-800 font-bold text-base uppercase tracking-wide mb-3 px-1">
+            <h3 className="text-emerald-800 font-bold text-base uppercase tracking-wide mb-3 px-1 text-center">
               {c.section1.title}
             </h3>
             <div className="grid grid-cols-2 gap-3">
