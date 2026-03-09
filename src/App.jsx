@@ -1210,7 +1210,7 @@ export default function KGMasterClass() {
                 ];
                 const color = valueColors[idx % valueColors.length];
                 return (
-                  <div key={idx} className="flex flex-col items-center gap-2.5 p-4 rounded-2xl bg-white shadow-sm border border-gray-100 hover:shadow-md transition-all">
+                  <div key={idx} className="flex flex-col items-center gap-2.5 p-4">
                     <div className={`w-10 h-10 ${color.bg} rounded-xl flex items-center justify-center shadow-md`}>
                       <Icon size={20} className={color.icon} />
                     </div>
