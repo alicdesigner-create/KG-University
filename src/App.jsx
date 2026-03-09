@@ -2064,7 +2064,7 @@ export default function KGMasterClass() {
 
                 {/* My Applications */}
                 {isOpen && isApps && (
-                  <div className="border-t border-slate-100 p-3 space-y-3">
+                  <div className="bg-white border-t border-slate-100 p-3 space-y-3">
                     {appsList.map((app, aIdx) => (
                       <div key={aIdx} className="bg-slate-50 rounded-xl p-3 flex items-start gap-3 border border-slate-100">
                         <img src={app.img} alt={app.name} className="w-12 h-12 rounded-xl object-cover flex-shrink-0 shadow-sm border border-slate-200" />
@@ -2097,7 +2097,7 @@ export default function KGMasterClass() {
 
                 {/* Steps-based items */}
                 {isOpen && item.steps && (
-                  <div className="border-t border-slate-100 px-4 py-4 space-y-3">
+                  <div className="bg-white border-t border-blue-800 px-4 py-4 space-y-3">
                     {item.steps.map((step, sIdx) => (
                       <div key={sIdx} className="flex gap-3 items-start">
                         <span className="w-6 h-6 bg-blue-900 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -2120,7 +2120,7 @@ export default function KGMasterClass() {
 
                 {/* Contact Trinet */}
                 {isOpen && item.phone && (
-                  <div className="border-t border-slate-100 px-4 py-4 space-y-4">
+                  <div className="bg-white border-t border-blue-800 px-4 py-4 space-y-4">
                     <a
                       href={item.phone}
                       onClick={e => e.stopPropagation()}
