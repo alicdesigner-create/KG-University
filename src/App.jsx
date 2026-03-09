@@ -1918,10 +1918,10 @@ export default function KGMasterClass() {
 
   // ── Resources Screen ─────────────────────────────────────────────────────────
   const appsList = [
-    { icon: '📷', name: 'Timestamp Camera', android: 'https://play.google.com/store/apps/details?id=com.jeyluta.timestampcamerafree', ios: 'https://apps.apple.com/us/app/timestamp-camera-basic/id840110184' },
-    { icon: '🗓️', name: 'Zoho Shifts',       android: 'https://play.google.com/store/apps/details?id=com.zoho.shifts',              ios: 'https://apps.apple.com/us/app/zoho-shifts/id1517003168' },
-    { icon: '👤', name: 'TriNet Mobile',     android: 'https://play.google.com/store/apps/details?id=com.trinet.hrpmobile',         ios: 'https://apps.apple.com/us/app/trinet-mobile/id589217167' },
-    { icon: '✅', name: 'OrangeQC',          android: 'https://play.google.com/store/apps/details?id=com.orangeqc.native',          ios: 'https://apps.apple.com/us/app/orangeqc/id324039524' },
+    { img: '/apps/timestamp.jpg', name: 'Timestamp Camera', android: 'https://play.google.com/store/apps/details?id=com.jeyluta.timestampcamerafree', ios: 'https://apps.apple.com/us/app/timestamp-camera-basic/id840110184' },
+    { img: '/apps/zoho.jpg',      name: 'Zoho Shifts',       android: 'https://play.google.com/store/apps/details?id=com.zoho.shifts',              ios: 'https://apps.apple.com/us/app/zoho-shifts/id1517003168' },
+    { img: '/apps/trinet.jpg',    name: 'TriNet Mobile',     android: 'https://play.google.com/store/apps/details?id=com.trinet.hrpmobile',         ios: 'https://apps.apple.com/us/app/trinet-mobile/id589217167' },
+    { img: '/apps/orangeqc.jpg',  name: 'OrangeQC',          android: 'https://play.google.com/store/apps/details?id=com.orangeqc.native',          ios: 'https://apps.apple.com/us/app/orangeqc/id324039524' },
   ];
 
   const renderResources = () => {
@@ -1957,32 +1957,26 @@ export default function KGMasterClass() {
                   <div className="border-t border-slate-100 p-3 space-y-3">
                     {appsList.map((app, aIdx) => (
                       <div key={aIdx} className="bg-slate-50 rounded-xl p-3 flex items-start gap-3 border border-slate-100">
-                        <div className="w-11 h-11 bg-white rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm border border-slate-200 text-2xl">
-                          {app.icon}
-                        </div>
+                        <img src={app.img} alt={app.name} className="w-12 h-12 rounded-xl object-cover flex-shrink-0 shadow-sm border border-slate-200" />
                         <div className="flex-1 min-w-0">
                           <p className="text-blue-900 font-bold text-sm">{app.name}</p>
-                          <p className="text-gray-500 text-xs mt-0.5 mb-2">{res.appsDesc[aIdx]}</p>
-                          <div className="flex gap-2 flex-wrap">
+                          <p className="text-gray-500 text-xs mt-0.5 mb-2.5">{res.appsDesc[aIdx]}</p>
+                          <div className="flex gap-2.5">
                             <a href={app.android} target="_blank" rel="noopener noreferrer"
-                              className="flex items-center gap-1.5 bg-gray-900 text-white rounded-lg px-2.5 py-1.5 hover:bg-gray-700 transition-colors"
+                              className="flex items-center gap-1.5 text-white rounded-lg px-3 py-1.5 hover:opacity-90 transition-opacity"
+                              style={{ backgroundColor: '#1a7f37' }}
                               onClick={e => e.stopPropagation()}
                             >
                               <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 fill-white flex-shrink-0"><path d="M3.18 23.76c.37.21.8.22 1.17.04l11.29-6.52-2.5-2.5-9.96 8.98zm-1.1-19.2C2 4.84 2 5.08 2 5.34v13.32c0 .26 0 .5.08.72l.06.06 7.46-7.46v-.18L2.14 4.5l-.06.06zM20.1 10.4l-2.62-1.51-2.83 2.83 2.83 2.83 2.65-1.53c.75-.44.75-1.18-.03-1.62zm-16.92 11l9.96-8.98-2.5-2.5L1.25 21.5l1.93 1.9z"/></svg>
-                              <div>
-                                <div className="text-gray-400 leading-none" style={{fontSize:'7px'}}>GET IT ON</div>
-                                <div className="font-bold text-xs leading-none">Google Play</div>
-                              </div>
+                              <span className="font-bold text-xs">Android</span>
                             </a>
                             <a href={app.ios} target="_blank" rel="noopener noreferrer"
-                              className="flex items-center gap-1.5 bg-gray-900 text-white rounded-lg px-2.5 py-1.5 hover:bg-gray-700 transition-colors"
+                              className="flex items-center gap-1.5 text-white rounded-lg px-3 py-1.5 hover:opacity-90 transition-opacity"
+                              style={{ backgroundColor: '#1d4ed8' }}
                               onClick={e => e.stopPropagation()}
                             >
                               <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 fill-white flex-shrink-0"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-                              <div>
-                                <div className="text-gray-400 leading-none" style={{fontSize:'7px'}}>DOWNLOAD ON THE</div>
-                                <div className="font-bold text-xs leading-none">App Store</div>
-                              </div>
+                              <span className="font-bold text-xs">iPhone</span>
                             </a>
                           </div>
                         </div>
