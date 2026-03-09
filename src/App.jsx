@@ -484,11 +484,44 @@ export default function KGMasterClass() {
           'Quality control inspections.',
         ],
         items: [
-          { icon: '📱', title: 'My Applications',                          description: 'Access your work apps and platforms' },
-          { icon: '💵', title: 'How To Obtain My Pay Stubs From TriNet',   description: 'Step-by-step guide to access your pay stubs' },
-          { icon: '📖', title: 'How to get the Employee Handbook on Trinet?', description: 'Step-by-step guide to download your handbook' },
-          { icon: '📄', title: 'How to download my W2 on Tri-Net?',       description: 'Access and download your tax documents' },
-          { icon: '☎️', title: 'Contact Trinet',                           description: 'Get support directly from Trinet' },
+          { icon: '📱', title: 'My Applications', description: 'Access your work apps and platforms' },
+          {
+            icon: '💵', title: 'How To Obtain My Pay Stubs From TriNet', description: 'Step-by-step guide to access your pay stubs',
+            steps: [
+              'Open the app and go to the "Money" tab at the bottom.',
+              'Tap on "Pay".',
+              'Select the specific date of the paycheck you want to view.',
+              'Tap "View Statement" to see the full PDF detail.',
+            ],
+          },
+          {
+            icon: '📖', title: 'How to get the Employee Handbook on Trinet?', description: 'Step-by-step guide to download your handbook',
+            steps: [
+              'Go to the "Menu" (three lines or "More" icon).',
+              'Look for the "Company" or "Documents" section.',
+              'Tap on "Employee Handbook" or "Company Documents".',
+            ],
+            note: 'Here you can read all KG Facility Solutions policies anytime.',
+          },
+          {
+            icon: '📄', title: 'How to download my W2 on Tri-Net?', description: 'Access and download your tax documents',
+            steps: [
+              'In the "Money" tab, select "Taxes".',
+              'Tap on "Statements".',
+              'Select the year and tap the download icon or "View PDF" to save it to your phone.',
+            ],
+          },
+          {
+            icon: '☎️', title: 'Contact Trinet', description: 'Get support directly from Trinet',
+            phone: 'tel:8006380461', phoneLabel: 'Call TriNet Support',
+            scheduleTitle: 'Monday – Friday',
+            schedule: [
+              { zone: 'Eastern',  hours: '6:00 a.m. – Midnight' },
+              { zone: 'Central',  hours: '5:00 a.m. – 11:00 p.m.' },
+              { zone: 'Mountain', hours: '4:00 a.m. – 10:00 p.m.' },
+              { zone: 'Pacific',  hours: '3:00 a.m. – 9:00 p.m.' },
+            ],
+          },
         ],
       },
     },
@@ -881,11 +914,44 @@ export default function KGMasterClass() {
           'Inspecciones de control de calidad.',
         ],
         items: [
-          { icon: '📱', title: 'Mis Aplicaciones',                                    description: 'Accede a tus apps y plataformas de trabajo' },
-          { icon: '💵', title: 'Cómo Obtener Mis Recibos de Pago en TriNet',          description: 'Guía paso a paso para acceder a tus recibos de pago' },
-          { icon: '📖', title: '¿Cómo obtener el Handbook de empleado en Trinet?',    description: 'Guía paso a paso para descargar tu handbook' },
-          { icon: '📄', title: '¿Cómo descargar mi W2 en Tri-Net?',                  description: 'Accede y descarga tus documentos de impuestos' },
-          { icon: '☎️', title: 'Contactar a Trinet',                                  description: 'Obtén soporte directamente de Trinet' },
+          { icon: '📱', title: 'Mis Aplicaciones', description: 'Accede a tus apps y plataformas de trabajo' },
+          {
+            icon: '💵', title: 'Cómo Obtener Mis Recibos de Pago en TriNet', description: 'Guía paso a paso para acceder a tus recibos de pago',
+            steps: [
+              'Abre la app y ve a la pestaña "Money" en la parte inferior.',
+              'Toca "Pay".',
+              'Selecciona la fecha específica del cheque que deseas ver.',
+              'Toca "View Statement" para ver el PDF completo.',
+            ],
+          },
+          {
+            icon: '📖', title: '¿Cómo obtener el Handbook de empleado en Trinet?', description: 'Guía paso a paso para descargar tu handbook',
+            steps: [
+              'Ve al "Menu" (tres líneas o ícono "More").',
+              'Busca la sección "Company" o "Documents".',
+              'Toca "Employee Handbook" o "Company Documents".',
+            ],
+            note: 'Aquí puedes leer todas las políticas de KG Facility Solutions en cualquier momento.',
+          },
+          {
+            icon: '📄', title: '¿Cómo descargar mi W2 en Tri-Net?', description: 'Accede y descarga tus documentos de impuestos',
+            steps: [
+              'En la pestaña "Money", selecciona "Taxes".',
+              'Toca "Statements".',
+              'Selecciona el año y toca el ícono de descarga o "View PDF" para guardarlo en tu teléfono.',
+            ],
+          },
+          {
+            icon: '☎️', title: 'Contactar a Trinet', description: 'Obtén soporte directamente de Trinet',
+            phone: 'tel:8006380461', phoneLabel: 'Llamar a Soporte de TriNet',
+            scheduleTitle: 'Lunes – Viernes',
+            schedule: [
+              { zone: 'Eastern',  hours: '6:00 a.m. – Medianoche' },
+              { zone: 'Central',  hours: '5:00 a.m. – 11:00 p.m.' },
+              { zone: 'Mountain', hours: '4:00 a.m. – 10:00 p.m.' },
+              { zone: 'Pacific',  hours: '3:00 a.m. – 9:00 p.m.' },
+            ],
+          },
         ],
       },
     },
@@ -1996,6 +2062,7 @@ export default function KGMasterClass() {
                   </span>
                 </button>
 
+                {/* My Applications */}
                 {isOpen && isApps && (
                   <div className="border-t border-slate-100 p-3 space-y-3">
                     {appsList.map((app, aIdx) => (
@@ -2025,6 +2092,52 @@ export default function KGMasterClass() {
                         </div>
                       </div>
                     ))}
+                  </div>
+                )}
+
+                {/* Steps-based items */}
+                {isOpen && item.steps && (
+                  <div className="border-t border-slate-100 px-4 py-4 space-y-3">
+                    {item.steps.map((step, sIdx) => (
+                      <div key={sIdx} className="flex gap-3 items-start">
+                        <span className="w-6 h-6 bg-blue-900 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                          <span className="text-white text-xs font-bold">{sIdx + 1}</span>
+                        </span>
+                        <p className="text-gray-700 text-sm leading-relaxed pt-0.5">
+                          <span className="font-semibold text-blue-900">Step {sIdx + 1}:</span> {step}
+                        </p>
+                      </div>
+                    ))}
+                    {item.note && (
+                      <div className="mt-2 bg-blue-50 border border-blue-100 rounded-xl px-4 py-3">
+                        <p className="text-blue-800 text-sm leading-relaxed">
+                          <span className="font-semibold">Note: </span>{item.note}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* Contact Trinet */}
+                {isOpen && item.phone && (
+                  <div className="border-t border-slate-100 px-4 py-4 space-y-4">
+                    <a
+                      href={item.phone}
+                      onClick={e => e.stopPropagation()}
+                      className="flex items-center justify-center gap-2 w-full bg-blue-900 text-white font-bold text-sm py-3 rounded-xl hover:bg-blue-800 transition-colors shadow"
+                    >
+                      <span className="text-lg">📞</span>
+                      {item.phoneLabel}
+                    </a>
+                    <div className="bg-slate-50 rounded-xl border border-slate-100 p-3">
+                      <p className="text-blue-900 font-semibold text-xs mb-2 text-center">{item.scheduleTitle}</p>
+                      {item.schedule.map((s, sIdx) => (
+                        <div key={sIdx} className="flex justify-between items-center py-1.5 border-b border-slate-100 last:border-0">
+                          <span className="text-gray-600 text-xs font-medium">{s.zone}</span>
+                          <span className="text-blue-900 text-xs font-semibold">{s.hours}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 )}
               </div>
