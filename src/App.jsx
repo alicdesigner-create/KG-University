@@ -997,9 +997,9 @@ export default function KGMasterClass() {
     </div>
   );
 
-  // ── Section Title (icon + text, replaces heavy hero banner) ─────────────────
+  // ── Section Title (icon + text, centered below nav) ─────────────────────────
   const PageHero = ({ gradient, Icon, svgSrc, title }) => (
-    <div className="px-4 pt-5 pb-1">
+    <div className="px-4 pt-5 pb-1 flex justify-center">
       <div className="flex items-center gap-3">
         <div className={`w-12 h-12 ${gradient} rounded-2xl flex items-center justify-center flex-shrink-0 shadow-md`}>
           {svgSrc
@@ -1012,18 +1012,19 @@ export default function KGMasterClass() {
     </div>
   );
 
-  // ── Sub-page Nav — single bar: back + logo + lang toggle ─────────────────────
+  // ── Sub-page Nav — white bar: back left, logo center, lang toggle right ───────
   const SubPageNav = ({ onBack }) => (
-    <div className="w-full bg-blue-900 shadow-lg flex-shrink-0">
-      <div className="py-2.5 px-3 flex items-center gap-2">
-        <button onClick={onBack ?? goHome} className="hover:bg-blue-800 p-2 rounded transition flex-shrink-0">
-          <ArrowLeft size={20} className="text-white" />
+    <div className="w-full bg-white shadow-sm flex-shrink-0">
+      <div className="py-2.5 px-3 flex items-center relative">
+        <button onClick={onBack ?? goHome} className="hover:bg-gray-100 p-2 rounded transition flex-shrink-0 text-gray-700">
+          <ArrowLeft size={20} />
         </button>
-        <button onClick={goHome} className="flex-shrink-0">
-          <img src="/kg-logo.png" alt="KG Masterclass" className="h-8 object-contain brightness-0 invert" />
-        </button>
-        <div className="flex-1" />
-        <LangToggle />
+        <div className="absolute left-0 right-0 flex justify-center pointer-events-none">
+          <button onClick={goHome} className="pointer-events-auto">
+            <img src="/kg-logo.png" alt="KG Masterclass" className="h-9 object-contain" />
+          </button>
+        </div>
+        <div className="ml-auto flex-shrink-0"><LangToggle /></div>
       </div>
     </div>
   );
