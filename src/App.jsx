@@ -997,39 +997,33 @@ export default function KGMasterClass() {
     </div>
   );
 
-  // ── Page Hero Banner (shown below SubPageNav on inner screens) ───────────────
-  const PageHero = ({ gradient, Icon, svgSrc }) => (
-    <div className={`relative z-0 ${gradient} px-6 py-8 text-center overflow-hidden`}>
-      <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-white/10" />
-      <div className="absolute -bottom-8 -left-8 w-28 h-28 rounded-full bg-white/10" />
-      <div className="absolute top-6 left-8 w-10 h-10 rounded-full bg-white/5" />
-      <div className="relative z-10 w-20 h-20 bg-white/20 rounded-3xl flex items-center justify-center mx-auto shadow-inner">
-        {svgSrc
-          ? <img src={svgSrc} className="w-10 h-10 object-contain" alt="" />
-          : Icon && <Icon size={36} className="text-white" />
-        }
+  // ── Section Title (icon + text, replaces heavy hero banner) ─────────────────
+  const PageHero = ({ gradient, Icon, svgSrc, title }) => (
+    <div className="px-4 pt-5 pb-1">
+      <div className="flex items-center gap-3">
+        <div className={`w-12 h-12 ${gradient} rounded-2xl flex items-center justify-center flex-shrink-0 shadow-md`}>
+          {svgSrc
+            ? <img src={svgSrc} className="w-6 h-6 object-contain" alt="" />
+            : Icon && <Icon size={22} className="text-white" />
+          }
+        </div>
+        {title && <h1 className="text-blue-900 font-bold text-xl leading-tight">{title}</h1>}
       </div>
-      <div className="absolute bottom-0 left-0 right-0 h-7 bg-slate-50" style={{ borderRadius: '1.5rem 1.5rem 0 0' }} />
     </div>
   );
 
-  // ── Sub-page Nav with logo (shared across all inner screens) ─────────────────
-  const SubPageNav = ({ title, icon, onBack }) => (
-    <div className="w-full shadow-lg flex-shrink-0">
-      <div className="bg-blue-900 text-white py-3 px-4 flex items-center relative">
+  // ── Sub-page Nav — single bar: back + logo + lang toggle ─────────────────────
+  const SubPageNav = ({ onBack }) => (
+    <div className="w-full bg-blue-900 shadow-lg flex-shrink-0">
+      <div className="py-2.5 px-3 flex items-center gap-2">
         <button onClick={onBack ?? goHome} className="hover:bg-blue-800 p-2 rounded transition flex-shrink-0">
-          <ArrowLeft size={22} />
+          <ArrowLeft size={20} className="text-white" />
         </button>
-        <div className="absolute left-0 right-0 flex items-center justify-center gap-2 pointer-events-none">
-          {icon && <span className="text-lg">{icon}</span>}
-          <h2 className="font-bold text-base">{title}</h2>
-        </div>
-        <div className="ml-auto flex-shrink-0"><LangToggle /></div>
-      </div>
-      <div className="bg-white border-b border-gray-100 py-2.5 text-center">
-        <button onClick={goHome} className="inline-block">
-          <img src="/kg-logo.png" alt="KG Masterclass" className="h-11 mx-auto object-contain" />
+        <button onClick={goHome} className="flex-shrink-0">
+          <img src="/kg-logo.png" alt="KG Masterclass" className="h-8 object-contain brightness-0 invert" />
         </button>
+        <div className="flex-1" />
+        <LangToggle />
       </div>
     </div>
   );
@@ -1162,7 +1156,7 @@ export default function KGMasterClass() {
       <div className="h-screen flex flex-col bg-slate-50">
         <SubPageNav title={k.navTitle} />
         <div className="flex-1 overflow-y-auto pb-20">
-        <PageHero gradient="bg-gradient-to-br from-blue-900 to-blue-700" Icon={Building2} />
+        <PageHero gradient="bg-blue-900" Icon={Building2} title={k.navTitle} />
 
         <div className="max-w-2xl mx-auto px-5 pt-6 pb-4 space-y-6">
 
@@ -1258,7 +1252,7 @@ export default function KGMasterClass() {
           onBack={() => navigateTo('cleaning')}
         />
         <div className="flex-1 overflow-y-auto pb-20">
-        {(() => { const SubIcon = cleaningSubIcons[subId]; return <PageHero gradient="bg-gradient-to-br from-sky-600 to-sky-400" Icon={SubIcon} />; })()}
+        {(() => { const SubIcon = cleaningSubIcons[subId]; return <PageHero gradient="bg-sky-500" Icon={SubIcon} title={detail.navTitle} />; })()}
 
         <div className="max-w-2xl mx-auto px-5 pt-6 space-y-6">
 
@@ -1329,7 +1323,7 @@ export default function KGMasterClass() {
       <div className="h-screen flex flex-col bg-slate-50">
         <SubPageNav title={c.navTitle} />
         <div className="flex-1 overflow-y-auto pb-20">
-        <PageHero gradient="bg-gradient-to-br from-sky-600 to-sky-400" Icon={Sparkles} />
+        <PageHero gradient="bg-sky-500" Icon={Sparkles} title={c.navTitle} />
         <div className="p-6 max-w-2xl mx-auto">
           <p className="text-gray-600 text-sm mb-6 text-center">{c.intro}</p>
           <div className="grid grid-cols-2 gap-4">
@@ -1387,7 +1381,7 @@ export default function KGMasterClass() {
       <div className="h-screen flex flex-col bg-slate-50">
         <SubPageNav title={s.navTitle} />
         <div className="flex-1 overflow-y-auto pb-20">
-          <PageHero gradient="bg-gradient-to-br from-red-600 to-red-400" Icon={Shield} />
+          <PageHero gradient="bg-red-500" Icon={Shield} title={s.navTitle} />
           <div className="p-4 max-w-2xl mx-auto space-y-3">
             {s.topics.map((topic, idx) => {
               const isOpen = openSafetyItem === idx;
@@ -1466,7 +1460,7 @@ export default function KGMasterClass() {
           onBack={() => navigateTo('safety')}
         />
         <div className="flex-1 overflow-y-auto pb-20">
-        <PageHero gradient="bg-gradient-to-br from-red-600 to-red-400" Icon={Shield} />
+        <PageHero gradient="bg-red-500" Icon={Shield} title={detail.navTitle} />
 
         <div className="max-w-2xl mx-auto px-5 pt-6 space-y-6">
 
@@ -1518,7 +1512,7 @@ export default function KGMasterClass() {
       <div className="h-screen flex flex-col bg-slate-50">
         <SubPageNav title={e.navTitle} />
         <div className="flex-1 overflow-y-auto pb-20">
-          <PageHero gradient="bg-gradient-to-br from-orange-600 to-orange-400" Icon={Wrench} />
+          <PageHero gradient="bg-orange-500" Icon={Wrench} title={e.navTitle} />
           <div className="p-4 max-w-2xl mx-auto space-y-4">
             {e.items.map((item, idx) => {
               const { image, imgPosition } = equipmentImages[idx];
@@ -1606,7 +1600,7 @@ export default function KGMasterClass() {
     <div className="h-screen flex flex-col bg-slate-50">
       <SubPageNav title={navTitle} icon={icon} />
       <div className="flex-1 overflow-y-auto pb-20">
-      {heroGradient && HeroIcon && <PageHero gradient={heroGradient} Icon={HeroIcon} />}
+      {heroGradient && HeroIcon && <PageHero gradient={heroGradient} Icon={HeroIcon} title={navTitle} />}
 
       <div className="p-6 max-w-2xl mx-auto space-y-3">
         {topics.map((topic, idx) => (
@@ -1652,7 +1646,7 @@ export default function KGMasterClass() {
       <div className="h-screen flex flex-col bg-slate-50">
         <SubPageNav title={c.navTitle} />
         <div className="flex-1 overflow-y-auto pb-20">
-        <PageHero gradient="bg-gradient-to-br from-emerald-700 to-emerald-500" svgSrc="/spray-bottle.svg" />
+        <PageHero gradient="bg-emerald-600" svgSrc="/spray-bottle.svg" title={c.navTitle} />
         <div className="p-4 max-w-2xl mx-auto space-y-6">
           {/* Section 1 — Product grid */}
           <div>
@@ -1772,7 +1766,7 @@ export default function KGMasterClass() {
       <div className="h-screen flex flex-col bg-slate-50">
         <SubPageNav title={s.navTitle} />
         <div className="flex-1 overflow-y-auto pb-20">
-        <PageHero gradient="bg-gradient-to-br from-violet-700 to-violet-500" Icon={Star} />
+        <PageHero gradient="bg-violet-600" Icon={Star} title={s.navTitle} />
         <div className="p-6 max-w-2xl mx-auto">
           <div className="bg-white rounded-xl shadow-lg p-6">
             <div className="flex items-center gap-3 mb-4">
@@ -2039,7 +2033,7 @@ export default function KGMasterClass() {
       <div className="h-screen flex flex-col bg-slate-50">
         <SubPageNav title={res.navTitle} />
         <div className="flex-1 overflow-y-auto pb-20">
-        <PageHero gradient="bg-gradient-to-br from-slate-600 to-slate-400" Icon={FolderOpen} />
+        <PageHero gradient="bg-slate-500" Icon={FolderOpen} title={res.navTitle} />
         <div className="p-4 max-w-2xl mx-auto space-y-3">
           {res.items.map((item, idx) => {
             const isOpen = openResourceItem === idx;
