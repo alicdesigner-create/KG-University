@@ -38,6 +38,7 @@ export default function KGMasterClass() {
   const [lang, setLang] = useState('en');
   const [selectedChemical, setSelectedChemical] = useState(null);
   const [openSafetyTopic, setOpenSafetyTopic] = useState(null);
+  const [openSafetyItem, setOpenSafetyItem] = useState(null);
   const [userInfo, setUserInfo] = useState({ name: '', phone: '', role: '' });
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formErrors, setFormErrors] = useState({});
@@ -1238,6 +1239,56 @@ export default function KGMasterClass() {
   };
 
   // ── Safety Detail Screen ─────────────────────────────────────────────────────
+  const renderSafety = () => {
+    const s = t.safety;
+    const icons = { uniform: '👔', osha: '📋', biohazards: '☣️', height: '🪜', tripping: '⚠️', ppe: '🥽' };
+    return (
+      <div className="h-screen flex flex-col bg-slate-50">
+        <SubPageNav title={s.navTitle} />
+        <div className="flex-1 overflow-y-auto pb-20">
+          <PageHero gradient="bg-gradient-to-br from-red-600 to-red-400" Icon={Shield} />
+          <div className="p-4 max-w-2xl mx-auto space-y-3">
+            {s.topics.map((topic, idx) => {
+              const isOpen = openSafetyItem === idx;
+              const detail = t.safetyDetails[topic.id];
+              return (
+                <div key={idx} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                  <button
+                    onClick={() => setOpenSafetyItem(isOpen ? null : idx)}
+                    className="w-full p-4 flex items-center gap-3 hover:bg-red-50 transition-colors text-left"
+                  >
+                    <div className="w-10 h-10 bg-gradient-to-br from-red-600 to-red-400 rounded-xl flex items-center justify-center flex-shrink-0 shadow text-lg">
+                      {icons[topic.id]}
+                    </div>
+                    <p className="text-red-900 font-semibold flex-grow text-sm">{topic.title}</p>
+                    <span className={`text-red-400 transition-transform duration-300 ${isOpen ? 'rotate-90' : ''}`}>
+                      <ChevronRight size={18} />
+                    </span>
+                  </button>
+                  {isOpen && detail && (
+                    <div className="border-t border-red-100 px-4 pb-4 space-y-3 pt-3">
+                      {detail.points.map((point, pIdx) => (
+                        <div key={pIdx} className="flex gap-3 items-start">
+                          <span className="w-5 h-5 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
+                            <span className="text-white text-xs font-bold">✓</span>
+                          </span>
+                          <p className="text-gray-700 text-sm leading-relaxed">
+                            <strong className="text-red-900">{point.label}:</strong> {point.text}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+          <PageFooter />
+        </div>
+      </div>
+    );
+  };
+
   const renderSafetyDetail = (topicId) => {
     const detail = t.safetyDetails[topicId];
     if (!detail) return null;
@@ -1829,7 +1880,7 @@ export default function KGMasterClass() {
     case 'cleaning-pressure_washing': return renderCleaningDetail('pressure_washing');
     case 'cleaning-schools':      return renderCleaningDetail('schools');
     case 'cleaning-banking':      return renderCleaningDetail('banking');
-    case 'safety':            return renderTopics(t.safety.navTitle, '🛡️', t.safety.topics, (id) => navigateTo(`safety-${id}`), 'bg-gradient-to-br from-red-600 to-red-400', Shield);
+    case 'safety':            return renderSafety();
     case 'safety-uniform':    return renderSafetyDetail('uniform');
     case 'safety-osha':       return renderSafetyDetail('osha');
     case 'safety-biohazards': return renderSafetyDetail('biohazards');
