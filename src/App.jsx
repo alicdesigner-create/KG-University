@@ -2045,19 +2045,19 @@ export default function KGMasterClass() {
             const isOpen = openResourceItem === idx;
             const isApps = idx === 0;
             return (
-              <div key={idx} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+              <div key={idx} className={`rounded-2xl shadow-sm overflow-hidden border transition-colors ${isOpen ? 'bg-blue-900 border-blue-800' : 'bg-white border-gray-100'}`}>
                 <button
                   onClick={() => setOpenResourceItem(isOpen ? null : idx)}
-                  className="w-full p-4 flex items-center gap-4 hover:bg-slate-50 transition-colors text-left"
+                  className="w-full p-4 flex items-center gap-4 transition-colors text-left"
                 >
-                  <div className="w-11 h-11 bg-blue-900 rounded-full flex items-center justify-center flex-shrink-0 shadow-md">
+                  <div className={`w-11 h-11 rounded-full flex items-center justify-center flex-shrink-0 shadow-md ${isOpen ? 'bg-white/20' : 'bg-blue-900'}`}>
                     <span className="text-xl">{item.icon}</span>
                   </div>
                   <div className="flex-grow">
-                    <p className="text-blue-900 font-semibold text-sm leading-snug">{item.title}</p>
-                    <p className="text-gray-500 text-xs mt-0.5">{item.description}</p>
+                    <p className={`font-semibold text-sm leading-snug ${isOpen ? 'text-white' : 'text-blue-900'}`}>{item.title}</p>
+                    <p className={`text-xs mt-0.5 ${isOpen ? 'text-blue-200' : 'text-gray-500'}`}>{item.description}</p>
                   </div>
-                  <span className={`text-slate-400 transition-transform duration-300 ${isOpen ? 'rotate-90' : ''}`}>
+                  <span className={`transition-transform duration-300 ${isOpen ? 'text-white rotate-90' : 'text-slate-400'}`}>
                     <ChevronRight size={18} />
                   </span>
                 </button>
