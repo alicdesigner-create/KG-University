@@ -959,7 +959,9 @@ export default function KGMasterClass() {
         <div className="ml-auto flex-shrink-0"><LangToggle /></div>
       </div>
       <div className="bg-white border-b border-gray-100 py-2.5 text-center">
-        <img src="/kg-logo.png" alt="KG Masterclass" className="h-11 mx-auto object-contain" />
+        <button onClick={goHome} className="inline-block">
+          <img src="/kg-logo.png" alt="KG Masterclass" className="h-11 mx-auto object-contain" />
+        </button>
       </div>
     </div>
   );
