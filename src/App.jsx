@@ -339,12 +339,28 @@ export default function KGMasterClass() {
 
       equipment: {
         navTitle: 'Equipment',
-        topics: [
-          { title: 'Equipment Usage',                         description: 'General equipment operation' },
-          { title: 'How to Use Equipment',                    description: 'Step-by-step equipment guides' },
-          { title: 'Equipment Maintenance',                   description: 'Keeping equipment in top condition' },
-          { title: 'Auto Scrubbers',                          description: 'Operation and maintenance of auto scrubbers' },
-          { title: 'Industrial Backpack and Upright Vacuums', description: 'Proper use and care of vacuum equipment' },
+        items: [
+          { title: 'Microfiber Cloths (Rags)', points: [
+            { label: 'Usage',       text: 'Use the color-coded system to prevent cross-contamination: blue for glass, green for general surfaces, and pink for high-risk areas.' },
+            { label: 'Maintenance', text: 'At the end of your shift, place all used cloths in the designated laundry bin.' },
+            { label: 'Care',        text: 'Ensure you remove any large debris before depositing them for centralized washing.' },
+          ]},
+          { title: 'Mop Heads', points: [
+            { label: 'Usage',       text: 'Select the correct mop color for your assigned area and secure it firmly to the handle before applying chemicals.' },
+            { label: 'Maintenance', text: 'Once the job is finished, place dirty mop heads in the textile collection area for professional laundering.' },
+            { label: 'Care',        text: 'Never store damp mops in closed closets; leave them in the collection area to allow for proper airflow.' },
+          ]},
+          { title: 'ProTeam Backpack & Upright Vacuums', points: [
+            { label: 'Usage — Backpack', text: 'Adjust the harness to your hips and keep the power cord visible behind you at all times.' },
+            { label: 'Usage — Upright',  text: 'Adjust the head height based on the carpet thickness to protect the motor.' },
+            { label: 'Maintenance',      text: 'Check the ProTeam filter bag and replace it if it is 2/3 full to maintain strong suction power.' },
+            { label: 'Care',             text: 'Regularly clean the rotating brush (beater bar) to remove hair or strings that may block the movement.' },
+          ]},
+          { title: 'Auto Scrubber Machines (Minuteman & E20 Sport)', points: [
+            { label: 'Usage',       text: 'Fill the solution tank with the exact chemical and water mixture as specified in the equipment manual. Operate at a steady speed to ensure the vacuum system picks up all moisture in a single pass.' },
+            { label: 'Maintenance', text: 'Completely empty and rinse the recovery tank after every use to prevent sediment buildup and bad odors.' },
+            { label: 'Care',        text: 'Remove the pads or brushes and clean the squeegee blade to guarantee perfect drying for the next shift.' },
+          ]},
         ],
       },
 
@@ -696,12 +712,28 @@ export default function KGMasterClass() {
 
       equipment: {
         navTitle: 'Equipos',
-        topics: [
-          { title: 'Uso de Equipos',                                    description: 'Operación general de equipos' },
-          { title: 'Cómo Usar los Equipos',                             description: 'Guías paso a paso' },
-          { title: 'Mantenimiento de Equipos',                          description: 'Mantener los equipos en óptimas condiciones' },
-          { title: 'Auto Scrubbers',                                    description: 'Operación y mantenimiento de auto scrubbers' },
-          { title: 'Aspiradoras Industriales de Mochila y Verticales',  description: 'Uso y cuidado del equipo de aspirado' },
+        items: [
+          { title: 'Trapos de Microfibra', points: [
+            { label: 'Uso',           text: 'Usa el sistema de colores para evitar la contaminación cruzada: azul para vidrios, verde para superficies generales y rosado para áreas de alto riesgo.' },
+            { label: 'Mantenimiento', text: 'Al final de tu turno, coloca todos los trapos usados en el contenedor de lavandería designado.' },
+            { label: 'Cuidado',       text: 'Asegúrate de retirar los residuos grandes antes de depositarlos para el lavado centralizado.' },
+          ]},
+          { title: 'Cabezales de Trapeador', points: [
+            { label: 'Uso',           text: 'Selecciona el color de trapeador correcto para tu área asignada y asegúralo firmemente al mango antes de aplicar químicos.' },
+            { label: 'Mantenimiento', text: 'Una vez terminado el trabajo, coloca los cabezales sucios en el área de recolección textil para lavado profesional.' },
+            { label: 'Cuidado',       text: 'Nunca guardes trapeadores húmedos en closets cerrados; déjalos en el área de recolección para permitir una ventilación adecuada.' },
+          ]},
+          { title: 'Aspiradoras ProTeam de Mochila y Verticales', points: [
+            { label: 'Uso — Mochila',  text: 'Ajusta el arnés a tus caderas y mantén el cable de alimentación visible detrás de ti en todo momento.' },
+            { label: 'Uso — Vertical', text: 'Ajusta la altura del cabezal según el grosor de la alfombra para proteger el motor.' },
+            { label: 'Mantenimiento',  text: 'Revisa la bolsa de filtro ProTeam y reemplázala si está 2/3 llena para mantener una succión potente.' },
+            { label: 'Cuidado',        text: 'Limpia regularmente el cepillo giratorio (batidor) para eliminar cabello o hilos que puedan bloquear el movimiento.' },
+          ]},
+          { title: 'Máquinas Auto Scrubber (Minuteman & E20 Sport)', points: [
+            { label: 'Uso',           text: 'Llena el tanque con la mezcla exacta de químico y agua según el manual. Opera a velocidad constante para que el sistema de vacío recoja toda la humedad en un solo paso.' },
+            { label: 'Mantenimiento', text: 'Vacía y enjuaga completamente el tanque de recuperación después de cada uso para evitar sedimentos y malos olores.' },
+            { label: 'Cuidado',       text: 'Retira los almohadillas o cepillos y limpia la escobilla de secado para garantizar un secado perfecto en el siguiente turno.' },
+          ]},
         ],
       },
 
@@ -1239,6 +1271,55 @@ export default function KGMasterClass() {
     );
   };
 
+  // ── Equipment Screen ──────────────────────────────────────────────────────────
+  const equipmentImages = [
+    { image: '/equipo/mops-rags.jpg',        imgPosition: 'top'    },
+    { image: '/equipo/mops-rags.jpg',        imgPosition: 'bottom' },
+    { image: '/equipo/backpack-vacuums.jpg', imgPosition: 'center' },
+    { image: '/equipo/auto-scrubbers.jpg',   imgPosition: 'center' },
+  ];
+
+  const renderEquipment = () => {
+    const e = t.equipment;
+    return (
+      <div className="h-screen flex flex-col bg-slate-50">
+        <SubPageNav title={e.navTitle} />
+        <div className="flex-1 overflow-y-auto pb-20">
+          <PageHero gradient="bg-gradient-to-br from-orange-600 to-orange-400" Icon={Wrench} />
+          <div className="p-4 max-w-2xl mx-auto space-y-4">
+            {e.items.map((item, idx) => {
+              const { image, imgPosition } = equipmentImages[idx];
+              return (
+                <div key={idx} className="bg-white rounded-2xl shadow-md overflow-hidden flex border border-gray-100" style={{ minHeight: '200px' }}>
+                  {/* Left: text */}
+                  <div className="flex-1 p-4 space-y-2.5">
+                    <h3 className="text-orange-700 font-bold text-sm leading-snug border-b border-orange-100 pb-2">{item.title}</h3>
+                    {item.points.map((point, pIdx) => (
+                      <div key={pIdx}>
+                        <p className="text-orange-500 font-bold text-xs uppercase tracking-wide">{point.label}</p>
+                        <p className="text-gray-600 text-xs leading-relaxed mt-0.5">{point.text}</p>
+                      </div>
+                    ))}
+                  </div>
+                  {/* Right: image */}
+                  <div className="w-2/5 flex-shrink-0">
+                    <img
+                      src={image}
+                      alt={item.title}
+                      className="w-full h-full object-cover"
+                      style={{ objectPosition: imgPosition }}
+                    />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <PageFooter />
+        </div>
+      </div>
+    );
+  };
+
   // ── Generic Topics Screen (Safety / Equipment) ────────────────────────────────
   const renderTopics = (navTitle, icon, topics, onTopicClick, heroGradient, HeroIcon) => (
     <div className="h-screen flex flex-col bg-slate-50">
@@ -1727,7 +1808,7 @@ export default function KGMasterClass() {
     case 'safety-height':     return renderSafetyDetail('height');
     case 'safety-tripping':   return renderSafetyDetail('tripping');
     case 'safety-ppe':        return renderSafetyDetail('ppe');
-    case 'equipment':    return renderTopics(t.equipment.navTitle, '🔧', t.equipment.topics, undefined, 'bg-gradient-to-br from-orange-600 to-orange-400', Wrench);
+    case 'equipment':    return renderEquipment();
     case 'chemicals':    return renderChemicals();
     case 'standards':    return renderStandards();
     case 'resources':    return renderResources();
