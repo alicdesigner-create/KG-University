@@ -37,6 +37,7 @@ export default function KGMasterClass() {
   );
   const [lang, setLang] = useState('en');
   const [selectedChemical, setSelectedChemical] = useState(null);
+  const [openSafetyTopic, setOpenSafetyTopic] = useState(null);
   const [userInfo, setUserInfo] = useState({ name: '', phone: '', role: '' });
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formErrors, setFormErrors] = useState({});
@@ -367,10 +368,27 @@ export default function KGMasterClass() {
         section2: {
           title: 'Chemical Safety',
           topics: [
-            { title: 'Chemical Safety',       description: 'Handling hazardous materials safely' },
-            { title: 'Storage',               description: 'Proper chemical storage procedures' },
-            { title: 'Emergency Procedures',  description: 'What to do in case of chemical incidents' },
-            { title: 'Safety Data Sheet',     description: 'Understanding and using SDS documents' },
+            { title: 'Chemical Safety', points: [
+              { label: 'Protect Yourself', text: 'Always wear your required Personal Protective Equipment (PPE), such as gloves and safety goggles, before handling any product.' },
+              { label: 'Ventilation', text: 'Ensure your workspace has proper airflow to avoid breathing in strong chemical vapors.' },
+              { label: 'Never Mix', text: 'Do not combine different chemicals. This can create toxic gases that are extremely dangerous to your health.' },
+            ]},
+            { title: 'Storage', points: [
+              { label: 'Original Containers', text: 'Always keep chemicals in their original factory bottles with legible labels.' },
+              { label: 'Proper Location', text: 'Store products in cool, dry, and well-ventilated areas, far away from any food.' },
+              { label: 'Access Control', text: 'Ensure chemicals are stored in locked cabinets or areas where only authorized staff can enter.' },
+            ]},
+            { title: 'Emergency Procedures', points: [
+              { label: 'Top Priority', text: 'If a serious accident occurs or you feel you are in danger, stay calm and call 911 immediately.' },
+              { label: 'Eye or Skin Contact', text: 'If you are splashed by a chemical, do not wait; flush the affected area with plenty of running water for at least 15 minutes straight.' },
+              { label: 'Check the SDS', text: 'Always refer to the Safety Data Sheet (SDS) for the specific product to find first-aid instructions while help is on the way.' },
+              { label: 'Golden Rule', text: 'Never try to mix one chemical with another to "clean" a spill or contact; use only water for rinsing and seek medical attention immediately.' },
+            ]},
+            { title: 'Safety Data Sheet (SDS)', points: [
+              { label: 'Your Reference Guide', text: 'Use SDS sheets to learn about the specific hazards of products like NABC or Oxivir.' },
+              { label: 'Key Information', text: 'These documents tell you exactly what ingredients are in the product and what to do in case of accidental contact.' },
+              { label: 'Quick Location', text: 'Memorize where the SDS manual is kept at your job site so you can check it immediately if you have any questions.' },
+            ]},
           ],
         },
       },
@@ -707,10 +725,27 @@ export default function KGMasterClass() {
         section2: {
           title: 'Seguridad con Químicos',
           topics: [
-            { title: 'Seguridad con Químicos',       description: 'Manejo seguro de materiales peligrosos' },
-            { title: 'Almacenamiento',               description: 'Procedimientos adecuados de almacenamiento' },
-            { title: 'Procedimientos de Emergencia', description: 'Qué hacer en caso de incidentes con químicos' },
-            { title: 'Hoja de Datos de Seguridad',   description: 'Entender y usar documentos SDS' },
+            { title: 'Seguridad con Químicos', points: [
+              { label: 'Protégete', text: 'Usa siempre el EPP requerido (guantes y gafas de seguridad) antes de manipular cualquier producto.' },
+              { label: 'Ventilación', text: 'Asegúrate de que tu área de trabajo tenga buena circulación de aire para evitar inhalar vapores químicos fuertes.' },
+              { label: 'Nunca mezcles', text: 'No combines diferentes químicos. Esto puede generar gases tóxicos extremadamente peligrosos para tu salud.' },
+            ]},
+            { title: 'Almacenamiento', points: [
+              { label: 'Envases originales', text: 'Guarda siempre los químicos en sus botellas originales de fábrica con etiquetas legibles.' },
+              { label: 'Ubicación adecuada', text: 'Almacena los productos en áreas frescas, secas y bien ventiladas, lejos de cualquier alimento.' },
+              { label: 'Control de acceso', text: 'Asegúrate de que los químicos estén en gabinetes o áreas con llave a los que solo pueda acceder el personal autorizado.' },
+            ]},
+            { title: 'Procedimientos de Emergencia', points: [
+              { label: 'Prioridad máxima', text: 'Si ocurre un accidente grave o sientes que estás en peligro, mantén la calma y llama al 911 de inmediato.' },
+              { label: 'Contacto con ojos o piel', text: 'Si un químico te salpica, no esperes; enjuaga el área afectada con abundante agua corriente durante al menos 15 minutos seguidos.' },
+              { label: 'Consulta la SDS', text: 'Revisa siempre la Hoja de Datos de Seguridad (SDS) del producto específico para encontrar instrucciones de primeros auxilios mientras llega la ayuda.' },
+              { label: 'Regla de oro', text: 'Nunca intentes mezclar un químico con otro para "limpiar" un derrame o contacto; usa solo agua para enjuagar y busca atención médica de inmediato.' },
+            ]},
+            { title: 'Hoja de Datos de Seguridad (SDS)', points: [
+              { label: 'Tu guía de referencia', text: 'Usa las hojas SDS para conocer los riesgos específicos de productos como NABC u Oxivir.' },
+              { label: 'Información clave', text: 'Estos documentos te indican exactamente qué ingredientes tiene el producto y qué hacer en caso de contacto accidental.' },
+              { label: 'Ubicación rápida', text: 'Memoriza dónde se guarda el manual SDS en tu lugar de trabajo para consultarlo de inmediato si tienes alguna pregunta.' },
+            ]},
           ],
         },
       },
@@ -1293,21 +1328,38 @@ export default function KGMasterClass() {
               {c.section2.title}
             </h3>
             <div className="space-y-3">
-              {c.section2.topics.map((topic, idx) => (
-                <button
-                  key={idx}
-                  className="w-full bg-white rounded-2xl shadow-sm p-5 flex items-center gap-4 hover:shadow-md hover:border-emerald-200 transition-all border border-gray-100 text-left"
-                >
-                  <div className="w-10 h-10 bg-gradient-to-br from-emerald-600 to-emerald-400 rounded-xl flex items-center justify-center flex-shrink-0 shadow">
-                    <span className="text-white font-bold text-sm">{idx + 1}</span>
+              {c.section2.topics.map((topic, idx) => {
+                const isOpen = openSafetyTopic === idx;
+                return (
+                  <div key={idx} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                    <button
+                      onClick={() => setOpenSafetyTopic(isOpen ? null : idx)}
+                      className="w-full p-5 flex items-center gap-4 hover:bg-emerald-50 transition-colors text-left"
+                    >
+                      <div className="w-10 h-10 bg-gradient-to-br from-emerald-600 to-emerald-400 rounded-xl flex items-center justify-center flex-shrink-0 shadow">
+                        <span className="text-white font-bold text-sm">{idx + 1}</span>
+                      </div>
+                      <p className="text-emerald-900 font-semibold flex-grow">{topic.title}</p>
+                      <span className={`text-emerald-500 transition-transform duration-300 ${isOpen ? 'rotate-90' : ''}`}>
+                        <ChevronRight size={18} />
+                      </span>
+                    </button>
+                    {isOpen && (
+                      <div className="px-5 pb-5 space-y-3 border-t border-emerald-100">
+                        {topic.points.map((point, pIdx) => (
+                          <div key={pIdx} className="pt-3 flex gap-3">
+                            <div className="w-2 h-2 rounded-full bg-emerald-400 mt-1.5 flex-shrink-0" />
+                            <p className="text-gray-700 text-sm leading-relaxed">
+                              <span className="font-semibold text-emerald-800">{point.label}: </span>
+                              {point.text}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
-                  <div className="flex-grow">
-                    <p className="text-emerald-900 font-semibold">{topic.title}</p>
-                    <p className="text-gray-500 text-xs mt-0.5">{topic.description}</p>
-                  </div>
-                  <ChevronRight className="text-emerald-300 flex-shrink-0" size={18} />
-                </button>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>
