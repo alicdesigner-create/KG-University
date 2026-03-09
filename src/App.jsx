@@ -44,12 +44,43 @@ export default function KGMasterClass() {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formErrors, setFormErrors] = useState({});
   const [scrollY, setScrollY] = useState(0);
+  const [pullY, setPullY] = useState(0);
+  const pullStartY = useRef(0);
+  const pullYRef = useRef(0);
+  const safetyRefs = useRef([]);
 
   // ── Scroll listener for parallax ──────────────────────────────────────────────
   useEffect(() => {
     const onScroll = () => setScrollY(window.scrollY);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // ── Pull-to-refresh (iOS PWA) ──────────────────────────────────────────────────
+  useEffect(() => {
+    const onStart = (e) => { pullStartY.current = e.touches[0].clientY; };
+    const onMove = (e) => {
+      const delta = e.touches[0].clientY - pullStartY.current;
+      if (delta <= 0) return;
+      const scrollEls = document.querySelectorAll('.overflow-y-auto');
+      const atTop = Array.from(scrollEls).some(el => el.scrollTop <= 2);
+      if (!atTop) return;
+      pullYRef.current = Math.min(delta * 0.5, 60);
+      setPullY(pullYRef.current);
+    };
+    const onEnd = () => {
+      if (pullYRef.current >= 40) window.location.reload();
+      pullYRef.current = 0;
+      setPullY(0);
+    };
+    document.addEventListener('touchstart', onStart, { passive: true });
+    document.addEventListener('touchmove', onMove, { passive: true });
+    document.addEventListener('touchend', onEnd);
+    return () => {
+      document.removeEventListener('touchstart', onStart);
+      document.removeEventListener('touchmove', onMove);
+      document.removeEventListener('touchend', onEnd);
+    };
   }, []);
 
   // ── Splash Screen ─────────────────────────────────────────────────────────────
@@ -1292,9 +1323,17 @@ export default function KGMasterClass() {
               const isOpen = openSafetyItem === idx;
               const detail = t.safetyDetails[topic.id];
               return (
-                <div key={idx} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <div key={idx} ref={el => { safetyRefs.current[idx] = el; }} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                   <button
-                    onClick={() => setOpenSafetyItem(isOpen ? null : idx)}
+                    onClick={() => {
+                      const next = isOpen ? null : idx;
+                      setOpenSafetyItem(next);
+                      if (next !== null) {
+                        setTimeout(() => {
+                          safetyRefs.current[next]?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }, 50);
+                      }
+                    }}
                     className="w-full p-4 flex items-center gap-3 hover:bg-red-50 transition-colors text-left"
                   >
                     <div className="w-10 h-10 bg-gradient-to-br from-red-600 to-red-400 rounded-xl flex items-center justify-center flex-shrink-0 shadow text-lg">
@@ -2008,30 +2047,53 @@ export default function KGMasterClass() {
   }
 
   // ── Router ───────────────────────────────────────────────────────────────────
+  let screen;
   switch (currentScreen) {
-    case 'registration': return renderRegistration();
-    case 'kgfs':         return renderKGFS();
-    case 'cleaning':              return renderCleaning();
-    case 'cleaning-offices':      return renderCleaningDetail('offices');
-    case 'cleaning-bathrooms':    return renderCleaningDetail('bathrooms');
-    case 'cleaning-kitchens':     return renderCleaningDetail('kitchens');
-    case 'cleaning-windows':      return renderCleaningDetail('windows');
-    case 'cleaning-floors':       return renderCleaningDetail('floors');
-    case 'cleaning-pressure_washing': return renderCleaningDetail('pressure_washing');
-    case 'cleaning-schools':      return renderCleaningDetail('schools');
-    case 'cleaning-banking':      return renderCleaningDetail('banking');
-    case 'safety':            return renderSafety();
-    case 'safety-uniform':    return renderSafetyDetail('uniform');
-    case 'safety-osha':       return renderSafetyDetail('osha');
-    case 'safety-biohazards': return renderSafetyDetail('biohazards');
-    case 'safety-height':     return renderSafetyDetail('height');
-    case 'safety-tripping':   return renderSafetyDetail('tripping');
-    case 'safety-ppe':        return renderSafetyDetail('ppe');
-    case 'equipment':    return renderEquipment();
-    case 'chemicals':    return renderChemicals();
-    case 'standards':    return renderStandards();
-    case 'resources':    return renderResources();
-    case 'contact':      return renderContact();
-    default:             return renderHome();
+    case 'registration': screen = renderRegistration(); break;
+    case 'kgfs':         screen = renderKGFS(); break;
+    case 'cleaning':              screen = renderCleaning(); break;
+    case 'cleaning-offices':      screen = renderCleaningDetail('offices'); break;
+    case 'cleaning-bathrooms':    screen = renderCleaningDetail('bathrooms'); break;
+    case 'cleaning-kitchens':     screen = renderCleaningDetail('kitchens'); break;
+    case 'cleaning-windows':      screen = renderCleaningDetail('windows'); break;
+    case 'cleaning-floors':       screen = renderCleaningDetail('floors'); break;
+    case 'cleaning-pressure_washing': screen = renderCleaningDetail('pressure_washing'); break;
+    case 'cleaning-schools':      screen = renderCleaningDetail('schools'); break;
+    case 'cleaning-banking':      screen = renderCleaningDetail('banking'); break;
+    case 'safety':            screen = renderSafety(); break;
+    case 'safety-uniform':    screen = renderSafetyDetail('uniform'); break;
+    case 'safety-osha':       screen = renderSafetyDetail('osha'); break;
+    case 'safety-biohazards': screen = renderSafetyDetail('biohazards'); break;
+    case 'safety-height':     screen = renderSafetyDetail('height'); break;
+    case 'safety-tripping':   screen = renderSafetyDetail('tripping'); break;
+    case 'safety-ppe':        screen = renderSafetyDetail('ppe'); break;
+    case 'equipment':    screen = renderEquipment(); break;
+    case 'chemicals':    screen = renderChemicals(); break;
+    case 'standards':    screen = renderStandards(); break;
+    case 'resources':    screen = renderResources(); break;
+    case 'contact':      screen = renderContact(); break;
+    default:             screen = renderHome();
   }
+
+  return (
+    <>
+      {pullY > 0 && (
+        <div
+          className="fixed top-0 left-0 right-0 flex justify-center z-[9999] pointer-events-none"
+          style={{ transform: `translateY(${pullY - 28}px)`, transition: 'transform 0.1s' }}
+        >
+          <div className="w-8 h-8 rounded-full bg-white shadow-lg border border-gray-200 flex items-center justify-center">
+            <svg
+              className={`text-blue-500 ${pullY >= 40 ? 'animate-spin' : ''}`}
+              width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"
+            >
+              <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+            </svg>
+          </div>
+        </div>
+      )}
+      {screen}
+    </>
+  );
 }
