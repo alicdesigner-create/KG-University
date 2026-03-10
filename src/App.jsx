@@ -139,6 +139,7 @@ export default function KGMasterClass() {
   const safetyRefs = useRef([]);
   const [searchQuery, setSearchQuery] = useState('');
   const searchRef = useRef(null);
+  const [openValue, setOpenValue] = useState(null);
 
   // ── Scroll listener for parallax ──────────────────────────────────────────────
   useEffect(() => {
@@ -314,12 +315,12 @@ export default function KGMasterClass() {
         ],
         valuesLabel: 'Core Values',
         values: [
-          { label: 'Integrity',       Icon: ShieldCheck    },
-          { label: 'Innovation',      Icon: Lightbulb      },
-          { label: 'Inclusiveness',   Icon: Users2         },
-          { label: 'Accountability',  Icon: ClipboardCheck },
-          { label: 'Relationships',   Icon: Handshake      },
-          { label: 'Professionalism', Icon: Briefcase      },
+          { label: 'Integrity',       Icon: ShieldCheck,    desc: 'We act with honesty and transparency, honoring our commitments to clients and team members.' },
+          { label: 'Innovation',      Icon: Lightbulb,      desc: 'We continuously improve our methods and adopt new technologies for efficient solutions.' },
+          { label: 'Inclusiveness',   Icon: Users2,         desc: 'We foster a diverse environment where every individual is respected and valued.' },
+          { label: 'Accountability',  Icon: ClipboardCheck, desc: 'We take full ownership of our results, ensuring every facility meets our high standards.' },
+          { label: 'Relationships',   Icon: Handshake,      desc: 'We build lasting connections through trust, communication, and mutual respect.' },
+          { label: 'Professionalism', Icon: Briefcase,      desc: 'We maintain the highest level of conduct, appearance, and expertise in all interactions.' },
         ],
       },
 
@@ -801,12 +802,12 @@ export default function KGMasterClass() {
         ],
         valuesLabel: 'Valores Fundamentales',
         values: [
-          { label: 'Integridad',        Icon: ShieldCheck    },
-          { label: 'Innovación',        Icon: Lightbulb      },
-          { label: 'Inclusión',         Icon: Users2         },
-          { label: 'Responsabilidad',   Icon: ClipboardCheck },
-          { label: 'Relaciones',        Icon: Handshake      },
-          { label: 'Profesionalismo',   Icon: Briefcase      },
+          { label: 'Integridad',        Icon: ShieldCheck,    desc: 'Actuamos con honestidad y transparencia, honrando nuestros compromisos con clientes y colaboradores.' },
+          { label: 'Innovación',        Icon: Lightbulb,      desc: 'Mejoramos continuamente nuestros métodos y adoptamos nuevas tecnologías para ofrecer soluciones eficientes.' },
+          { label: 'Inclusión',         Icon: Users2,         desc: 'Fomentamos un ambiente diverso donde cada individuo es respetado y valorado.' },
+          { label: 'Responsabilidad',   Icon: ClipboardCheck, desc: 'Asumimos total responsabilidad de nuestros resultados, garantizando que cada instalación cumpla nuestros altos estándares.' },
+          { label: 'Relaciones',        Icon: Handshake,      desc: 'Construimos conexiones duraderas basadas en confianza, comunicación y respeto mutuo.' },
+          { label: 'Profesionalismo',   Icon: Briefcase,      desc: 'Mantenemos el más alto nivel de conducta, apariencia y experiencia en todas las interacciones.' },
         ],
       },
 
@@ -1476,10 +1477,10 @@ export default function KGMasterClass() {
           <hr className="border-gray-100" />
 
           {/* ── Core Values ── */}
-          <div className="text-center">
-            <h2 className="text-blue-900 font-bold text-base uppercase tracking-widest mb-3">{k.valuesLabel}</h2>
-            <div className="grid grid-cols-2 gap-3">
-              {k.values.map(({ label, Icon }, idx) => {
+          <div>
+            <h2 className="text-blue-900 font-bold text-base uppercase tracking-widest mb-3 text-center">{k.valuesLabel}</h2>
+            <div className="space-y-2">
+              {k.values.map(({ label, Icon, desc }, idx) => {
                 const valueColors = [
                   { bg: 'bg-blue-900',    icon: 'text-white' },
                   { bg: 'bg-sky-500',     icon: 'text-white' },
@@ -1489,13 +1490,24 @@ export default function KGMasterClass() {
                   { bg: 'bg-red-500',     icon: 'text-white' },
                 ];
                 const color = valueColors[idx % valueColors.length];
+                const isOpen = openValue === idx;
                 return (
-                  <div key={idx} className="flex flex-col items-center gap-2.5 p-4">
-                    <div className={`w-10 h-10 ${color.bg} rounded-xl flex items-center justify-center shadow-md`}>
-                      <Icon size={20} className={color.icon} />
+                  <button
+                    key={idx}
+                    onClick={() => setOpenValue(isOpen ? null : idx)}
+                    className="w-full bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow text-left overflow-hidden"
+                  >
+                    <div className="flex items-center gap-3 px-4 py-3">
+                      <div className={`w-10 h-10 ${color.bg} rounded-xl flex items-center justify-center shadow-md flex-shrink-0`}>
+                        <Icon size={20} className={color.icon} />
+                      </div>
+                      <p className="text-blue-900 font-semibold text-sm flex-1">{label}</p>
+                      <ChevronRight size={14} className={`text-blue-300 transition-transform duration-300 flex-shrink-0 ${isOpen ? 'rotate-90' : ''}`} />
                     </div>
-                    <p className="text-blue-900 font-semibold text-sm">{label}</p>
-                  </div>
+                    <div className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-24 opacity-100' : 'max-h-0 opacity-0'}`}>
+                      <p className="text-gray-500 text-xs font-light leading-relaxed px-4 pb-3">{desc}</p>
+                    </div>
+                  </button>
                 );
               })}
             </div>
