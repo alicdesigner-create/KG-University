@@ -315,7 +315,7 @@ export default function KGMasterClass() {
         ],
         valuesLabel: 'Core Values',
         values: [
-          { label: 'Integrity',       Icon: ShieldCheck,    desc: 'We act with honesty and transparency, honoring our commitments to clients and team members.' },
+          { label: 'Integrity',       Icon: ShieldCheck,    desc: 'Integrity is doing the right thing when no one is watching.' },
           { label: 'Innovation',      Icon: Lightbulb,      desc: 'We continuously improve our methods and adopt new technologies for efficient solutions.' },
           { label: 'Inclusiveness',   Icon: Users2,         desc: 'We foster a diverse environment where every individual is respected and valued.' },
           { label: 'Accountability',  Icon: ClipboardCheck, desc: 'We take full ownership of our results, ensuring every facility meets our high standards.' },
@@ -802,7 +802,7 @@ export default function KGMasterClass() {
         ],
         valuesLabel: 'Valores Fundamentales',
         values: [
-          { label: 'Integridad',        Icon: ShieldCheck,    desc: 'Actuamos con honestidad y transparencia, honrando nuestros compromisos con clientes y colaboradores.' },
+          { label: 'Integridad',        Icon: ShieldCheck,    desc: 'Integrity is doing the right thing when no one is watching.' },
           { label: 'Innovación',        Icon: Lightbulb,      desc: 'Mejoramos continuamente nuestros métodos y adoptamos nuevas tecnologías para ofrecer soluciones eficientes.' },
           { label: 'Inclusión',         Icon: Users2,         desc: 'Fomentamos un ambiente diverso donde cada individuo es respetado y valorado.' },
           { label: 'Responsabilidad',   Icon: ClipboardCheck, desc: 'Asumimos total responsabilidad de nuestros resultados, garantizando que cada instalación cumpla nuestros altos estándares.' },
@@ -1505,7 +1505,7 @@ export default function KGMasterClass() {
                       <ChevronRight size={14} className={`text-blue-300 transition-transform duration-300 flex-shrink-0 ${isOpen ? 'rotate-90' : ''}`} />
                     </div>
                     <div className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-24 opacity-100' : 'max-h-0 opacity-0'}`}>
-                      <p className="text-gray-500 text-xs font-light leading-relaxed px-4 pb-3">{desc}</p>
+                      <p className="text-gray-500 text-xs font-light leading-relaxed px-4 pb-3 text-center">{desc}</p>
                     </div>
                   </button>
                 );
