@@ -587,6 +587,7 @@ export default function KGMasterClass() {
           { icon: '📱', title: 'My Applications', description: 'Access your work apps and platforms' },
           {
             icon: '💵', title: 'How to obtain my pay stubs from TriNet', description: 'Step-by-step guide to access your pay stubs',
+            notice: 'You must have an active TriNet username and password to access this information.',
             steps: [
               'Open the app and go to the "Money" tab at the bottom.',
               'Tap on "Pay".',
@@ -596,6 +597,7 @@ export default function KGMasterClass() {
           },
           {
             icon: '📖', title: 'How to get the Employee Handbook on Trinet?', description: 'Step-by-step guide to download your handbook',
+            notice: 'You must have an active TriNet username and password to access this information.',
             steps: [
               'Go to the "Menu" (three lines or "More" icon).',
               'Look for the "Company" or "Documents" section.',
@@ -605,6 +607,7 @@ export default function KGMasterClass() {
           },
           {
             icon: '📄', title: 'How to download my W2 on Tri-Net?', description: 'Access and download your tax documents',
+            notice: 'You must have an active TriNet username and password to access this information.',
             steps: [
               'In the "Money" tab, select "Taxes".',
               'Tap on "Statements".',
@@ -1069,6 +1072,7 @@ export default function KGMasterClass() {
           { icon: '📱', title: 'Mis Aplicaciones', description: 'Accede a tus apps y plataformas de trabajo' },
           {
             icon: '💵', title: 'Cómo Obtener Mis Recibos de Pago en TriNet', description: 'Guía paso a paso para acceder a tus recibos de pago',
+            notice: 'Debes tener un usuario y contraseña activos en TriNet para acceder a esta información.',
             steps: [
               'Abre la app y ve a la pestaña "Money" en la parte inferior.',
               'Toca "Pay".',
@@ -1078,6 +1082,7 @@ export default function KGMasterClass() {
           },
           {
             icon: '📖', title: '¿Cómo obtener el Handbook de empleado en Trinet?', description: 'Guía paso a paso para descargar tu handbook',
+            notice: 'Debes tener un usuario y contraseña activos en TriNet para acceder a esta información.',
             steps: [
               'Ve al "Menu" (tres líneas o ícono "More").',
               'Busca la sección "Company" o "Documents".',
@@ -1087,6 +1092,7 @@ export default function KGMasterClass() {
           },
           {
             icon: '📄', title: '¿Cómo descargar mi W2 en Tri-Net?', description: 'Accede y descarga tus documentos de impuestos',
+            notice: 'Debes tener un usuario y contraseña activos en TriNet para acceder a esta información.',
             steps: [
               'En la pestaña "Money", selecciona "Taxes".',
               'Toca "Statements".',
@@ -2527,6 +2533,14 @@ export default function KGMasterClass() {
                 {/* Steps-based items */}
                 {isOpen && item.steps && (
                   <div className="bg-white border-t border-blue-800 px-4 py-4 space-y-3">
+                    {item.notice && (
+                      <div className="flex gap-2 bg-amber-50 border border-amber-200 rounded-xl px-3 py-2.5">
+                        <span className="text-amber-500 flex-shrink-0 mt-0.5">⚠️</span>
+                        <p className="text-amber-800 text-xs leading-relaxed">
+                          <span className="font-bold">IMPORTANT: </span>{item.notice}
+                        </p>
+                      </div>
+                    )}
                     {item.steps.map((step, sIdx) => (
                       <div key={sIdx} className="flex gap-3 items-start">
                         <span className="w-6 h-6 bg-blue-900 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
