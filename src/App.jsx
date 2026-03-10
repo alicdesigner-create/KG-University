@@ -137,6 +137,8 @@ export default function KGMasterClass() {
   const pullTimerRef = useRef(null);
   const pullActiveRef = useRef(false);
   const safetyRefs = useRef([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const searchRef = useRef(null);
 
   // ── Scroll listener for parallax ──────────────────────────────────────────────
   useEffect(() => {
@@ -190,6 +192,27 @@ export default function KGMasterClass() {
       setTimeout(() => setShowSplash(false), 300);
     }, 2500);
     return () => clearTimeout(hideTimer);
+  }, []);
+
+  // ── Search: ESC to close + click outside to close ────────────────────────────
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === 'Escape') setSearchQuery(''); };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, []);
+
+  useEffect(() => {
+    const onOutside = (e) => {
+      if (searchRef.current && !searchRef.current.contains(e.target)) {
+        setSearchQuery('');
+      }
+    };
+    document.addEventListener('mousedown', onOutside);
+    document.addEventListener('touchend', onOutside);
+    return () => {
+      document.removeEventListener('mousedown', onOutside);
+      document.removeEventListener('touchend', onOutside);
+    };
   }, []);
 
   // ── Navigation: persist screen + handle Android back button ──────────────────
@@ -248,7 +271,9 @@ export default function KGMasterClass() {
 
   const translations = {
     en: {
-      subtitle:     'Professional Training Platform',
+      subtitle:           'Professional Training Platform',
+      searchPlaceholder:  'Search categories, chemicals…',
+      searchNoResults:    'No results found',
       takeQuiz:     'Take a Quiz',
       needMoreInfo: 'Need more info?',
       contactUs:    'Contact us',
@@ -733,7 +758,9 @@ export default function KGMasterClass() {
     },
 
     es: {
-      subtitle:     'Plataforma de Entrenamiento Profesional',
+      subtitle:           'Plataforma de Entrenamiento Profesional',
+      searchPlaceholder:  'Busca categorías, químicos…',
+      searchNoResults:    'Sin resultados',
       takeQuiz:     'Tomar Quiz',
       needMoreInfo: '¿Necesitas más información?',
       contactUs:    'Contáctanos',
@@ -1198,6 +1225,61 @@ export default function KGMasterClass() {
     resources: 'bg-slate-500',
   };
 
+  // ── Search Index ──────────────────────────────────────────────────────────────
+  const searchIndex = [
+    // Main categories
+    { id: 'kgfs',      type: 'category', screen: 'kgfs',      icon: '🏢', nameEn: 'Learn about KGFS',        nameEs: 'Conoce KGFS',                   descEn: 'Company history and mission',            descEs: 'Historia y misión de la empresa',         keywords: ['company','history','founders','wade','keller','debbie','garay','mission','values','1995','integrity','innovation','inclusiveness','accountability','professionalism'] },
+    { id: 'cleaning',  type: 'category', screen: 'cleaning',  icon: '✨', nameEn: 'Cleaning Training',        nameEs: 'Entrenamiento de Limpieza',      descEn: 'Professional cleaning techniques',       descEs: 'Técnicas profesionales de limpieza',      keywords: ['office','bathroom','kitchen','window','floor','pressure','school','bank','mop','vacuum','microfiber','rags'] },
+    { id: 'chemicals', type: 'category', screen: 'chemicals', icon: '🧪', nameEn: 'Chemicals',                nameEs: 'Químicos',                       descEn: 'Chemical handling and safety',           descEs: 'Manejo y seguridad de químicos',          keywords: ['nabc','klearview','topclean','oxivir','assurance','clr','ajax','enzymes','stainless','disinfectant','cleaner'] },
+    { id: 'equipment', type: 'category', screen: 'equipment', icon: '🔧', nameEn: 'Equipment',                nameEs: 'Equipos',                        descEn: 'Tools and equipment guide',              descEs: 'Guía de herramientas y equipos',          keywords: ['vacuum','backpack','upright','auto scrubber','autoscrubber','mop','microfiber','rags','filter','bag'] },
+    { id: 'safety',    type: 'category', screen: 'safety',    icon: '🛡️', nameEn: 'Safety at Work',           nameEs: 'Seguridad en el Trabajo',        descEn: 'Workplace safety protocols',             descEs: 'Protocolos de seguridad laboral',         keywords: ['ppe','osha','biohazard','uniform','height','ladder','tripping','gloves','goggles','mask','signage','sds'] },
+    { id: 'standards', type: 'category', screen: 'standards', icon: '⭐', nameEn: 'Employee Standard',        nameEs: 'Estándar del Empleado',          descEn: 'Company standards and expectations',     descEs: 'Estándares y expectativas de la empresa', keywords: ['punctuality','uniform','communication','quality','teamwork','accountability','clearance','badge','language','appearance'] },
+    { id: 'resources', type: 'category', screen: 'resources', icon: '📁', nameEn: 'Other Resources',          nameEs: 'Otros Recursos',                 descEn: 'Apps, handbooks and Trinet guides',      descEs: 'Apps, handbooks y guías de Trinet',       keywords: ['trinet','pay stub','paystub','w2','handbook','app','hr','payroll','benefits','contact','phone'] },
+    // Cleaning subcategories
+    { id: 'offices',          type: 'cleaning', screen: 'cleaning-offices',          icon: '🏢', nameEn: 'Office Cleaning',    nameEs: 'Limpieza de Oficinas',    descEn: 'Cleaning training',  descEs: 'Entrenamiento de limpieza', keywords: ['desk','keyboard','screen','dust','office','nabc','trash','bin','wipe'] },
+    { id: 'bathrooms',        type: 'cleaning', screen: 'cleaning-bathrooms',        icon: '🚽', nameEn: 'Bathroom Cleaning',  nameEs: 'Limpieza de Baños',       descEn: 'Cleaning training',  descEs: 'Entrenamiento de limpieza', keywords: ['toilet','sink','mirror','chrome','urinal','restroom','bathroom','tile'] },
+    { id: 'kitchens',         type: 'cleaning', screen: 'cleaning-kitchens',         icon: '🍳', nameEn: 'Kitchen Cleaning',   nameEs: 'Limpieza de Cocinas',     descEn: 'Cleaning training',  descEs: 'Entrenamiento de limpieza', keywords: ['kitchen','microwave','refrigerator','drain','enzymes','grease','coffee','food'] },
+    { id: 'windows',          type: 'cleaning', screen: 'cleaning-windows',          icon: '🪟', nameEn: 'Window Cleaning',    nameEs: 'Limpieza de Ventanas',    descEn: 'Cleaning training',  descEs: 'Entrenamiento de limpieza', keywords: ['window','glass','mirror','klearview','streak','frame','track'] },
+    { id: 'floors',           type: 'cleaning', screen: 'cleaning-floors',           icon: '🧹', nameEn: 'Floor Care',         nameEs: 'Cuidado de Pisos',        descEn: 'Cleaning training',  descEs: 'Entrenamiento de limpieza', keywords: ['floor','mop','carpet','vacuum','topclean','stain','edge','autoscrubber'] },
+    { id: 'pressure_washing', type: 'cleaning', screen: 'cleaning-pressure_washing', icon: '💦', nameEn: 'Pressure Washing',   nameEs: 'Limpieza a Presión',      descEn: 'Cleaning training',  descEs: 'Entrenamiento de limpieza', keywords: ['pressure','washing','outdoor','hose','machine','exterior','freeze'] },
+    { id: 'schools',          type: 'cleaning', screen: 'cleaning-schools',          icon: '🏫', nameEn: 'Schools Cleaning',   nameEs: 'Limpieza de Escuelas',    descEn: 'Cleaning training',  descEs: 'Entrenamiento de limpieza', keywords: ['school','desk','locker','classroom','fountain','keyboard','carpet','gum'] },
+    { id: 'banking',          type: 'cleaning', screen: 'cleaning-banking',          icon: '🏦', nameEn: 'Banking Cleaning',   nameEs: 'Limpieza de Bancos',      descEn: 'Cleaning training',  descEs: 'Entrenamiento de limpieza', keywords: ['bank','badge','alarm','security','vault','finance','keys','access','confidential'] },
+    // Chemical products
+    { id: 'nabc',       type: 'chemical', screen: 'chemicals', image: '/quimicos/nabc.jpg',       icon: '🧴', nameEn: 'NABC',                        nameEs: 'NABC',                           descEn: 'Hospital-grade disinfectant',              descEs: 'Desinfectante de grado hospitalario',   keywords: ['disinfectant','bathroom','bacteria','virus','odor','non-acid','hospital','10 minutes','nabc'] },
+    { id: 'klearview',  type: 'chemical', screen: 'chemicals', image: '/quimicos/klearview.jpg',  icon: '🧴', nameEn: 'Glance / Klearview',          nameEs: 'Glance / Klearview',             descEn: 'Streak-free glass cleaner',               descEs: 'Limpiador de vidrios sin rayas',        keywords: ['glass','window','mirror','streak','glance','klearview','reflective','fingerprint'] },
+    { id: 'topclean',   type: 'chemical', screen: 'chemicals', image: '/quimicos/topclean.jpg',   icon: '🧴', nameEn: 'Top Clean',                   nameEs: 'Top Clean',                      descEn: 'Neutral pH floor cleaner',                descEs: 'Limpiador de pisos pH neutro',          keywords: ['floor','neutral','cleaner','topclean','daily','maintenance','finish','shine'] },
+    { id: 'nutrarinse', type: 'chemical', screen: 'chemicals', image: '/quimicos/nutrarinse.jpg', icon: '🧴', nameEn: 'Nutra Rinse',                 nameEs: 'Nutra Rinse',                    descEn: 'Salt and ice melt neutralizer',            descEs: 'Neutralizador de sal y hielo',          keywords: ['neutralizer','salt','ice','melt','residue','nutrarinse','stripper','white powder'] },
+    { id: 'assurance',  type: 'chemical', screen: 'chemicals', image: '/quimicos/assurance.jpg',  icon: '🧴', nameEn: 'Assurance',                   nameEs: 'Assurance',                      descEn: 'Heavy-duty degreaser',                     descEs: 'Desengrasante de alta potencia',        keywords: ['degreaser','grease','assurance','industrial','multiuse','oil','deep clean'] },
+    { id: 'oxivir',     type: 'chemical', screen: 'chemicals', image: '/quimicos/oxivir.jpg',     icon: '🧴', nameEn: 'Oxivir',                      nameEs: 'Oxivir',                         descEn: 'Hydrogen peroxide disinfectant',           descEs: 'Desinfectante de peróxido de hidrógeno',keywords: ['hydrogen peroxide','disinfectant','oxivir','fast acting','broad spectrum','sanitize'] },
+    { id: 'ajax',       type: 'chemical', screen: 'chemicals', image: '/quimicos/ajax.jpg',       icon: '🧴', nameEn: 'Ajax',                        nameEs: 'Ajax con Cloro',                 descEn: 'Scouring powder with bleach',              descEs: 'Polvo limpiador con cloro',             keywords: ['ajax','bleach','scouring','powder','porcelain','ceramic','stainless','tile'] },
+    { id: 'clr',        type: 'chemical', screen: 'chemicals', image: '/quimicos/clr.jpg',        icon: '🧴', nameEn: 'CLR',                         nameEs: 'CLR',                            descEn: 'Calcium, Lime & Rust Remover',             descEs: 'Removedor de calcio, sarro y óxido',   keywords: ['clr','calcium','lime','rust','hard water','scale','shower','fixture','deposit'] },
+    { id: 'enzymes',    type: 'chemical', screen: 'chemicals', image: '/quimicos/enzymes.jpg',    icon: '🧴', nameEn: 'Victoria Bay Liquid Enzymes', nameEs: 'Victoria Bay Enzimas Líquidas',  descEn: 'Organic odor eliminator for drains',      descEs: 'Eliminador de olores orgánicos',        keywords: ['enzymes','organic','odor','drain','restroom','carpet','biological','victoria bay'] },
+    { id: 'stainless',  type: 'chemical', screen: 'chemicals', image: '/quimicos/stainless.jpg',  icon: '🧴', nameEn: 'Stainless Steel Polish',      nameEs: 'Pulidor de Acero Inoxidable',    descEn: 'Polish for stainless steel surfaces',     descEs: 'Pulidor de acero inoxidable',           keywords: ['stainless','steel','polish','shine','fingerprint','metal','buff','grain'] },
+  ];
+
+  const searchResults = searchQuery.length >= 2
+    ? searchIndex.filter(item => {
+        const q = searchQuery.toLowerCase();
+        return [item.nameEn, item.nameEs, item.descEn, item.descEs, ...item.keywords]
+          .join(' ').toLowerCase().includes(q);
+      }).slice(0, 10)
+    : [];
+
+  const handleSearchResult = (result) => {
+    setSearchQuery('');
+    if (result.type === 'chemical') {
+      setSelectedChemical({
+        id: result.id,
+        name: lang === 'en' ? result.nameEn : result.nameEs,
+        image: result.image,
+        description: t.chemicals.descriptions[result.id],
+      });
+      navigateTo('chemicals');
+    } else {
+      navigateTo(result.screen);
+    }
+  };
+
   const renderHome = () => (
     <div className="min-h-screen bg-slate-50 pb-52">
 
@@ -1238,6 +1320,51 @@ export default function KGMasterClass() {
 
         {/* Curved bottom */}
         <div className="absolute bottom-0 left-0 right-0 h-10 bg-slate-50" style={{ borderRadius: '2rem 2rem 0 0' }} />
+      </div>
+
+      {/* ── Search Bar ── */}
+      <div className="px-4 pb-2" ref={searchRef}>
+        <div className="relative">
+          <div className="flex items-center bg-white rounded-2xl shadow-sm border border-gray-200 focus-within:border-blue-300 focus-within:shadow-md transition-all overflow-hidden">
+            <span className="pl-4 text-gray-400 flex-shrink-0">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            </span>
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder={t.searchPlaceholder}
+              className="flex-1 bg-transparent py-3 px-3 text-gray-700 text-sm outline-none placeholder-gray-400"
+            />
+            {searchQuery && (
+              <button onClick={() => setSearchQuery('')} className="pr-4 text-gray-400 hover:text-gray-600 transition-colors flex-shrink-0">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+              </button>
+            )}
+          </div>
+          {searchQuery.length >= 2 && (
+            <div className="absolute top-full left-0 right-0 mt-1 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden z-50 max-h-72 overflow-y-auto">
+              {searchResults.length > 0 ? (
+                searchResults.map((result, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => handleSearchResult(result)}
+                    className="w-full flex items-center gap-3 px-4 py-3 hover:bg-blue-50 active:bg-blue-100 transition-colors text-left border-b border-gray-50 last:border-b-0"
+                  >
+                    <span className="text-xl flex-shrink-0">{result.icon}</span>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-blue-900 font-semibold text-sm truncate">{lang === 'en' ? result.nameEn : result.nameEs}</p>
+                      <p className="text-gray-400 text-xs">{lang === 'en' ? result.descEn : result.descEs}</p>
+                    </div>
+                    <ChevronRight size={14} className="text-gray-300 flex-shrink-0" />
+                  </button>
+                ))
+              ) : (
+                <p className="px-4 py-6 text-center text-gray-400 text-sm">{t.searchNoResults}</p>
+              )}
+            </div>
+          )}
+        </div>
       </div>
 
       {/* ── Categories ── */}
