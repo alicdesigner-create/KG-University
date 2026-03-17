@@ -553,7 +553,13 @@ export default function KGMasterClass() {
           clr:        'CLR (Calcium, Lime & Rust Remover): A specialized acidic cleaner used to dissolve tough calcium and lime deposits as well as surface rust stains. It is highly effective for fixtures, showerheads, and surfaces exposed to hard water. To use, apply to the stained area, let it work for a few minutes, scrub if necessary, and rinse well.',
           enzymes:    'Victoria Bay Liquid Enzymes: A biological treatment containing live cultures that digest organic waste and eliminate odors at the source. It is ideal for floor drains, restrooms, and carpets where organic matter causes persistent smells. To use, apply directly to the source of the odor or waste and allow the enzymes to work naturally without immediate rinsing.',
           stainless:  'Stainless Steel Polish: A professional-grade polish that cleans, protects, and enhances the luster of stainless steel surfaces. It creates a protective barrier that resists fingerprints, water spots, and streaks. To use, apply a small amount to a clean, dry microfiber cloth, wipe with the grain of the metal, and buff to a high shine.',
-          dawn:       'Dawn Ultra Dish Soap: A specialized surfactant-based concentrate used for heavy-duty surface degreasing and high-end detailing. It is a critical tool for breaking down carbon-based buildup and organic oils on hard surfaces and fixtures.\n\nKey Uses\nChrome & Metal Restoration: The gold standard for removing oxidation and hard water films from chrome, stainless steel, and polished metal fixtures.\nHigh-Traffic Degreasing: Used to emulsify grease and oil buildup on backsplashes, walls, and technical equipment surfaces.\nSurface Preparation: Effective for removing stubborn, oily residues that standard multipurpose cleaners may leave behind.\nGlass & Mirror Detailing: In precise dilutions, it cuts through heavy smoking film or exterior pollution on glass surfaces.\n\nPro Tips\nResidue Control: Always follow with a clean water rinse to ensure a streak-free, "squeaky clean" finish on polished metals.\nOxidation Hack: When used with warm water, it acts as a restorative agent for dull bathroom partitions and metal trim.\nChemical Compatibility: Safe for use on most non-porous surfaces where harsh industrial solvents are not permitted.',
+        },
+        richDescriptions: {
+          dawn: [
+            { heading: 'Purpose', text: 'High-performance concentrate engineered to emulsify heavy grease and organic oils. Essential for detailing metal surfaces and high-traffic areas.' },
+            { heading: 'Applications', bullets: ['Metal Restoration: Removes dullness and water spots from chrome and stainless steel.', 'Surface Degreasing: Eliminates oily buildup on walls, equipment, and technical surfaces.', 'Detail Cleaning: Effective against light oxidation and stubborn organic residues.'] },
+            { heading: 'Pro Tips', bullets: ['Dilution: Use minimal amounts to prevent excessive suds and simplify rinsing.', 'Shine: Always rinse with clean water to ensure a streak-free, professional finish.'] },
+          ],
         },
         section1: {
           title: 'How to Use & Where to Use',
@@ -1041,7 +1047,13 @@ export default function KGMasterClass() {
           clr:        'CLR (Removedor de Calcio, Sarro y Óxido): Limpiador ácido especializado para disolver depósitos difíciles de calcio y sarro, así como manchas superficiales de óxido. Es muy eficaz en griferías, alcachofas de ducha y superficies expuestas a agua dura. Para usarlo, aplica en el área manchada, deja actuar unos minutos, friega si es necesario y enjuaga bien.',
           enzymes:    'Victoria Bay Enzimas Líquidas: Tratamiento biológico con cultivos vivos que digieren residuos orgánicos y eliminan olores en su origen. Es ideal para desagües de pisos, baños y alfombras donde la materia orgánica genera olores persistentes. Para usarlo, aplica directamente en el origen del olor o residuo y deja que las enzimas actúen de forma natural sin enjuagar de inmediato.',
           stainless:  'Pulidor de Acero Inoxidable: Pulidor de grado profesional que limpia, protege y realza el brillo de las superficies de acero inoxidable. Crea una barrera protectora que resiste huellas dactilares, manchas de agua y rayas. Para usarlo, aplica una pequeña cantidad en un paño de microfibra limpio y seco, limpia siguiendo el veteado del metal y pule hasta obtener un brillo intenso.',
-          dawn:       'Dawn Ultra Dish Soap: Concentrado especializado a base de surfactantes para el desengrase intensivo de superficies y detalles de alto nivel. Es una herramienta clave para eliminar acumulaciones de origen carbónico y aceites orgánicos en superficies duras y accesorios.\n\nUsos Principales\nRestauración de Cromo y Metal: El estándar de oro para eliminar oxidación y depósitos de agua dura en cromo, acero inoxidable y accesorios de metal pulido.\nDesengrase en Áreas de Alto Tráfico: Se utiliza para emulsionar acumulaciones de grasa y aceite en salpicaderos, paredes y superficies de equipos técnicos.\nPreparación de Superficies: Eficaz para eliminar residuos oleosos difíciles que los limpiadores multiusos estándar pueden dejar atrás.\nDetallado de Vidrios y Espejos: En diluciones precisas, elimina películas de humo o contaminación exterior en superficies de vidrio.\n\nConsejos Profesionales\nControl de Residuos: Siempre enjuaga con agua limpia para garantizar un acabado sin rayas en metales pulidos.\nTruco contra la Oxidación: Usado con agua tibia, actúa como agente restaurador para particiones de baño opacas y ribetes metálicos.\nCompatibilidad Química: Seguro para usar en la mayoría de las superficies no porosas donde no se permiten solventes industriales agresivos.',
+        },
+        richDescriptions: {
+          dawn: [
+            { heading: 'Propósito', text: 'Concentrado de alto rendimiento diseñado para emulsionar grasa pesada y aceites orgánicos. Esencial para detallar superficies de metal y áreas de alto tráfico.' },
+            { heading: 'Aplicaciones', bullets: ['Restauración de Metal: Elimina opacidad y manchas de agua del cromo y acero inoxidable.', 'Desengrasante de Superficies: Elimina la acumulación oleosa en paredes, equipos y superficies técnicas.', 'Limpieza Detallada: Efectivo contra oxidación leve y residuos orgánicos obstinados.'] },
+            { heading: 'Consejos Profesionales', bullets: ['Dilución: Usa cantidades mínimas para prevenir exceso de espuma y simplificar el enjuague.', 'Brillo: Siempre enjuaga con agua limpia para asegurar un acabado sin rayas y profesional.'] },
+          ],
         },
         section1: {
           title: 'Cómo Usar y Dónde Usar',
@@ -1945,7 +1957,7 @@ export default function KGMasterClass() {
 
   const renderChemicals = () => {
     const c = t.chemicals;
-    const chemicalProducts = chemicalProductBase.map(p => ({ ...p, description: c.descriptions[p.id] }));
+    const chemicalProducts = chemicalProductBase.map(p => ({ ...p, description: c.descriptions[p.id], richDescription: c.richDescriptions?.[p.id] }));
     return (
       <div className="h-screen flex flex-col bg-slate-50">
         <SubPageNav title={c.navTitle} />
@@ -2053,7 +2065,27 @@ export default function KGMasterClass() {
                 <h3 className="text-white font-bold text-lg">{selectedChemical.name}</h3>
               </div>
               <div className="modal-content bg-emerald-700 px-5 py-4">
-                <p className="text-emerald-50 text-sm leading-relaxed">{selectedChemical.description}</p>
+                {selectedChemical.richDescription ? (
+                  <div className="space-y-4">
+                    {selectedChemical.richDescription.map((section, i) => (
+                      <div key={i}>
+                        <p className="text-white font-bold text-sm mb-1">{section.heading}</p>
+                        {section.text && <p className="text-emerald-50 text-sm leading-relaxed">{section.text}</p>}
+                        {section.bullets && (
+                          <ul className="space-y-1 mt-1">
+                            {section.bullets.map((b, j) => (
+                              <li key={j} className="text-emerald-50 text-sm leading-relaxed flex gap-2">
+                                <span className="flex-shrink-0">•</span><span>{b}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-emerald-50 text-sm leading-relaxed">{selectedChemical.description}</p>
+                )}
               </div>
             </div>
           </div>
