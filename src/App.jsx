@@ -1207,7 +1207,7 @@ export default function KGMasterClass() {
         </button>
         <div className="absolute left-0 right-0 flex justify-center pointer-events-none">
           <button onClick={goHome} className="pointer-events-auto">
-            <img src="/kg-logo.png" alt="KG Masterclass" className="h-12 object-contain" />
+            <img src="/kg-university-logo.png" alt="KG University" className="h-12 object-contain" />
           </button>
         </div>
         <div className="ml-auto flex-shrink-0"><LangToggle dark /></div>
@@ -1315,7 +1315,7 @@ export default function KGMasterClass() {
             willChange: 'transform',
           }}
         >
-          <img src="/kg-logo.png" alt="KG Masterclass" className="h-24 mx-auto object-contain drop-shadow-lg" />
+          <img src="/kg-university-logo.png" alt="KG University" className="h-24 mx-auto object-contain drop-shadow-lg" />
           <p className="text-blue-900/70 text-xs mt-3 tracking-widest uppercase font-semibold">{t.subtitle}</p>
         </div>
 
