@@ -2773,7 +2773,7 @@ export default function KGMasterClass() {
   // ── Splash Screen render ─────────────────────────────────────────────────────
   if (showSplash) {
     return (
-      <div className={`fixed inset-0 z-50 flex items-center justify-center bg-blue-900 ${splashHiding ? 'splash-hide' : ''}`}>
+      <div className={`fixed inset-0 z-50 flex items-center justify-center bg-white ${splashHiding ? 'splash-hide' : ''}`}>
         <img
           src="/splash-logo.png"
           alt="KG Masterclass"
