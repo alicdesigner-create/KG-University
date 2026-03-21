@@ -738,7 +738,7 @@ export default function KGMasterClass() {
         emailSent: '✓ Results sent to your email.',
         emailError: 'Could not send email, but your results were recorded.',
         adminSubject: (name) => `Quiz Result — ${name}`,
-        userSubject: 'Your KG Masterclass Quiz Results',
+        userSubject: 'Your KG University Quiz Results',
       },
       es: {
         navTitle: 'Tomar Quiz',
@@ -761,7 +761,7 @@ export default function KGMasterClass() {
         emailSent: '✓ Resultados enviados a tu correo.',
         emailError: 'No se pudo enviar el email, pero tus resultados fueron registrados.',
         adminSubject: (name) => `Resultado Quiz — ${name}`,
-        userSubject: 'Tus Resultados del Quiz KG Masterclass',
+        userSubject: 'Tus Resultados del Quiz KG University',
       },
     },
 
@@ -2404,7 +2404,7 @@ export default function KGMasterClass() {
 
     const adminHtml = `<div style="font-family:sans-serif;max-width:700px;margin:auto">
       <div style="background:#1e3a8a;padding:24px;text-align:center">
-        <h1 style="color:#fff;margin:0;font-size:20px">KG Masterclass — Quiz Result</h1>
+        <h1 style="color:#fff;margin:0;font-size:20px">KG University — Quiz Result</h1>
       </div>
       <div style="padding:20px;background:#f8fafc">
         <p><b>Name:</b> ${userInfo.name}</p>
@@ -2429,7 +2429,7 @@ export default function KGMasterClass() {
 
     const userHtml = `<div style="font-family:sans-serif;max-width:500px;margin:auto">
       <div style="background:#1e3a8a;padding:24px;text-align:center">
-        <h1 style="color:#fff;margin:0;font-size:20px">KG Masterclass Quiz</h1>
+        <h1 style="color:#fff;margin:0;font-size:20px">KG University Quiz</h1>
       </div>
       <div style="padding:24px;background:#f8fafc;text-align:center">
         <p style="font-size:16px">Hi <b>${userInfo.name}</b>, thank you for completing the quiz!</p>
@@ -2450,7 +2450,7 @@ export default function KGMasterClass() {
     };
 
     await post(ADMIN, `Quiz Result — ${userInfo.name} (${pct}%)`, adminHtml);
-    if (userInfo.email) await post(userInfo.email, 'Your KG Masterclass Quiz Results', userHtml);
+    if (userInfo.email) await post(userInfo.email, 'Your KG University Quiz Results', userHtml);
   };
 
   // ── Quiz Screen ───────────────────────────────────────────────────────────────
@@ -2776,7 +2776,7 @@ export default function KGMasterClass() {
       <div className={`fixed inset-0 z-50 flex items-center justify-center bg-white ${splashHiding ? 'splash-hide' : ''}`}>
         <img
           src="/splash-logo.png"
-          alt="KG Masterclass"
+          alt="KG University"
           className="splash-logo w-64 max-w-xs object-contain"
         />
       </div>
