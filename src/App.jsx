@@ -515,7 +515,7 @@ export default function KGMasterClass() {
               { label: 'Pink',  color: '#f9a8d4', text: 'Exclusive for restrooms and high-risk sanitary areas.' },
             ]},
             { label: 'Maintenance', text: 'Once the job is finished, place dirty mop heads in the textile collection area for professional laundering.' },
-            { label: 'Care',        text: 'Never store damp mops in closed closets; leave them in the collection area to allow for proper airflow.' },
+            { label: 'Care',        text: 'Leave mop heads in the collection area to allow for proper airflow and drying. When storing mops, keep heads separated to prevent cross-contamination between different cleaning areas and ensure each mop maintains its designated use.' },
           ]},
           { title: 'Flat Mops', points: [
             { label: 'Usage', text: 'Select the appropriate flat mop head based on your cleaning surface and secure it firmly to the handle. Flat mops are ideal for large floor areas and provide superior coverage and efficiency.', subPoints: [
@@ -530,12 +530,12 @@ export default function KGMasterClass() {
             { label: 'Usage — Backpack', text: 'Adjust the harness to your hips and keep the power cord visible behind you at all times.' },
             { label: 'Usage — Upright',  text: 'Adjust the head height based on the carpet thickness to protect the motor.' },
             { label: 'Maintenance',      text: 'Check the filter bag and replace it if it is 2/3 full to maintain strong suction power.' },
-            { label: 'Care',             text: 'Regularly clean the rotating brush (beater bar) to remove hair or strings that may block the movement.' },
+            { label: 'Care',             text: 'Inspect vacuum nozzles regularly to ensure they remain clear and unobstructed. Remove any debris, paper fragments, or large objects that may block airflow and reduce suction efficiency. Replace vacuum bags and filters at regular intervals to maintain optimal performance and air quality. Keep the entire unit clean by wiping down the exterior and checking hoses for blockages before each use.' },
           ]},
           { title: 'Auto Scrubber Machines', points: [
             { label: 'Usage',       text: 'Fill the solution tank with the exact chemical and water mixture as specified in the equipment manual. Operate at a steady speed to ensure the vacuum system picks up all moisture in a single pass.' },
             { label: 'Maintenance', text: 'Completely empty and rinse the recovery tank after every use to prevent sediment buildup and bad odors.' },
-            { label: 'Care',        text: 'Remove the pads or brushes and clean the squeegee blade to guarantee perfect drying for the next shift.' },
+            { label: 'Care',        text: 'Position the squeegee properly—avoid resting it heavily on the floor when the machine is idle, as this can cause permanent deformation and leave marks during operation. Always rinse the machine thoroughly before storage to remove residual cleaning solutions and debris. Ensure the water tank is completely empty before putting the machine away to prevent mold growth and maintain equipment longevity.' },
           ]},
         ],
         tutorials: {
@@ -1018,7 +1018,7 @@ export default function KGMasterClass() {
               { label: 'Rosado', color: '#f9a8d4', text: 'Exclusivo para baños y áreas sanitarias de alto riesgo.' },
             ]},
             { label: 'Mantenimiento', text: 'Una vez terminado el trabajo, coloca los cabezales sucios en el área de recolección textil para lavado profesional.' },
-            { label: 'Cuidado',       text: 'Nunca guardes trapeadores húmedos en closets cerrados; déjalos en el área de recolección para permitir una ventilación adecuada.' },
+            { label: 'Cuidado',       text: 'Deja las cabezas de fregona en el área de recolección para permitir un secado adecuado y una ventilación apropiada. Al almacenar fregonas, mantén las cabezas separadas para evitar contaminación cruzada entre diferentes áreas de limpieza y garantizar que cada fregona mantenga su uso designado.' },
           ]},
           { title: 'Fregonas Planas', points: [
             { label: 'Uso', text: 'Selecciona la cabeza de fregona plana apropiada según tu superficie de limpieza y asegúrala firmemente al mango. Las fregonas planas son ideales para grandes áreas de piso y proporcionan cobertura y eficiencia superiores.', subPoints: [
@@ -1033,12 +1033,12 @@ export default function KGMasterClass() {
             { label: 'Uso — Mochila',  text: 'Ajusta el arnés a tus caderas y mantén el cable de alimentación visible detrás de ti en todo momento.' },
             { label: 'Uso — Vertical', text: 'Ajusta la altura del cabezal según el grosor de la alfombra para proteger el motor.' },
             { label: 'Mantenimiento',  text: 'Revisa la bolsa de filtro y reemplázala si está 2/3 llena para mantener una succión potente.' },
-            { label: 'Cuidado',        text: 'Limpia regularmente el cepillo giratorio (batidor) para eliminar cabello o hilos que puedan bloquear el movimiento.' },
+            { label: 'Cuidado',        text: 'Inspecciona regularmente las boquillas de la aspiradora para asegurar que permanezcan libres y sin obstrucciones. Elimina cualquier residuo, fragmentos de papel u objetos grandes que puedan bloquear el flujo de aire y reducir la eficiencia de succión. Reemplaza las bolsas y filtros de la aspiradora a intervalos regulares para mantener el rendimiento óptimo y la calidad del aire. Mantén toda la unidad limpia limpiando el exterior y revisando las mangueras en busca de bloqueos antes de cada uso.' },
           ]},
           { title: 'Máquinas Auto Scrubber', points: [
             { label: 'Uso',           text: 'Llena el tanque con la mezcla exacta de químico y agua según el manual. Opera a velocidad constante para que el sistema de vacío recoja toda la humedad en un solo paso.' },
             { label: 'Mantenimiento', text: 'Vacía y enjuaga completamente el tanque de recuperación después de cada uso para evitar sedimentos y malos olores.' },
-            { label: 'Cuidado',       text: 'Retira los almohadillas o cepillos y limpia la escobilla de secado para garantizar un secado perfecto en el siguiente turno.' },
+            { label: 'Cuidado',       text: 'Posiciona el squeegee correctamente evitando dejarlo recargado pesadamente en el piso cuando la máquina está inactiva, ya que esto puede causar deformaciones permanentes y dejar marcas durante la operación. Siempre enjuaga la máquina completamente antes del almacenamiento para eliminar soluciones de limpieza residuales y escombros. Asegúrate de que el tanque de agua esté completamente vacío antes de guardar la máquina para prevenir el crecimiento de moho y mantener la longevidad del equipo.' },
           ]},
         ],
         tutorials: {
