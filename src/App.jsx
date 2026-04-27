@@ -517,6 +517,15 @@ export default function KGMasterClass() {
             { label: 'Maintenance', text: 'Once the job is finished, place dirty mop heads in the textile collection area for professional laundering.' },
             { label: 'Care',        text: 'Never store damp mops in closed closets; leave them in the collection area to allow for proper airflow.' },
           ]},
+          { title: 'Flat Mops', points: [
+            { label: 'Usage', text: 'Select the appropriate flat mop head based on your cleaning surface and secure it firmly to the handle. Flat mops are ideal for large floor areas and provide superior coverage and efficiency.', subPoints: [
+              { label: 'Blue',  color: '#60a5fa', text: 'For general maintenance of offices, hallways, and low-traffic areas.' },
+              { label: 'Green', color: '#4ade80', text: 'Designed for everyday cleaning of various floor types in open spaces.' },
+              { label: 'Red',   color: '#f87171', text: 'Reserved for restrooms and high-risk sanitary areas requiring intensive sanitization.' },
+            ]},
+            { label: 'Maintenance', text: 'After completing your cleaning task, place soiled flat mop heads in the designated textile collection area for professional laundering and disinfection.' },
+            { label: 'Care',        text: 'Always store flat mops in an upright position or lay them flat to dry in well-ventilated areas. Never store damp mops in sealed containers, as this promotes mold growth and odors. Inspect mop heads regularly for wear and replace when fibers become frayed or matted.' },
+          ]},
           { title: 'Backpack & Upright Vacuums', points: [
             { label: 'Usage — Backpack', text: 'Adjust the harness to your hips and keep the power cord visible behind you at all times.' },
             { label: 'Usage — Upright',  text: 'Adjust the head height based on the carpet thickness to protect the motor.' },
@@ -1010,6 +1019,15 @@ export default function KGMasterClass() {
             ]},
             { label: 'Mantenimiento', text: 'Una vez terminado el trabajo, coloca los cabezales sucios en el área de recolección textil para lavado profesional.' },
             { label: 'Cuidado',       text: 'Nunca guardes trapeadores húmedos en closets cerrados; déjalos en el área de recolección para permitir una ventilación adecuada.' },
+          ]},
+          { title: 'Fregonas Planas', points: [
+            { label: 'Uso', text: 'Selecciona la cabeza de fregona plana apropiada según tu superficie de limpieza y asegúrala firmemente al mango. Las fregonas planas son ideales para grandes áreas de piso y proporcionan cobertura y eficiencia superiores.', subPoints: [
+              { label: 'Azul',  color: '#60a5fa', text: 'Para mantenimiento general de oficinas, pasillos y áreas de bajo tráfico.' },
+              { label: 'Verde', color: '#4ade80', text: 'Diseñada para limpieza diaria de varios tipos de pisos en espacios abiertos.' },
+              { label: 'Roja',  color: '#f87171', text: 'Reservada para baños y áreas sanitarias de alto riesgo que requieren desinfección intensiva.' },
+            ]},
+            { label: 'Mantenimiento', text: 'Después de completar tu tarea de limpieza, coloca las cabezas de fregona sucias en el área designada de recolección textil para lavado y desinfección profesionales.' },
+            { label: 'Cuidado',       text: 'Siempre almacena las fregonas planas en posición vertical o déjalas reposar planas en áreas bien ventiladas. Nunca almacenes fregonas húmedas en contenedores sellados, ya que esto promueve el crecimiento de moho y olores. Inspecciona regularmente las cabezas de fregona en busca de desgaste y reemplázalas cuando las fibras se deshilachen o se apelmacen.' },
           ]},
           { title: 'Aspiradoras de Mochila y Verticales', points: [
             { label: 'Uso — Mochila',  text: 'Ajusta el arnés a tus caderas y mantén el cable de alimentación visible detrás de ti en todo momento.' },
@@ -1817,6 +1835,7 @@ export default function KGMasterClass() {
   const equipmentImages = [
     { image: '/equipo/rags.jpg',             imgPosition: 'center' },
     { image: '/equipo/mops.jpg',             imgPosition: 'center' },
+    { image: '/equipo/flat-mops.jpg',        imgPosition: 'center' },
     { image: '/equipo/vacuums.jpg',          imgPosition: 'center' },
     { image: '/equipo/auto-scrubbers.jpg',   imgPosition: 'center' },
   ];
