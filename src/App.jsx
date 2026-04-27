@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { ChevronRight, ArrowLeft, Building2, Sparkles, Shield, Wrench, Droplets, Star, FolderOpen, ShieldCheck, Lightbulb, Users2, ClipboardCheck, Handshake, Briefcase, SprayCan, ShowerHead, UtensilsCrossed, AppWindow, Grid3x3, Gauge, GraduationCap, Landmark } from 'lucide-react';
+import { ChevronRight, ArrowLeft, Building2, Sparkles, Shield, Wrench, Droplets, Star, FolderOpen, ShieldCheck, Lightbulb, Users2, ClipboardCheck, Handshake, Briefcase, SprayCan, ShowerHead, UtensilsCrossed, AppWindow, Grid3x3, Gauge, GraduationCap, Landmark, ExternalLink } from 'lucide-react';
 
 function ImageSlider({ images }) {
   const [current, setCurrent] = useState(0);
@@ -575,6 +575,7 @@ export default function KGMasterClass() {
         },
         section2: {
           title: 'Chemical Safety',
+          sdsButton: 'View Safety Data Sheet',
           topics: [
             { title: 'Chemical Safety', points: [
               { label: 'Protect Yourself', text: 'Always wear your required Personal Protective Equipment (PPE), such as gloves and safety goggles, before handling any product.' },
@@ -1078,6 +1079,7 @@ export default function KGMasterClass() {
         },
         section2: {
           title: 'Seguridad con Químicos',
+          sdsButton: 'Ver Safety Data Sheet',
           topics: [
             { title: 'Seguridad con Químicos', points: [
               { label: 'Protégete', text: 'Usa siempre el EPP requerido (guantes y gafas de seguridad) antes de manipular cualquier producto.' },
@@ -2051,6 +2053,17 @@ export default function KGMasterClass() {
                   </div>
                 );
               })}
+            </div>
+            <div className="flex justify-center mt-4">
+              <a
+                href="https://www.spartanchemical.com/sds/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white text-xs font-semibold px-4 py-2 rounded-full shadow transition-colors"
+              >
+                <ExternalLink size={13} />
+                {c.section2.sdsButton}
+              </a>
             </div>
           </div>
         </div>
