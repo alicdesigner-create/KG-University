@@ -137,6 +137,7 @@ export default function KGMasterClass() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [quizScore, setQuizScore] = useState(null);
   const [quizSubmitting, setQuizSubmitting] = useState(false);
+  const [quizSubmitError, setQuizSubmitError] = useState(null);
   const [scrollY, setScrollY] = useState(0);
   const [pullY, setPullY] = useState(0);
   const pullStartY = useRef(0);
@@ -753,6 +754,8 @@ export default function KGMasterClass() {
         backHome: 'Back to Home',
         emailSent: '✓ Results sent to your email.',
         emailError: 'Could not send email, but your results were recorded.',
+        saveError: 'Could not save your results. Please try again.',
+        retryBtn: 'Try Again',
         adminSubject: (name) => `Quiz Result — ${name}`,
         userSubject: 'Your KG University Quiz Results',
       },
@@ -776,6 +779,8 @@ export default function KGMasterClass() {
         backHome: 'Volver al Inicio',
         emailSent: '✓ Resultados enviados a tu correo.',
         emailError: 'No se pudo enviar el email, pero tus resultados fueron registrados.',
+        saveError: 'No se pudieron guardar tus resultados. Por favor intenta de nuevo.',
+        retryBtn: 'Intentar de nuevo',
         adminSubject: (name) => `Resultado Quiz — ${name}`,
         userSubject: 'Tus Resultados del Quiz KG University',
       },
@@ -2508,9 +2513,10 @@ export default function KGMasterClass() {
     const handleSubmit = async () => {
       if (!allDone) { alert(qz.unanswered); return; }
       setQuizSubmitting(true);
+      setQuizSubmitError(null);
+
       const score = quizAnswers.reduce((acc, ans, i) => acc + (ans === quizData[i].correct ? 1 : 0), 0);
-      setQuizScore(score);
-      const pct = Math.round((score / 20) * 100);
+      const pct   = Math.round((score / 20) * 100);
 
       const optLetters = ['a', 'b', 'c', 'd'];
       const answersMap = {};
@@ -2518,6 +2524,8 @@ export default function KGMasterClass() {
         answersMap[String(i + 1)] = ans !== null ? optLetters[ans] : null;
       });
 
+      // Save to Supabase — block navigation until confirmed
+      let saved = false;
       try {
         const { error } = await supabase.from('quiz_submissions').insert([{
           full_name:       userInfo.name,
@@ -2529,14 +2537,27 @@ export default function KGMasterClass() {
           percentage:      pct,
           quiz_date:       new Date().toISOString(),
         }]);
-        if (error) console.error('Supabase error:', error);
+        if (error) {
+          console.error('Supabase insert error:', error);
+          setQuizSubmitError(`${qz.saveError} (${error.message})`);
+        } else {
+          saved = true;
+        }
       } catch (e) {
-        console.error('Supabase error:', e);
+        console.error('Supabase exception:', e);
+        setQuizSubmitError(`${qz.saveError} (${e.message})`);
       }
 
+      setQuizSubmitting(false);
+
+      if (!saved) return; // Show error in UI — user can retry
+
+      setQuizScore(score);
+
+      // Emails are best-effort: don't block the result screen if they fail
       try { await sendBrevoEmails(quizAnswers, score); }
       catch (e) { console.error('Brevo error:', e); }
-      setQuizSubmitting(false);
+
       navigateTo('quiz-result');
     };
 
@@ -2608,6 +2629,13 @@ export default function KGMasterClass() {
           </div>
         </div>
 
+        {/* Error banner */}
+        {quizSubmitError && (
+          <div className="bg-red-50 border-t border-red-200 px-4 py-3">
+            <p className="text-red-700 text-xs font-semibold text-center">{quizSubmitError}</p>
+          </div>
+        )}
+
         {/* Bottom nav */}
         <div className="bg-white border-t border-gray-200 px-4 py-3 flex gap-3">
           <button
@@ -2630,7 +2658,7 @@ export default function KGMasterClass() {
                   ? 'bg-yellow-400 text-blue-900 hover:bg-yellow-300 shadow-lg'
                   : 'bg-gray-200 text-gray-400 cursor-not-allowed'
               }`}
-            >{quizSubmitting ? qz.sending : qz.submit}</button>
+            >{quizSubmitting ? qz.sending : quizSubmitError ? qz.retryBtn : qz.submit}</button>
           )}
         </div>
       </div>
