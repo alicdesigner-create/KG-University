@@ -1,5 +1,11 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { ChevronRight, ArrowLeft, Building2, Sparkles, Shield, Wrench, Droplets, Star, FolderOpen, ShieldCheck, Lightbulb, Users2, ClipboardCheck, Handshake, Briefcase, SprayCan, ShowerHead, UtensilsCrossed, AppWindow, Grid3x3, Gauge, GraduationCap, Landmark, ExternalLink } from 'lucide-react';
+import { createClient } from '@supabase/supabase-js';
+
+const supabase = createClient(
+  'https://fufikrayqeispfkocibw.supabase.co',
+  'sb_publishable_xz6amLA6wo0NdrrZe8ar6g_yhYdS0ld'
+);
 
 function ImageSlider({ images }) {
   const [current, setCurrent] = useState(0);
@@ -2504,6 +2510,30 @@ export default function KGMasterClass() {
       setQuizSubmitting(true);
       const score = quizAnswers.reduce((acc, ans, i) => acc + (ans === quizData[i].correct ? 1 : 0), 0);
       setQuizScore(score);
+      const pct = Math.round((score / 20) * 100);
+
+      const optLetters = ['a', 'b', 'c', 'd'];
+      const answersMap = {};
+      quizAnswers.forEach((ans, i) => {
+        answersMap[String(i + 1)] = ans !== null ? optLetters[ans] : null;
+      });
+
+      try {
+        const { error } = await supabase.from('quiz_submissions').insert([{
+          full_name:       userInfo.name,
+          phone_number:    userInfo.phone,
+          role:            userInfo.role,
+          email:           userInfo.email || null,
+          answers:         answersMap,
+          correct_answers: score,
+          percentage:      pct,
+          quiz_date:       new Date().toISOString(),
+        }]);
+        if (error) console.error('Supabase error:', error);
+      } catch (e) {
+        console.error('Supabase error:', e);
+      }
+
       try { await sendBrevoEmails(quizAnswers, score); }
       catch (e) { console.error('Brevo error:', e); }
       setQuizSubmitting(false);
