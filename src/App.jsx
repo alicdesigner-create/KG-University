@@ -3,7 +3,7 @@ import { ChevronRight, ArrowLeft, Building2, Sparkles, Shield, Wrench, Droplets,
 import { createClient } from '@supabase/supabase-js';
 
 const supabase = createClient(
-  'https://fufikrayqeispfkocibw.supabase.co',
+  'https://iuflkrayqeispfkocibw.supabase.co',
   'sb_publishable_xz6amLA6wo0NdrrrzE8ar6g_yhYdS0ld'
 );
 
