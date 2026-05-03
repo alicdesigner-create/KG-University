@@ -2426,60 +2426,41 @@ export default function KGMasterClass() {
 
   // ── Brevo Email Sender ────────────────────────────────────────────────────────
   const sendBrevoEmails = async (answers, score) => {
-    const BREVO_KEY = 'mOzRAQckVyfb9p5I';
+    const BREVO_KEY = import.meta.env.VITE_BREVO_KEY;
     const SENDER    = { name: 'KG Facility Solutions Team', email: 'alirioc@kgfsco.com' };
-    const ADMIN     = 'alirioc@kgfsco.com';
     const pct       = Math.round((score / 20) * 100);
     const now       = new Date().toLocaleString('en-US', { timeZone: 'America/Denver' });
     const roleLabel = translations.registration[lang].roles.find(r => r.value === userInfo.role)?.label || userInfo.role;
+    const scoreColor = pct >= 80 ? '#16a34a' : pct >= 60 ? '#d97706' : '#dc2626';
 
-    const rows = quizData.map((q, i) => {
-      const qLang  = q[lang];
-      const sel    = answers[i];
-      const ok     = sel === q.correct;
-      return `<tr style="background:${ok ? '#f0fdf4' : '#fff1f2'}">
-        <td style="padding:6px 10px;font-size:12px;color:#374151"><b>Q${i+1}.</b> ${qLang.q}</td>
-        <td style="padding:6px 10px;font-size:12px;color:#374151">${sel !== null ? qLang.opts[sel] : '—'}</td>
-        <td style="padding:6px 10px;font-size:12px;color:#374151">${qLang.opts[q.correct]}</td>
-        <td style="padding:6px 10px;font-size:12px;font-weight:bold;color:${ok ? '#16a34a' : '#dc2626'}">${ok ? '✓' : '✗'}</td>
-      </tr>`;
-    }).join('');
-
-    const adminHtml = `<div style="font-family:sans-serif;max-width:700px;margin:auto">
+    const adminHtml = `<div style="font-family:sans-serif;max-width:600px;margin:auto">
       <div style="background:#1e3a8a;padding:24px;text-align:center">
-        <h1 style="color:#fff;margin:0;font-size:20px">KG University — Quiz Result</h1>
+        <h1 style="color:#fff;margin:0;font-size:20px">New Quiz Submission - KG University</h1>
       </div>
-      <div style="padding:20px;background:#f8fafc">
-        <p><b>Name:</b> ${userInfo.name}</p>
-        <p><b>Phone:</b> ${userInfo.phone}</p>
-        <p><b>Email:</b> ${userInfo.email}</p>
-        <p><b>Role:</b> ${roleLabel}</p>
-        <p><b>Date:</b> ${now} (MT)</p>
-        <p style="font-size:22px;font-weight:bold;color:${pct>=80?'#16a34a':pct>=60?'#d97706':'#dc2626'}">
-          Score: ${score}/20 (${pct}%)
+      <div style="padding:24px;background:#f8fafc">
+        <p style="margin:0 0 8px"><b>Name:</b> ${userInfo.name}</p>
+        <p style="margin:0 0 8px"><b>Phone:</b> ${userInfo.phone}</p>
+        <p style="margin:0 0 8px"><b>Email:</b> ${userInfo.email || '—'}</p>
+        <p style="margin:0 0 8px"><b>Role:</b> ${roleLabel}</p>
+        <p style="margin:0 0 16px"><b>Date:</b> ${now} (MT)</p>
+        <p style="font-size:28px;font-weight:bold;color:${scoreColor};margin:0">
+          Score: ${score}/20 &nbsp;(${pct}%)
         </p>
-        <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;margin-top:16px">
-          <thead><tr style="background:#1e3a8a">
-            <th style="padding:8px 10px;color:#fff;font-size:12px;text-align:left">Question</th>
-            <th style="padding:8px 10px;color:#fff;font-size:12px;text-align:left">Answer Given</th>
-            <th style="padding:8px 10px;color:#fff;font-size:12px;text-align:left">Correct Answer</th>
-            <th style="padding:8px 10px;color:#fff;font-size:12px;text-align:left">Result</th>
-          </tr></thead>
-          <tbody>${rows}</tbody>
-        </table>
       </div>
     </div>`;
 
     const userHtml = `<div style="font-family:sans-serif;max-width:500px;margin:auto">
       <div style="background:#1e3a8a;padding:24px;text-align:center">
-        <h1 style="color:#fff;margin:0;font-size:20px">KG University Quiz</h1>
+        <h1 style="color:#fff;margin:0;font-size:20px">KG University - Quiz Completed</h1>
       </div>
       <div style="padding:24px;background:#f8fafc;text-align:center">
-        <p style="font-size:16px">Hi <b>${userInfo.name}</b>, thank you for completing the quiz!</p>
-        <p style="font-size:40px;font-weight:bold;color:${pct>=80?'#16a34a':pct>=60?'#d97706':'#dc2626'}">${pct}%</p>
-        <p style="font-size:14px;color:#6b7280">${score} out of 20 correct</p>
-        <p style="margin-top:16px;font-size:14px">${pct>=80?'Excellent work! 🎉':pct>=60?'Good job! Keep reviewing the material.':'Keep studying — you\'ll improve!'}</p>
-        <p style="margin-top:24px;font-size:12px;color:#9ca3af">KG Facility Solutions Team</p>
+        <p style="font-size:16px;margin:0 0 16px">Hi <b>${userInfo.name}</b>, thank you for completing the KG University quiz!</p>
+        <p style="font-size:48px;font-weight:bold;color:${scoreColor};margin:0">${pct}%</p>
+        <p style="font-size:14px;color:#6b7280;margin:8px 0 16px">${score} out of 20 correct</p>
+        <p style="font-size:14px;margin:0 0 24px">
+          ${pct >= 80 ? 'Excellent work! Keep it up.' : pct >= 60 ? 'Good job! Keep reviewing the material.' : 'Keep studying — you\'ll improve!'}
+        </p>
+        <p style="font-size:12px;color:#9ca3af;margin:0">KG Facility Solutions Team</p>
       </div>
     </div>`;
 
@@ -2492,8 +2473,8 @@ export default function KGMasterClass() {
       if (!res.ok) throw new Error(await res.text());
     };
 
-    await post(ADMIN, `Quiz Result — ${userInfo.name} (${pct}%)`, adminHtml);
-    if (userInfo.email) await post(userInfo.email, 'Your KG University Quiz Results', userHtml);
+    await post('alirioc@kgfsco.com', 'New Quiz Submission - KG University', adminHtml);
+    if (userInfo.email) await post(userInfo.email, 'KG University - Quiz Completed', userHtml);
   };
 
   // ── Quiz Screen ───────────────────────────────────────────────────────────────
