@@ -2168,7 +2168,7 @@ export default function KGMasterClass() {
     const managers = [
       { name: 'Miguel Torres',     photo: '/managers/miguel.jpg',  tel: 'tel:7207881118',  display: '720-788-1118' },
       { name: 'Alirio Castaneda',  photo: '/managers/alirio.jpg',  tel: 'tel:7209264665',  display: '720-926-4665' },
-      { name: 'Rolando Hernández', photo: '/managers/rolando.jpg', tel: 'tel:7209552814',  display: '720-955-2814' },
+      { name: 'Kevin Villa',        photo: '/managers/rolando.jpg', tel: 'tel:7208136460',  display: '720-813-6460' },
     ];
     return (
       <div className="h-screen flex flex-col bg-gradient-to-b from-slate-900 to-slate-800">
