@@ -2427,7 +2427,7 @@ export default function KGMasterClass() {
   // ── Brevo Email Sender ────────────────────────────────────────────────────────
   const sendBrevoEmails = async (answers, score) => {
     const BREVO_KEY = import.meta.env.VITE_BREVO_KEY;
-    const SENDER    = { name: 'KG Facility Solutions Team', email: 'alirioc@kgfsco.com' };
+    const SENDER    = { name: 'KG Facility Solutions Team', email: 'alicdesigner@gmail.com' };
     const pct       = Math.round((score / 20) * 100);
     const now       = new Date().toLocaleString('en-US', { timeZone: 'America/Denver' });
     const roleLabel = translations.registration[lang].roles.find(r => r.value === userInfo.role)?.label || userInfo.role;
