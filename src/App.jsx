@@ -4,7 +4,7 @@ import { createClient } from '@supabase/supabase-js';
 
 const supabase = createClient(
   'https://iuflkrayqeispfkocibw.supabase.co',
-  'sb_publishable_xz6amLA6wo0NdrrrzE8ar6g_yhYdS0ld'
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml1ZmxrcmF5cWVpc3Bma29jaWJ3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3NjQ3NTQsImV4cCI6MjA5MzM0MDc1NH0.gaNgRbuP2fPtfvdiH3MB0GcmyxfTZUuLarcqQNA-bWw'
 );
 
 function ImageSlider({ images }) {
