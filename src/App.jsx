@@ -3,8 +3,8 @@ import { ChevronRight, ArrowLeft, Building2, Sparkles, Shield, Wrench, Droplets,
 import { createClient } from '@supabase/supabase-js';
 
 const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL,
-  import.meta.env.VITE_SUPABASE_ANON_KEY
+  'https://fufikrayqeispfkocibw.supabase.co',
+  'sb_publishable_xz6amLA6wo0NdrrrzE8ar6g_yhYdS0ld'
 );
 
 function ImageSlider({ images }) {
