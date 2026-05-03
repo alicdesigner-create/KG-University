@@ -2433,7 +2433,21 @@ export default function KGMasterClass() {
     const roleLabel = translations.registration[lang].roles.find(r => r.value === userInfo.role)?.label || userInfo.role;
     const scoreColor = pct >= 80 ? '#16a34a' : pct >= 60 ? '#d97706' : '#dc2626';
 
-    const adminHtml = `<div style="font-family:sans-serif;max-width:600px;margin:auto">
+    const answerRows = quizData.map((q, i) => {
+      const qText   = q.en.q;
+      const sel     = answers[i];
+      const correct = sel === q.correct;
+      const given   = sel !== null ? q.en.opts[sel] : '—';
+      const right   = q.en.opts[q.correct];
+      return `<tr style="background:${correct ? '#f0fdf4' : '#fff1f2'}">
+        <td style="padding:8px 10px;font-size:12px;color:#374151;border-bottom:1px solid #e5e7eb"><b>Q${i + 1}.</b> ${qText}</td>
+        <td style="padding:8px 10px;font-size:12px;color:#374151;border-bottom:1px solid #e5e7eb">${given}</td>
+        <td style="padding:8px 10px;font-size:13px;font-weight:bold;text-align:center;border-bottom:1px solid #e5e7eb;color:${correct ? '#16a34a' : '#dc2626'}">${correct ? '✓' : '✗'}</td>
+        <td style="padding:8px 10px;font-size:12px;color:#374151;border-bottom:1px solid #e5e7eb">${correct ? '' : right}</td>
+      </tr>`;
+    }).join('');
+
+    const adminHtml = `<div style="font-family:sans-serif;max-width:700px;margin:auto">
       <div style="background:#1e3a8a;padding:24px;text-align:center">
         <h1 style="color:#fff;margin:0;font-size:20px">New Quiz Submission - KG University</h1>
       </div>
@@ -2443,9 +2457,20 @@ export default function KGMasterClass() {
         <p style="margin:0 0 8px"><b>Email:</b> ${userInfo.email || '—'}</p>
         <p style="margin:0 0 8px"><b>Role:</b> ${roleLabel}</p>
         <p style="margin:0 0 16px"><b>Date:</b> ${now} (MT)</p>
-        <p style="font-size:28px;font-weight:bold;color:${scoreColor};margin:0">
+        <p style="font-size:28px;font-weight:bold;color:${scoreColor};margin:0 0 24px">
           Score: ${score}/20 &nbsp;(${pct}%)
         </p>
+        <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse">
+          <thead>
+            <tr style="background:#1e3a8a">
+              <th style="padding:8px 10px;color:#fff;font-size:12px;text-align:left">Question</th>
+              <th style="padding:8px 10px;color:#fff;font-size:12px;text-align:left">Answer Given</th>
+              <th style="padding:8px 10px;color:#fff;font-size:12px;text-align:center">Result</th>
+              <th style="padding:8px 10px;color:#fff;font-size:12px;text-align:left">Correct Answer</th>
+            </tr>
+          </thead>
+          <tbody>${answerRows}</tbody>
+        </table>
       </div>
     </div>`;
 
