@@ -138,6 +138,7 @@ export default function KGMasterClass() {
   const [quizScore, setQuizScore] = useState(null);
   const [quizSubmitting, setQuizSubmitting] = useState(false);
   const [quizSubmitError, setQuizSubmitError] = useState(null);
+  const [consentChecked, setConsentChecked] = useState(false);
   const [scrollY, setScrollY] = useState(0);
   const [pullY, setPullY] = useState(0);
   const pullStartY = useRef(0);
@@ -2381,10 +2382,29 @@ export default function KGMasterClass() {
                   )}
                 </div>
 
+                {/* Consent checkbox */}
+                <label className="flex items-start gap-3 cursor-pointer select-none pt-1">
+                  <input
+                    type="checkbox"
+                    checked={consentChecked}
+                    onChange={(e) => setConsentChecked(e.target.checked)}
+                    className="mt-1 w-4 h-4 flex-shrink-0 accent-blue-900 cursor-pointer"
+                  />
+                  <span className="text-xs text-gray-600 leading-relaxed">
+                    <span className="block mb-1">I agree to provide my personal information (name, phone number, email, and quiz results) to KG Facility Solutions for internal training purposes.</span>
+                    <span className="block text-gray-400">Acepto proporcionar mi información personal (nombre, número de teléfono, correo electrónico y resultados del quiz) a KG Facility Solutions para fines de capacitación interna.</span>
+                  </span>
+                </label>
+
                 {/* Submit */}
                 <button
                   type="submit"
-                  className="w-full bg-yellow-400 hover:bg-yellow-300 active:bg-yellow-500 text-blue-900 font-bold py-3.5 rounded-xl transition-all shadow-lg text-base mt-2"
+                  disabled={!consentChecked}
+                  className={`w-full font-bold py-3.5 rounded-xl transition-all text-base mt-2 ${
+                    consentChecked
+                      ? 'bg-yellow-400 hover:bg-yellow-300 active:bg-yellow-500 text-blue-900 shadow-lg'
+                      : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                  }`}
                 >
                   {r.startBtn} →
                 </button>
@@ -2719,7 +2739,17 @@ export default function KGMasterClass() {
             {/* Actions */}
             <div className="space-y-3 pb-4">
               <button
-                onClick={() => { setQuizAnswers(Array(20).fill(null)); setCurrentQuestion(0); setQuizScore(null); navigateTo('quiz'); }}
+                onClick={() => {
+                  setUserInfo({ name: '', phone: '', email: '', role: '' });
+                  setFormSubmitted(false);
+                  setFormErrors({});
+                  setConsentChecked(false);
+                  setQuizAnswers(Array(20).fill(null));
+                  setCurrentQuestion(0);
+                  setQuizScore(null);
+                  setQuizSubmitError(null);
+                  navigateTo('registration');
+                }}
                 className="w-full py-3 rounded-xl border-2 border-blue-900 text-blue-900 font-bold text-sm hover:bg-blue-50 transition-colors"
               >{qz.retake}</button>
               <button
