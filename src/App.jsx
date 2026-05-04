@@ -287,7 +287,7 @@ export default function KGMasterClass() {
       needMoreInfo: 'Need more info?',
       contactUs:    'Contact us',
       footer: {
-        copy:       '© 2026 Teso Graphics. All Rights Reserved.',
+        copy:       '© 2026 Teso Graphics LLC. All Rights Reserved.KG University™ for KG Facility Solutions',
         designedBy: 'KG Facility Solutions - Designed by tesographics.com',
       },
       contact: {
@@ -795,7 +795,7 @@ export default function KGMasterClass() {
       needMoreInfo: '¿Necesitas más información?',
       contactUs:    'Contáctanos',
       footer: {
-        copy:       '© 2026 Teso Graphics. Todos los Derechos Reservados.',
+        copy:       '© 2026 Teso Graphics LLC. All Rights Reserved.KG University™ for KG Facility Solutions',
         designedBy: 'KG Facility Solutions - Diseñado por tesographics.com',
       },
       contact: {
