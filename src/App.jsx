@@ -288,7 +288,6 @@ export default function KGMasterClass() {
       contactUs:    'Contact us',
       footer: {
         copy:       '© 2026 Teso Graphics LLC. All Rights Reserved.KG University™ for KG Facility Solutions',
-        designedBy: 'KG Facility Solutions - Designed by tesographics.com',
       },
       contact: {
         navTitle:     'Contact KG Office',
@@ -796,7 +795,6 @@ export default function KGMasterClass() {
       contactUs:    'Contáctanos',
       footer: {
         copy:       '© 2026 Teso Graphics LLC. All Rights Reserved.KG University™ for KG Facility Solutions',
-        designedBy: 'KG Facility Solutions - Diseñado por tesographics.com',
       },
       contact: {
         navTitle:      'Contactar Oficina KG',
@@ -1195,14 +1193,6 @@ export default function KGMasterClass() {
   const PageFooter = () => (
     <div className="bg-blue-950 px-4 py-3 text-center">
       <p className="text-gray-400 text-xs">{t.footer.copy}</p>
-      <a
-        href="https://www.tesographics.com"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-cyan-400 text-xs hover:text-cyan-300 transition-colors"
-      >
-        {t.footer.designedBy}
-      </a>
     </div>
   );
 
@@ -1468,14 +1458,6 @@ export default function KGMasterClass() {
         </button>
         <div className="mt-1.5">
           <p className="text-gray-400 text-xs leading-tight">{t.footer.copy}</p>
-          <a
-            href="https://www.tesographics.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-cyan-400 text-xs hover:text-cyan-300 transition-colors"
-          >
-            {t.footer.designedBy}
-          </a>
         </div>
       </div>
     </div>
